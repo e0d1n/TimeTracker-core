@@ -5,9 +5,11 @@ import java.util.TimerTask;
 import java.util.Date;
 import java.util.Timer;
 
+
 public class Clock extends Observable {
-	public Clock() {
+	public Clock(int updatePeriode) {
 		this.ct = new ClockTimer();
+		this.updatePeriode = updatePeriode;
 		Thread th = new Thread(ct);
 		th.start();
 	}
@@ -19,7 +21,7 @@ public class Clock extends Observable {
 			while (true) {
 				tick();
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(getUpdatePeriode());
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,20 +72,20 @@ public class Clock extends Observable {
 	private void tick() {
 		this.date = new Date();
 		setChanged();
-		notifyObservers(date);
+		notifyObservers(this);
 	}
 
 	/**
 	 * @uml.property  name="updatePeriode"
 	 */
-	private int updatePeriode;
+	private long updatePeriode;
 
 	/**
 	 * Getter of the property <tt>updatePeriode</tt>
 	 * @return  Returns the updatePeriode.
 	 * @uml.property  name="updatePeriode"
 	 */
-	public int getUpdatePeriode() {
+	public long getUpdatePeriode() {
 		return updatePeriode;
 	}
 
@@ -92,7 +94,7 @@ public class Clock extends Observable {
 	 * @param updatePeriode  The updatePeriode to set.
 	 * @uml.property  name="updatePeriode"
 	 */
-	public void setUpdatePeriode(int updatePeriode) {
+	public void setUpdatePeriode(long updatePeriode) {
 		this.updatePeriode = updatePeriode;
 	}
 }

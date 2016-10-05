@@ -1,8 +1,8 @@
 package Core;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Activity {
+public abstract class Activity implements Serializable{
 
 	/**
 	 * @uml.property name="name"
@@ -52,23 +52,25 @@ public abstract class Activity {
 		this.project = project;
 		this.startDate = null;
 		this.finishDate = null;
+		this.duration = (long) 0;
 	}
 
 	/**
 	 * Activity Recursive Update It's used to update the activity time.
 	 * 
-	 * @param date
+	 * @param Object clock
 	 *            : Last update time
 	 */
-	protected void updateActivity(Date date) {
+	protected void updateActivity(Object clock) {
 		// No start date defined
 		if (this.startDate == null) {
-			this.startDate = date;
+			this.startDate = ((Clock) clock).getDate();
 		}
-		this.finishDate = date;
+		this.finishDate = ((Clock) clock).getDate();
+		this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
 		System.out.println(this);
 		if (this.project != null) {
-			this.project.updateActivity(date);
+			this.project.updateActivity(clock);
 		}
 
 	}

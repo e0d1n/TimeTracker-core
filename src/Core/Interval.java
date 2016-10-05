@@ -1,10 +1,11 @@
 package Core;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Date;
 
-public class Interval implements Observer {
+public class Interval implements Observer, Serializable {
 
 	/**
 	 * @uml.property name="startDate"
@@ -41,6 +42,7 @@ public class Interval implements Observer {
 		this.task = task;
 		this.startDate = null;
 		this.finishDate = null;
+		this.duration = (long) 0;
 	}
 
 	/**
@@ -53,8 +55,7 @@ public class Interval implements Observer {
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
 
-		return "	Soy interval "
-				+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		return "Soy interval, Duracion:"+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	/**
@@ -62,15 +63,16 @@ public class Interval implements Observer {
 	 * interval with the new dates
 	 */
 	@Override
-	public void update(Observable arg0, Object date) {
+	public void update(Observable arg0, Object clock) {
 		// TODO Auto-generated method stub
 		if (this.startDate == null) {
-			this.startDate = (Date) date;
+			this.startDate = ((Clock) clock).getDate();
 		}
-		this.finishDate = (Date) date;
-		this.duration = getDateDiff(this.startDate, this.finishDate);
+		this.finishDate = ((Clock) clock).getDate();
+		this.duration =this.duration + ((Clock) clock).getUpdatePeriode();
+		
 		System.out.println(this);
-		this.task.updateActivity((Date) date);
+		this.task.updateActivity(clock);
 	}
 
 	/**

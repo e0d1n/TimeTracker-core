@@ -29,14 +29,6 @@ public class Task extends Activity {
 		this.intervals.add(newInterval);
 	}
 	
-	/**
-	 */
-	public void getTotalSubTime(){
-		this.duration = 0;
-		for(Interval interval: this.intervals){
-			this.duration += interval.getDuration();
-		}
-	}
 
 	/**
 	 */
@@ -60,14 +52,11 @@ public class Task extends Activity {
 
 	@Override
 	public String toString() {
-
-		return "Soy "+ this.name +" "+ startDate + " " + finishDate;
+		int seconds = (int) (this.duration / 1000) % 60;
+		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
+		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+		return "Soy Task " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:"+String.format("%02d:%02d:%02d", hours, minutes, seconds);	
 	}
-
-	/**
-	 * @uml.property  name="duration"
-	 */
-	private long duration;
 
 	/**
 	 * Getter of the property <tt>duration</tt>
