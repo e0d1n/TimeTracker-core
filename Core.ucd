@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="846,738" id="Core" metadata="uml2-1.0" initialized="true" scrolledY="216" tag="1000" key="32303037303533312D313030302054696D65547261636B65725F46312F726F6F74">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="846,738" id="Core" metadata="uml2-1.0" initialized="true" scrolledY="36" tag="1000" key="32303037303533312D313030302054696D65547261636B65725F46312F726F6F74">
   <children xsi:type="editmodel:ClassEditModel" name="Client" location="375,60" size="79,67" id="Core/Client" runTimeClassModel="main([Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
@@ -8,11 +8,12 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Clock" location="480,49" size="137,218" id="Core/Clock" runTimeClassModel="Core.Clock.ClockTimer,tick(),timer,date,Clock(),ct">
-    <children xsi:type="editmodel:CompartmentEditModel" size="86,54">
+  <children xsi:type="editmodel:ClassEditModel" name="Clock" location="480,49" size="137,236" id="Core/Clock" runTimeClassModel="Core.Clock.ClockTimer,tick(),timer,date,Clock(),updatePeriode,ct">
+    <children xsi:type="editmodel:CompartmentEditModel" size="105,72">
       <children xsi:type="editmodel:AttributeEditModel" name="ct" id="Core/Clock#ct"/>
       <children xsi:type="editmodel:AttributeEditModel" name="date" id="Core/Clock#date"/>
       <children xsi:type="editmodel:AttributeEditModel" name="timer" id="Core/Clock#timer"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="updatePeriode" id="Core/Clock#updatePeriode"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="56,36">
       <children xsi:type="editmodel:MethodEditModel" name="Clock" id="Core/Clock#Clock()"/>
@@ -30,7 +31,7 @@
     </children>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Interval" location="45,525" size="118,211" id="Core/Interval" runTimeClassModel="getDateDiff(Ljava.util.Date;Ljava.util.Date;),update(Ljava.util.Observable;Ljava.lang.Object;),startDate,duration,task,Interval(LCore.Task;),finishDate,getDuration(),toString()">
+  <children xsi:type="editmodel:ClassEditModel" name="Interval" location="45,525" size="118,211" id="Core/Interval" runTimeClassModel="getDateDiff(Ljava.util.Date;Ljava.util.Date;),update(Ljava.util.Observable;Ljava.lang.Object;),startDate,duration,task,Interval(LCore.Task;),finishDate,toString(),getDuration()">
     <children xsi:type="editmodel:CompartmentEditModel" size="95,72">
       <children xsi:type="editmodel:AttributeEditModel" name="duration" id="Core/Interval#duration"/>
       <children xsi:type="editmodel:AttributeEditModel" name="finishDate" id="Core/Interval#finishDate"/>
@@ -51,7 +52,7 @@
         <children xsi:type="editmodel:LabelEditModel" name="*" location="92,504" size="4,14" anchorKind="FirstPart"/>
       </children>
       <children xsi:type="editmodel:AssociationEndEditModel" name="task" location="66,211" id="Core/Interval@intervals+Core/Task@task|Core/Task#task" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - task" location="110,484" size="30,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" + task" location="110,484" size="32,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="1" location="90,484" size="6,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
@@ -78,14 +79,14 @@
         <children xsi:type="editmodel:LabelEditModel" name="1" location="318,240" size="6,14" anchorKind="FirstPart"/>
       </children>
       <children xsi:type="editmodel:AssociationEndEditModel" name="activities" location="129,45" id="Core/Project@project+Core/Activity@activities|Core/Activity#activities" multiplicityLabel="//@children.3/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.3/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true" orderingKind="1" changeability="2">
-        <children xsi:type="editmodel:LabelEditModel" name=" - activities" location="256,39" size="52,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" + activities" location="256,39" size="54,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="*" location="256,67" size="4,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="Task" location="37,266" size="149,211" id="Core/Task" runTimeClassModel="start(LCore.Clock;),Task(Ljava.lang.String;Ljava.lang.String;LCore.Project;),duration,getTotalSubTime(),addInterval(LCore.Task;),intervals,isStartable,stop(LCore.Clock;),toString()">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="Task" location="37,266" size="149,211" id="Core/Task" runTimeClassModel="start(LCore.Clock;),Task(Ljava.lang.String;Ljava.lang.String;LCore.Project;),duration,addInterval(LCore.Task;),getTotalSubTime(),intervals,isStartable,stop(LCore.Clock;),toString()">
     <children xsi:type="editmodel:CompartmentEditModel" size="126,54">
       <children xsi:type="editmodel:AttributeEditModel" name="intervals" id="Core/Interval@intervals+Core/Task@task|Core/Interval#intervals"/>
       <children xsi:type="editmodel:AttributeEditModel" name="isStartable" id="Core/Task#isStartable"/>

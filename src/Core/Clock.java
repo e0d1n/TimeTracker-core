@@ -72,4 +72,27 @@ public class Clock extends Observable {
 		setChanged();
 		notifyObservers(date);
 	}
+
+	/**
+	 * @uml.property  name="updatePeriode"
+	 */
+	private int updatePeriode;
+
+	/**
+	 * Getter of the property <tt>updatePeriode</tt>
+	 * @return  Returns the updatePeriode.
+	 * @uml.property  name="updatePeriode"
+	 */
+	public int getUpdatePeriode() {
+		return updatePeriode;
+	}
+
+	/**
+	 * Setter of the property <tt>updatePeriode</tt>
+	 * @param updatePeriode  The updatePeriode to set.
+	 * @uml.property  name="updatePeriode"
+	 */
+	public void setUpdatePeriode(int updatePeriode) {
+		this.updatePeriode = updatePeriode;
+	}
 }
