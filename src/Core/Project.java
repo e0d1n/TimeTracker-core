@@ -9,7 +9,7 @@ public class Project extends Activity {
 	 * @uml.property name="activities"
 	 * @uml.associationEnd readOnly="true" ordering="true" aggregation="composite" inverse="project:Core.Activity"
 	 */
-	public List activities;
+	private List activities;
 
 	public Project(String name, String description, Project project) {
 		super(name, description, project);
@@ -30,5 +30,14 @@ public class Project extends Activity {
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
 
 		return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
+	}
+
+	/**
+	 * Getter of the property <tt>activities</tt>
+	 * @return  Returns the activities.
+	 * @uml.property  name="activities"
+	 */
+	public List getActivities(String name) {////ACABAR
+		return activities;
 	}
 }
