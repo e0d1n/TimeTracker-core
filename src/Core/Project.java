@@ -32,12 +32,4 @@ public class Project extends Activity {
 		return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
-	/**
-	 * Getter of the property <tt>activities</tt>
-	 * @return  Returns the activities.
-	 * @uml.property  name="activities"
-	 */
-	public List getActivities(String name) {////ACABAR
-		return activities;
-	}
 }

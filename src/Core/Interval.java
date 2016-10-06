@@ -76,7 +76,7 @@ public class Interval implements Observer, Serializable {
 	}
 
 	/**
-		 */
+	 */
 	public long getDateDiff(Date date1, Date date2) {
 
 		return date2.getTime() - date1.getTime();

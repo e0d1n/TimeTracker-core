@@ -8,17 +8,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
-public class SerialSave implements Saver {
+public class SerialSave{
 
-	@Override
 	public void Save(Project project) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("timetask.ser"));
-		System.out.println("serialize");
 		oos.writeObject(project);
 	}
 
-	@Override
 	public Project Load() throws FileNotFoundException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("timetask.ser"));
