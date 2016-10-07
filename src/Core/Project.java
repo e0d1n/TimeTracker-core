@@ -32,4 +32,11 @@ public class Project extends Activity {
 		return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
+	@Override
+	public void accept(Printer printer) {
+		// TODO Auto-generated method stub
+		printer.print(this);
+		
+	}
+
 }

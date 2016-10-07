@@ -76,6 +76,13 @@ public class Task extends Activity {
 		this.duration = duration;
 	}
 
+	@Override
+	public void accept(Printer printer) {
+		// TODO Auto-generated method stub
+		printer.print(this);
+		
+	}
+
 		
 
 }

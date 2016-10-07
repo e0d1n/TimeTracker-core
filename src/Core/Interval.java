@@ -5,7 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Date;
 
-public class Interval implements Observer, Serializable {
+public class Interval implements Observer, Serializable,Printable {
 
 	/**
 	 * @uml.property name="startDate"
@@ -67,24 +67,30 @@ public class Interval implements Observer, Serializable {
 		// TODO Auto-generated method stub
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
+			this.duration = (long) 0;
+		}else{
+		this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
 		}
 		this.finishDate = ((Clock) clock).getDate();
-		this.duration =this.duration + ((Clock) clock).getUpdatePeriode();
 		
-		System.out.println(this);
+		
+		
 		this.task.updateActivity(clock);
 	}
 
-	/**
-	 */
-	public long getDateDiff(Date date1, Date date2) {
 
-		return date2.getTime() - date1.getTime();
 
-	}
+
 
 	public long getDuration() {
 
 		return this.duration;
+	}
+
+	@Override
+	public void accept(Printer printer) {
+		// TODO Auto-generated method stub
+		printer.print(this);
+		
 	}
 }

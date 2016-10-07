@@ -2,7 +2,7 @@ package Core;
 import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Activity implements Serializable{
+public abstract class Activity implements Serializable,Printable{
 
 	/**
 	 * @uml.property name="name"
@@ -65,10 +65,12 @@ public abstract class Activity implements Serializable{
 		// No start date defined
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
+			this.duration = (long) 0;
+		}else{
+		this.duration = this.duration + ((Clock) clock).getUpdatePeriode();			
 		}
 		this.finishDate = ((Clock) clock).getDate();
-		this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
-		System.out.println(this);
+		
 		if (this.project != null) {
 			this.project.updateActivity(clock);
 		}

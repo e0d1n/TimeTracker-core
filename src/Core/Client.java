@@ -52,15 +52,16 @@ public class Client {
 		System.out.println(project);
 		*/
 		Clock clock = new Clock(2000);
+		Printer printer = new Printer();
 		Project proot = new Project("root","",null);
 		Project project = new Project("P1","",proot);
 		proot.addActivity(project);
 		Task T3 = new Task("T3","",project);
 		project.addActivity(T3);
 		Project neew = new Project("P2","",project);
-		project.addActivity( neew);
-		Task T1 = new Task("T1","",project);
-		Task T2 = new Task("T2","",project);
+		project.addActivity(neew);
+		Task T1 = new Task("T1","",neew);
+		Task T2 = new Task("T2","",neew);
 		neew.addActivity(T1);
 		neew.addActivity(T2);
 		T3.start(clock);
@@ -78,6 +79,13 @@ public class Client {
 		T3.start(clock);
 		Thread.sleep(2000);
 		T3.stop(clock);
+		proot.accept(printer);
+		project.accept(printer);
+		neew.accept(printer);
+		T1.accept(printer);
+		T2.accept(printer);
+		T3.accept(printer);
+		
 		
 	}
 }
