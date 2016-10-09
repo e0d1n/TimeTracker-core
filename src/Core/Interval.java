@@ -1,42 +1,49 @@
 package Core;
-
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class Interval implements Observer, Serializable,Printable {
 
 	/**
+	 * startDate: Start date of a interval
 	 * @uml.property name="startDate"
 	 */
 	private Date startDate;
 
 	/**
+	 * finishDate: Finish date of a interval
 	 * @uml.property name="finishDate"
 	 */
 	private Date finishDate;
 
 	/**
+	 * task: Who has created this interval
 	 * @uml.property name="task"
 	 * @uml.associationEnd multiplicity="(1 1)" inverse="intervals:Core.Task"
 	 */
 	private Task task;
 
 	/**
+	 * duration: Duration of a interval
 	 * @uml.property name="duration"
 	 */
 	private Long duration;
 
 	/**
-	 * Interval constructor It's used to create an interval of a Task
-	 * 
-	 * @param task
-	 *            : Father task of interval
-	 * @param sstartDate
-	 *            : Start date of interval
-	 * @param finishDate
-	 *            : Finish date of interval
+	 * Getter of the property <tt>duration</tt>
+	 * @return  Returns the duration.
+	 * @uml.property  name="duration"
+	 */
+	public long getDuration() {
+		return this.duration;
+	}
+	
+	/**
+	 * Interval constructor: It's used to create an interval of a Task
+	 * @param task: Father task of interval
 	 */
 	public Interval(Task task) {
 		this.task = task;
@@ -44,23 +51,12 @@ public class Interval implements Observer, Serializable,Printable {
 		this.finishDate = null;
 		this.duration = (long) 0;
 	}
-
+	
 	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-
-		int seconds = (int) (this.duration / 1000) % 60;
-		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
-		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-
-		return "Soy interval, Duracion:"+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
-	}
-
-	/**
-	 * Implements the update method of the observer Update the father task of a
-	 * interval with the new dates
+	 * update: Implements the update method observer
+	 * Update a interval and calls the method to update 
+	 * the activity of this interval (this updates upwards)
+	 * clock: Clock to update dates and duration
 	 */
 	@Override
 	public void update(Observable arg0, Object clock) {
@@ -69,22 +65,22 @@ public class Interval implements Observer, Serializable,Printable {
 			this.startDate = ((Clock) clock).getDate();
 			this.duration = (long) 0;
 		}else{
-		this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
+			this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
 		}
-		this.finishDate = ((Clock) clock).getDate();
-		
-		
-		
+		this.finishDate = ((Clock) clock).getDate();	
 		this.task.updateActivity(clock);
 	}
 
-
-
-
-
-	public long getDuration() {
-
-		return this.duration;
+	/**
+	 * @Override toString: Used to print a interval
+	 * Controls the format of the time
+	 */
+	@Override
+	public String toString() {
+		int seconds = (int) (this.duration / 1000) % 60;
+		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
+		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+		return "Soy interval, Duracion:"+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	@Override
