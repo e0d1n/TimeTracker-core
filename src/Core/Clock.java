@@ -18,31 +18,20 @@ public class Clock extends Observable {
 	 * @uml.property name="date"
 	 */
 	private Date date;
-
 	
 	/**
-	 * tick: Tick of the clock
-	 * Notify observers with the new date
+	 * Used to store the period update of the clock
+	 * @uml.property  name="updatePeriod"
 	 */
-	private void tick() {
-		this.date = new Date();
-		setChanged();
-		notifyObservers(this);
-	}
-
+	private long updatePeriod;
+	
 	/**
-	 * Used to store the periode update of the clock
-	 * @uml.property  name="updatePeriode"
+	 * Getter of the property <tt>updatePeriod</tt>
+	 * @return  Returns the updatePeriod.
+	 * @uml.property  name="updatePeriod"
 	 */
-	private long updatePeriode;
-
-	/**
-	 * Getter of the property <tt>updatePeriode</tt>
-	 * @return  Returns the updatePeriode.
-	 * @uml.property  name="updatePeriode"
-	 */
-	public long getUpdatePeriode() {
-		return updatePeriode;
+	public long getUpdatePeriod() {
+		return updatePeriod;
 	}
 
 	/**
@@ -50,8 +39,8 @@ public class Clock extends Observable {
 	 * @param updatePeriode  The updatePeriode to set.
 	 * @uml.property  name="updatePeriode"
 	 */
-	public void setUpdatePeriode(long updatePeriode) {
-		this.updatePeriode = updatePeriode;
+	public void setUpdatePeriod(long updatePeriod) {
+		this.updatePeriod = updatePeriod;
 	}
 	
 	/**
@@ -73,33 +62,74 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * Constructor clock: Creates a clock
+	 * tick: Tick of the clock
+	 * Update the attribute date and inform something has change and notify the observers
+	 * Notify observers with the new date
+	 */
+	private void tick() {
+		this.date = new Date();
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	/**
+	 * The clock it's a observable object used to control the time
+	 * Constructor clock: Creates a clock 
+	 * We initialize the clock creating a new clock timer, setting the updatePeriod(that we use to
+	 * notify the observers) and putting false to the attribute go that we use to control the
+	 * start and the stop of the clock
+	 * which determinate the period of the update  
 	 * @param updatePeriode: The update of the clock
 	 */
-	public Clock(int updatePeriode) {
+	public Clock(int updatePeriod) {
 		this.ct = new ClockTimer();
-		this.updatePeriode = updatePeriode;
-		Thread th = new Thread(ct);
-		th.start();
+		this.updatePeriod = updatePeriod;
+		this.go = false;
+		
 	}
 
 	private class ClockTimer extends TimerTask {
 		/**
 		 * @Override run: How the clocks runs
-		 * Wait a period to continue being updated
+		 * When we call start at the clock, it does tick and sleep until
+		 * we not call stop
 		 */
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			while (true) {
+			while (go) {
 				tick();
 				try {
-					Thread.sleep(getUpdatePeriode());
+					Thread.sleep(getUpdatePeriod());
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
+	}
+
+	/**
+	 * @uml.property  name="go"
+	 */
+	private Boolean go;
+
+	/**	 
+	 * start: Initializes the clock
+	 * Put go attribute to true to starts the clock
+	 * @uml.property  name="go"
+	 */
+	public void start() {
+		this.go = true;
+		Thread th = new Thread(ct);
+		th.start();
+	}
+
+	/**
+	 * stop: Put the attribute to false to stop the clock
+	 * @uml.property  name="go"
+	 */
+	public void stop() {
+		this.go = false;
 	}
 }

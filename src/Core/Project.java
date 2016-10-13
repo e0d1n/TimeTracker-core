@@ -13,7 +13,9 @@ public class Project extends Activity {
 	private List<Activity> activities;
 
 	/**
-	 * Constructor project: Used to create a project
+	 * Constructor project: It complains the composite element of the composite design pattern
+	 * We call the constructor of the superclass and
+	 * initialize the activities list 
 	 * @param name: Name of the project
 	 * @param description: Description of the project
 	 * @param project: Father project of the project
@@ -24,9 +26,9 @@ public class Project extends Activity {
 		this.activities = new java.util.ArrayList<Activity>();
 	}
 	
-
 	/**
-	 * addActivity: adds a activity to a project
+	 * addActivity: It adds the activity that like a parameter 
+	 * to activities list
 	 * @param activity: the activity to add
 	 */
 	public void addActivity(Activity activity) {
@@ -43,17 +45,17 @@ public class Project extends Activity {
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		
-		// 5-Set-2016 19:00:00
 		if( this.startDate == null ){
 			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 		}
-		
 		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
-		
-		//return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
+	/**
+	 * accept: Function part of the visitor design pattern that we use to print
+	 * Call all the accept of all the elements at the activities list 
+	 * @param printer: Object of the class printer used to visit the activity
+	 */
 	@Override
 	public void accept(Printer printer) {
 		// TODO Auto-generated method stub
@@ -61,7 +63,6 @@ public class Project extends Activity {
 		for (Activity act:this.activities){
 			act.accept(printer);
 		}
-		
 	}
 
 }

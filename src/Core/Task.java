@@ -1,10 +1,8 @@
 package Core;
 import java.util.List;
 
-
 @SuppressWarnings("serial")
 public class Task extends Activity {
-	
 	
 	/**
 	 * isStartable: Used to control when a task can be turned on
@@ -35,59 +33,48 @@ public class Task extends Activity {
 	 * @uml.property  name="duration"
 	 */
 	public void setDuration(long duration) {
-
-		// duracion recibida debug
 		this.duration = duration;
-		logger.debug("Duration of Task: ", this.name, this.duration);
-	
+		logger.debug("Duration of Task: "+this.name+" "+this.duration);
 	}
+	
 	/**
-	 * Constructor task: Used to create a task
+	 * Constructor task: It complains the leaf element of the composite design pattern
+	 * We call the constructor of the superclass and initialize the list
+	 * of intervals and the parameter isStartable, that we use to control
+	 * if a task is not turned on yet
 	 * @param name: Name of the task
 	 * @param description: Description of the task
 	 * @param project: Father project of the task
 	 */
 	public Task(String name, String description, Project project) {
 		// TODO Auto-generated constructor stub
-		// Use super type activity constructor
 		super(name, description, project);
 		this.intervals = new java.util.ArrayList<Interval>();
 		this.isStartable = true;
 	}
-
-	/**
-	 * addInterval: Used to add interval to a task and
-	 * adds the interval to the interval list
-	 * @param task: Necessary to specify that task creates the interval
-	 */
-	public void addInterval(Task task) {
-		Interval newInterval = new Interval(task);
-		this.intervals.add(newInterval);
-	}
 	
 	/**
-	 * start: Start a task creating an interval
-	 * It adds an observer to be notified by the clock
+	 * start: If the task is able to start we create an interval,
+	 * add it to the list intervals of the task and clock observers  
+	 * and change the state of the startable to false
+	 * If isn't able to start it throws a warning
 	 * @param clock: Needed to create the observer
 	 */
 	public void start(Clock clock) {
-		//
-		// Check if the task can be started
 		if (this.isStartable == true) {
-			//
 			Interval interval = new Interval(this);
 			this.intervals.add(interval);
 			clock.addObserver(interval);
 			this.isStartable = false;
-			//start debug
 		} else {
-			
-			System.out.println("This task is already running");
+			logger.warn("The task is already running");
 		}
+		logger.info("New interval added to: "+this.name);
 	}
 
 	/**
-	 * stop: Stop a task
+	 * stop: To stop a task, it delete the observer of the clock and change
+	 * the state
 	 * @param clock: Needed to delete the observer
 	 */
 	public void stop(Clock clock) {
@@ -105,24 +92,20 @@ public class Task extends Activity {
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		
 		if( this.startDate == null ){
 			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 		}
-		
 		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
-		
 	}
 	
+	/**
+	 * accept: Function part of the visitor design pattern that we use to print 
+	 * @param printer: Object of the class printer used to visit the activity
+	 */
 	@Override
 	public void accept(Printer printer) {
 		// TODO Auto-generated method stub
 		printer.print(this);
-		/*for (Interval inter:this.intervals){
-			inter.accept(printer);
-		}*/
 	}
-
-		
-
+	
 }

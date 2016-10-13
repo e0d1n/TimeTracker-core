@@ -7,10 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Client {
-	
+	// First test
 	public static void a1Test() throws InterruptedException, FileNotFoundException, IOException{
-		Clock clock2 = new Clock(2000);
 		Clock clock = new Clock(1000);
+		Clock clock2 = new Clock(1000);
+		clock.start();
+		clock2.start();
 		Project proot = new Project("RT","",null);
 		Printer printer = new Printer(proot);
 		Project project = new Project("P1","",proot);
@@ -19,11 +21,11 @@ public class Client {
 		project.addActivity(T3);
 		Project neew = new Project("P2","",project);
 		project.addActivity( neew);
-		Task T1 = new Task("T1","",project);
-		Task T2 = new Task("T2","",project);
+		Task T1 = new Task("T1","",neew);
+		Task T2 = new Task("T2","",neew);
 		neew.addActivity(T1);
 		neew.addActivity(T2);
-		printer.printAll();
+		clock2.addObserver(printer);
 		T3.start(clock);
 		Thread.sleep(3000);
 		T3.stop(clock);
@@ -34,18 +36,21 @@ public class Client {
 		T3.start(clock);
 		Thread.sleep(2000);
 		T3.stop(clock);
-		
+		Thread.sleep(500);
+		clock.deleteObservers();
+		clock2.deleteObservers();
+		clock.stop();
+		clock2.stop();	
 		SerialSave guardar = new SerialSave();
 		guardar.Save(proot);
-		
-		/*
-		SerialSave cargar = new SerialSave();
-		Project project = cargar.Load();
-		*/
 	}
+	
+	//Second test
 	public static void a2Test() throws InterruptedException{
 		Clock clock = new Clock(1000);
+		clock.start();
 		Clock clock2 = new Clock(2000);
+		clock2.start();
 		Project proot = new Project("RT","proot",null);
 		Project project = new Project("P1","p1",proot);
 		proot.addActivity(project);
@@ -74,13 +79,31 @@ public class Client {
 		T3.start(clock);
 		Thread.sleep(2000);
 		T3.stop(clock);
+		Thread.sleep(1000);
+		clock.deleteObservers();
+		clock2.deleteObservers();
+		clock.stop();
+		clock2.stop();	
 	}
 	
-	/**
-	 */
+	//Test for serialize
+	public static void serializeTest() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException{
+		SerialSave cargar = new SerialSave();
+		Project project = cargar.Load();
+		Printer printer = new Printer(project);
+		Clock clock = new Clock(1000);
+		clock.start();
+		clock.addObserver(printer);
+		Thread.sleep(2000);
+		clock.deleteObservers();	
+		clock.stop();
+	}
+	
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-			
-			a2Test();	
+		a1Test();
+		System.out.println("acabado");
+		serializeTest();
+		//a2Test();	
 	}
 
 }

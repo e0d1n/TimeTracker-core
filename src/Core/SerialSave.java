@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 public class SerialSave{
 
 	/**
@@ -28,4 +27,5 @@ public class SerialSave{
 		Project project = (Project) ois.readObject();
 		return project;
 	}
+	
 }
