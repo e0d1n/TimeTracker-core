@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 public class SerialSave{
 
 	/**
-	 * Save: Saves a project with serialization
+	 * Save: Saves a project with serialization to a file
 	 * @project: the project to save
 	 */
 	public void Save(Project project) throws FileNotFoundException, IOException {
@@ -20,7 +20,7 @@ public class SerialSave{
 	}
 
 	/**
-	 * Load: Load a project with a file serialized
+	 * Load: Load a project from a serialized file
 	 */
 	public Project Load() throws FileNotFoundException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="898,756" id="Core" metadata="uml2-1.0" initialized="true" scrolledY="88" tag="1000" key="32303037303533312D313030302054696D65547261636B65725F46312F726F6F74">
-  <children xsi:type="editmodel:ClassEditModel" name="Client" location="375,60" size="79,67" id="Core/Client" runTimeClassModel="main([Ljava.lang.String;)">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="898,738" id="Core" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302054696D65547261636B65725F46312F726F6F74">
+  <children xsi:type="editmodel:ClassEditModel" name="Client" location="375,60" size="85,85" id="Core/Client" runTimeClassModel="main([Ljava.lang.String;),a2Test(),a1Test()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
-      <children xsi:type="editmodel:MethodEditModel" name="main" id="Core/Client#main([Ljava.lang.String;)"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="62,36">
+      <children xsi:type="editmodel:MethodEditModel" name="a2Test" id="Core/Client#a2Test()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="a1Test" id="Core/Client#a1Test()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
@@ -61,7 +62,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Project" location="220,261" size="107,121" id="Core/Project" runTimeClassModel="addActivity(LCore.Activity;),Project(Ljava.lang.String;Ljava.lang.String;LCore.Project;),activities,accept(LCore.Printer;),toString()">
+  <children xsi:type="editmodel:ClassEditModel" name="Project" location="220,261" size="107,121" id="Core/Project" runTimeClassModel="addActivity(LCore.Activity;),Project(Ljava.lang.String;Ljava.lang.String;LCore.Project;),activities,toString(),accept(LCore.Printer;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="84,72">
       <children xsi:type="editmodel:MethodEditModel" name="Project" id="Core/Project#Project(Ljava.lang.String;Ljava.lang.String;LCore.Project;)"/>
@@ -71,12 +72,12 @@
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Core/Activity&lt;-Core/Project" source="//@children.3" target="//@children.4/@sourceConnections.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="53,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="52,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="Task" location="37,266" size="149,193" id="Core/Task" runTimeClassModel="start(LCore.Clock;),Task(Ljava.lang.String;Ljava.lang.String;LCore.Project;),duration,addInterval(LCore.Task;),intervals,isStartable,stop(LCore.Clock;),toString(),accept(LCore.Printer;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="Task" location="37,266" size="149,193" id="Core/Task" runTimeClassModel="start(LCore.Clock;),Task(Ljava.lang.String;Ljava.lang.String;LCore.Project;),duration,addInterval(LCore.Task;),intervals,isStartable,accept(LCore.Printer;),stop(LCore.Clock;),toString()">
     <children xsi:type="editmodel:CompartmentEditModel" size="126,36">
       <children xsi:type="editmodel:AttributeEditModel" name="intervals" id="Core/Interval@intervals+Core/Task@task|Core/Interval#intervals"/>
       <children xsi:type="editmodel:AttributeEditModel" name="isStartable" id="Core/Task#isStartable"/>
@@ -92,21 +93,22 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.3/@sourceConnections.0" autoLocated="true" id="Core/Activity&lt;-Core/Task" source="//@children.4" target="//@children.5" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
       <children xsi:type="editmodel:AssociationEndEditModel" location="74,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="64,175" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="64,190" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="Activity" location="120,15" size="129,175" id="Core/Activity" runTimeClassModel="startDate,project,duration,description,name,Activity(Ljava.lang.String;Ljava.lang.String;LCore.Project;),finishDate,updateActivity(Ljava.lang.Object;)">
-    <children xsi:type="editmodel:CompartmentEditModel" size="106,90">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="Activity" location="120,15" size="129,193" id="Core/Activity" runTimeClassModel="startDate,project,duration,description,name,logger,Activity(Ljava.lang.String;Ljava.lang.String;LCore.Project;),finishDate,updateActivity(Ljava.lang.Object;Z)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,108">
       <children xsi:type="editmodel:AttributeEditModel" name="description" id="Core/Activity#description"/>
       <children xsi:type="editmodel:AttributeEditModel" name="duration" id="Core/Activity#duration"/>
       <children xsi:type="editmodel:AttributeEditModel" name="finishDate" id="Core/Activity#finishDate"/>
       <children xsi:type="editmodel:AttributeEditModel" name="name" id="Core/Activity#name"/>
       <children xsi:type="editmodel:AttributeEditModel" name="startDate" id="Core/Activity#startDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="logger" id="Core/Activity#logger"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="99,36">
       <children xsi:type="editmodel:MethodEditModel" name="Activity" id="Core/Activity#Activity(Ljava.lang.String;Ljava.lang.String;LCore.Project;)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="updateActivity" id="Core/Activity#updateActivity(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="updateActivity" id="Core/Activity#updateActivity(Ljava.lang.Object;Z)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Core/Printable&lt;-Core/Activity" source="//@children.5" target="//@children.7" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
@@ -132,12 +134,15 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Printer" location="720,176" size="85,103" id="Core/Printer" runTimeClassModel="print(LCore.Interval;),print(LCore.Project;),print(LCore.Task;)">
+  <children xsi:type="editmodel:ClassEditModel" name="Printer" location="720,176" size="86,157" id="Core/Printer" runTimeClassModel="printAll(),update(Ljava.util.Observable;Ljava.lang.Object;),print(LCore.Interval;),print(LCore.Project;),Printer(LCore.Project;),print(LCore.Task;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="51,54">
+    <children xsi:type="editmodel:CompartmentEditModel" size="63,108">
       <children xsi:type="editmodel:MethodEditModel" name="print" id="Core/Printer#print(LCore.Project;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="print" id="Core/Printer#print(LCore.Task;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="print" id="Core/Printer#print(LCore.Interval;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="update" id="Core/Printer#update(Ljava.util.Observable;Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="printAll" id="Core/Printer#printAll()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Printer" id="Core/Printer#Printer(LCore.Project;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>

@@ -7,18 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Client {
-
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 * @throws ClassNotFoundException 
-	 */
-	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-		/*
-		Clock clock = new Clock(2000);
-		Project proot = new Project("root","",null);
+	
+	public static void a1Test() throws InterruptedException, FileNotFoundException, IOException{
+		Clock clock2 = new Clock(2000);
+		Clock clock = new Clock(1000);
+		Project proot = new Project("RT","",null);
+		Printer printer = new Printer(proot);
 		Project project = new Project("P1","",proot);
 		proot.addActivity(project);
 		Task T3 = new Task("T3","",project);
@@ -29,6 +23,7 @@ public class Client {
 		Task T2 = new Task("T2","",project);
 		neew.addActivity(T1);
 		neew.addActivity(T2);
+		printer.printAll();
 		T3.start(clock);
 		Thread.sleep(3000);
 		T3.stop(clock);
@@ -39,18 +34,20 @@ public class Client {
 		T3.start(clock);
 		Thread.sleep(2000);
 		T3.stop(clock);
+		
 		SerialSave guardar = new SerialSave();
 		guardar.Save(proot);
-		*/
+		
 		/*
 		SerialSave cargar = new SerialSave();
 		Project project = cargar.Load();
-		System.out.println(project);
 		*/
-		Clock clock = new Clock(2000);
-		Printer printer = new Printer();
-		Project proot = new Project("root","",null);
-		Project project = new Project("P1","",proot);
+	}
+	public static void a2Test() throws InterruptedException{
+		Clock clock = new Clock(1000);
+		Clock clock2 = new Clock(2000);
+		Project proot = new Project("RT","proot",null);
+		Project project = new Project("P1","p1",proot);
 		proot.addActivity(project);
 		Task T3 = new Task("T3","",project);
 		project.addActivity(T3);
@@ -60,6 +57,8 @@ public class Client {
 		Task T2 = new Task("T2","",neew);
 		neew.addActivity(T1);
 		neew.addActivity(T2);
+		Printer printer = new Printer(proot);
+		clock2.addObserver(printer);
 		T3.start(clock);
 		Thread.sleep(4000);
 		T2.start(clock);
@@ -75,11 +74,13 @@ public class Client {
 		T3.start(clock);
 		Thread.sleep(2000);
 		T3.stop(clock);
-		proot.accept(printer);
-		project.accept(printer);
-		neew.accept(printer);
-		T1.accept(printer);
-		T2.accept(printer);
-		T3.accept(printer);		
 	}
+	
+	/**
+	 */
+	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
+			
+			a2Test();	
+	}
+
 }

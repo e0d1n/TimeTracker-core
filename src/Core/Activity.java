@@ -1,10 +1,17 @@
 package Core;
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @SuppressWarnings("serial")
 public abstract class Activity implements Serializable, Printable {
-
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass()); 
+	
+	
 	/**
 	 * name: Name of the Activity
 	 * @uml.property name="name"
@@ -60,20 +67,21 @@ public abstract class Activity implements Serializable, Printable {
 
 	/**
 	 * updateActivity: It's used to update the dates 
-	 * and duration of the activity and their parents
+	 * and duration of the activity and their parents dates
+	 * @param first 
 	 * @param clock: Used watch for updates
 	 */
-	protected void updateActivity(Object clock) {
+	protected void updateActivity(Object clock, boolean first) {
 		// If no start date defined
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
 			this.duration = (long) 0;
-		} else {
+		} else if (!first){
 			this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
 		}
 		this.finishDate = ((Clock) clock).getDate();
 		if (this.project != null) {
-			this.project.updateActivity(clock);
+			this.project.updateActivity(clock,first);
 		}
 	}
 }

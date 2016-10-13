@@ -1,9 +1,11 @@
 package Core;
 import java.util.List;
 
+
 @SuppressWarnings("serial")
 public class Task extends Activity {
-
+	
+	
 	/**
 	 * isStartable: Used to control when a task can be turned on
 	 * @uml.property name="isStartable"
@@ -33,7 +35,11 @@ public class Task extends Activity {
 	 * @uml.property  name="duration"
 	 */
 	public void setDuration(long duration) {
+
+		// duracion recibida debug
 		this.duration = duration;
+		logger.debug("Duration of Task: ", this.name, this.duration);
+	
 	}
 	/**
 	 * Constructor task: Used to create a task
@@ -51,7 +57,7 @@ public class Task extends Activity {
 
 	/**
 	 * addInterval: Used to add interval to a task and
-	 * adds the interval to the interval list task
+	 * adds the interval to the interval list
 	 * @param task: Necessary to specify that task creates the interval
 	 */
 	public void addInterval(Task task) {
@@ -61,17 +67,21 @@ public class Task extends Activity {
 	
 	/**
 	 * start: Start a task creating an interval
-	 * It has an observer to be notified by the clock
+	 * It adds an observer to be notified by the clock
 	 * @param clock: Needed to create the observer
 	 */
 	public void start(Clock clock) {
+		//
 		// Check if the task can be started
 		if (this.isStartable == true) {
+			//
 			Interval interval = new Interval(this);
 			this.intervals.add(interval);
 			clock.addObserver(interval);
 			this.isStartable = false;
+			//start debug
 		} else {
+			
 			System.out.println("This task is already running");
 		}
 	}
@@ -95,14 +105,22 @@ public class Task extends Activity {
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		return "Soy Task " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:"+String.format("%02d:%02d:%02d", hours, minutes, seconds);	
+		
+		if( this.startDate == null ){
+			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		}
+		
+		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		
 	}
 	
 	@Override
 	public void accept(Printer printer) {
 		// TODO Auto-generated method stub
 		printer.print(this);
-		
+		/*for (Interval inter:this.intervals){
+			inter.accept(printer);
+		}*/
 	}
 
 		

@@ -73,7 +73,7 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * Constructor clock:
+	 * Constructor clock: Creates a clock
 	 * @param updatePeriode: The update of the clock
 	 */
 	public Clock(int updatePeriode) {

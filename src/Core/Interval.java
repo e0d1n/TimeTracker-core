@@ -61,14 +61,15 @@ public class Interval implements Observer, Serializable,Printable {
 	@Override
 	public void update(Observable arg0, Object clock) {
 		// TODO Auto-generated method stub
+		this.finishDate = ((Clock) clock).getDate();
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
 			this.duration = (long) 0;
+			this.task.updateActivity(clock,true);
 		}else{
 			this.duration = this.duration + ((Clock) clock).getUpdatePeriode();
-		}
-		this.finishDate = ((Clock) clock).getDate();	
-		this.task.updateActivity(clock);
+			this.task.updateActivity(clock,false);
+		}	
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class Interval implements Observer, Serializable,Printable {
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		return "Soy interval, Duracion:"+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		return "Soy interval "+this.task.name+", Duracion:"+ String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	@Override

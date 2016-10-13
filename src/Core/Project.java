@@ -23,6 +23,7 @@ public class Project extends Activity {
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
 	}
+	
 
 	/**
 	 * addActivity: adds a activity to a project
@@ -30,6 +31,7 @@ public class Project extends Activity {
 	 */
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
+		logger.info("New activity added: "+activity.name);
 	}
 
 	/**
@@ -41,13 +43,24 @@ public class Project extends Activity {
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		
+		// 5-Set-2016 19:00:00
+		if( this.startDate == null ){
+			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		}
+		
+		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		
+		//return "Soy project " + this.name + " Start:" + startDate + " Finish:" + finishDate +" Duration:" +String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	@Override
 	public void accept(Printer printer) {
 		// TODO Auto-generated method stub
 		printer.print(this);
+		for (Activity act:this.activities){
+			act.accept(printer);
+		}
 		
 	}
 
