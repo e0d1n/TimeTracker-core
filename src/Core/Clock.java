@@ -6,7 +6,7 @@ import java.util.Date;
 
 @SuppressWarnings("unused")
 public class Clock extends Observable {
-	
+
 	/**
 	 * ClockTimer: Needed to run the clock
 	 * @uml.property name="ct"
@@ -18,13 +18,13 @@ public class Clock extends Observable {
 	 * @uml.property name="date"
 	 */
 	private Date date;
-	
+
 	/**
 	 * Used to store the period update of the clock
 	 * @uml.property  name="updatePeriod"
 	 */
 	private long updatePeriod;
-	
+
 	/**
 	 * Getter of the property <tt>updatePeriod</tt>
 	 * @return  Returns the updatePeriod.
@@ -33,7 +33,7 @@ public class Clock extends Observable {
 	public long getUpdatePeriod() {
 		return updatePeriod;
 	}
-	
+
 	/**
 	 * Getter of the property <tt>date</tt>
 	 * @return Returns the date.
@@ -49,11 +49,12 @@ public class Clock extends Observable {
 	 * Notify observers with the new date
 	 */
 	private void tick() {
+
 		this.date = new Date();
 		setChanged();
 		notifyObservers(this);
 	}
-	
+
 	/**
 	 * The clock it's a observable object used to control the time
 	 * Constructor clock: Creates a clock 
@@ -63,6 +64,7 @@ public class Clock extends Observable {
 	 * @param updatePeriode: The update of the clock
 	 */
 	public Clock(int updatePeriod) {
+
 		this.ct = new ClockTimer();
 		this.updatePeriod = updatePeriod;
 		this.go = false;	
@@ -76,13 +78,11 @@ public class Clock extends Observable {
 		 */
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			while (go) {
 				tick();
 				try {
 					Thread.sleep(getUpdatePeriod());
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -112,5 +112,5 @@ public class Clock extends Observable {
 	public void stop() {
 		this.go = false;
 	}
-	
+
 }

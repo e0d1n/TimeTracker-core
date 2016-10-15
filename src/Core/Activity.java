@@ -6,7 +6,10 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public abstract class Activity implements Serializable, Printable {
-	//Declaration of the logback
+	
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
 	ch.qos.logback.classic.Logger logger = 
 		(ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 	
@@ -66,7 +69,7 @@ public abstract class Activity implements Serializable, Printable {
 		this.startDate = null;
 		this.finishDate = null;
 		this.duration = (long) 0;
-		logger.setLevel(Level.WARN);
+		this.logger.setLevel(Level.WARN);
 	}
 
 	/**

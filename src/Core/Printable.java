@@ -1,6 +1,7 @@
 package Core;
 
 public interface Printable {
+
 	/**
 	 * Interface of the visitable pattern
 	 * Needed to activities to be visited with a visitor

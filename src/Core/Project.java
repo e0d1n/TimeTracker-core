@@ -21,11 +21,10 @@ public class Project extends Activity {
 	 * @param project: Father project of the project
 	 */
 	public Project(String name, String description, Project project) {
-		// TODO Auto-generated constructor stub
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
 	}
-	
+
 	/**
 	 * addActivity: It adds the activity that like a parameter 
 	 * to activities list
@@ -42,13 +41,21 @@ public class Project extends Activity {
 	 */
 	@Override
 	public String toString() {
+		
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+		
 		if( this.startDate == null ){
-			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+			
+			return this.name + "   " + "                             " +
+					           "   " + "                             " +
+					           "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 		}
-		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		
+		return this.name + "   " + this.startDate +
+				           "   " + this.finishDate +
+				           "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 	/**
@@ -58,8 +65,8 @@ public class Project extends Activity {
 	 */
 	@Override
 	public void accept(Printer printer) {
-		// TODO Auto-generated method stub
 		printer.print(this);
+		// Call each of it sub activities
 		for (Activity act:this.activities){
 			act.accept(printer);
 		}

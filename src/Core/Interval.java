@@ -32,7 +32,7 @@ public class Interval implements Observer, Serializable{
 	 * @uml.property name="duration"
 	 */
 	private Long duration;
-	
+
 	/**
 	 * Interval constructor: It's used to create an interval. At first it defines 
 	 * the father task and put the initial values of the other attributes, 
@@ -40,12 +40,13 @@ public class Interval implements Observer, Serializable{
 	 * @param task: Father task of interval
 	 */
 	public Interval(Task task) {
+		
 		this.task = task;
 		this.startDate = null;
 		this.finishDate = null;
 		this.duration = (long) 0;
 	}
-	
+
 	/**
 	 * update: Implements the update method of observer
 	 * At first we update the finish date. 
@@ -57,7 +58,7 @@ public class Interval implements Observer, Serializable{
 	 */
 	@Override
 	public void update(Observable arg0, Object clock) {
-		// TODO Auto-generated method stub
+
 		this.finishDate = ((Clock) clock).getDate();
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
@@ -74,10 +75,12 @@ public class Interval implements Observer, Serializable{
 	 */
 	@Override
 	public String toString() {
+		
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		return "Soy interval "+this.task.name+", Duracion:"+ String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
+		
+		return "Interval " + this.task.name + ", Duracion:" + String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
 	}
-	
+
 }
