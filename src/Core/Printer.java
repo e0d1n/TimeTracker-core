@@ -9,6 +9,7 @@ public class Printer implements Observer {
 	
 	/**
 	 * Constructor Printer
+	 * Visitable class of the visitor pattern for print activities
 	 * @param root: Project root
 	 */
 	public Printer(Project root) {

@@ -33,15 +33,6 @@ public class Clock extends Observable {
 	public long getUpdatePeriod() {
 		return updatePeriod;
 	}
-
-	/**
-	 * Setter of the property <tt>updatePeriode</tt>
-	 * @param updatePeriode  The updatePeriode to set.
-	 * @uml.property  name="updatePeriode"
-	 */
-	public void setUpdatePeriod(long updatePeriod) {
-		this.updatePeriod = updatePeriod;
-	}
 	
 	/**
 	 * Getter of the property <tt>date</tt>
@@ -53,17 +44,8 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * Setter of the property <tt>date</tt> 
-	 * @param date: The date to set.
-	 * @uml.property name="date"
-	 */
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	/**
 	 * tick: Tick of the clock
-	 * Update the attribute date and inform something has change and notify the observers
+	 * Update the attribute date and inform something has change
 	 * Notify observers with the new date
 	 */
 	private void tick() {
@@ -77,15 +59,13 @@ public class Clock extends Observable {
 	 * Constructor clock: Creates a clock 
 	 * We initialize the clock creating a new clock timer, setting the updatePeriod(that we use to
 	 * notify the observers) and putting false to the attribute go that we use to control the
-	 * start and the stop of the clock
-	 * which determinate the period of the update  
+	 * start and the stop of the clock 
 	 * @param updatePeriode: The update of the clock
 	 */
 	public Clock(int updatePeriod) {
 		this.ct = new ClockTimer();
 		this.updatePeriod = updatePeriod;
-		this.go = false;
-		
+		this.go = false;	
 	}
 
 	private class ClockTimer extends TimerTask {
@@ -126,10 +106,11 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * stop: Put the attribute to false to stop the clock
+	 * stop: Put go attribute to false to stop the clock
 	 * @uml.property  name="go"
 	 */
 	public void stop() {
 		this.go = false;
 	}
+	
 }

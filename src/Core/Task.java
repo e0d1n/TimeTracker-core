@@ -19,29 +19,10 @@ public class Task extends Activity {
 	private List<Interval> intervals;
 
 	/**
-	 * Getter of the property <tt>duration</tt>
-	 * @return  Returns the duration.
-	 * @uml.property  name="duration"
-	 */
-	public long getDuration() {
-		return duration;
-	}
-
-	/**
-	 * Setter of the property <tt>duration</tt>
-	 * @param duration  The duration to set.
-	 * @uml.property  name="duration"
-	 */
-	public void setDuration(long duration) {
-		this.duration = duration;
-		logger.debug("Duration of Task: "+this.name+" "+this.duration);
-	}
-	
-	/**
 	 * Constructor task: It complains the leaf element of the composite design pattern
-	 * We call the constructor of the superclass and initialize the list
-	 * of intervals and the parameter isStartable, that we use to control
-	 * if a task is not turned on yet
+	 * We call the constructor of the superclass and initialize the list of intervals 
+	 * and the parameter isStartable, that we use to control if a task is not turned 
+	 * on yet
 	 * @param name: Name of the task
 	 * @param description: Description of the task
 	 * @param project: Father project of the task
@@ -54,10 +35,9 @@ public class Task extends Activity {
 	}
 	
 	/**
-	 * start: If the task is able to start we create an interval,
-	 * add it to the list intervals of the task and clock observers  
-	 * and change the state of the startable to false
-	 * If isn't able to start it throws a warning
+	 * start: If the task is able to start we create an interval and add it to the list 
+	 * intervals of the task and clock observers and change the state of the 
+	 * startable to false. If isn't able to start it throws a warning
 	 * @param clock: Needed to create the observer
 	 */
 	public void start(Clock clock) {

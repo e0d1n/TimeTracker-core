@@ -21,7 +21,7 @@ public class Interval implements Observer, Serializable{
 	private Date finishDate;
 
 	/**
-	 * task: Who has created this interval
+	 * task: What task has created this interval
 	 * @uml.property name="task"
 	 * @uml.associationEnd multiplicity="(1 1)" inverse="intervals:Core.Task"
 	 */
@@ -34,10 +34,9 @@ public class Interval implements Observer, Serializable{
 	private Long duration;
 	
 	/**
-	 * Interval constructor: It's used to create an interval
-	 * At first it defines the father task and put the initial
-	 * values of the other attributes, at the case of the dates
-	 * we use null to control the first iteration
+	 * Interval constructor: It's used to create an interval. At first it defines 
+	 * the father task and put the initial values of the other attributes, 
+	 * at the case of the dates we use null to control the first iteration
 	 * @param task: Father task of interval
 	 */
 	public Interval(Task task) {
@@ -49,14 +48,11 @@ public class Interval implements Observer, Serializable{
 	
 	/**
 	 * update: Implements the update method of observer
-	 * At first we update the finish date 
-	 * If the start date is null it means that we are at the first call
-	 * of the update and we initialize the start date and call
-	 * the method updateActivity with the parameter true to indicate
-	 * the first iteration
+	 * At first we update the finish date. 
+	 * If the start date is null it means we are at the first call of the update 
+	 * and we initialize the start date and call the method updateActivity with 
+	 * the parameter true to indicate the first iteration
 	 * Else we update the duration and call updateActivity with false
-	 * Update a interval and calls the method to update 
-	 * the activity of this interval (this updates upwards)
 	 * clock: Clock to update dates and duration
 	 */
 	@Override
