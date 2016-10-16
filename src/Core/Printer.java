@@ -68,10 +68,10 @@ public class Printer implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		/*
-		# Sleep 250ms because we need sincronize the update of the activities with 
-		# the print of the tree.
 		
+		// Sleep 250ms because we need sincronize the update of the activities with 
+		// the print of the tree.
+		/*
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {

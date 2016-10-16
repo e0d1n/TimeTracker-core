@@ -48,7 +48,7 @@ public class Client {
 	
 	//Second test
 	public static void a2Test() throws InterruptedException{
-		Clock clock = new Clock(1000);
+		Clock clock = new Clock(2000);
 		clock.start();
 		Clock clock2 = new Clock(2000);
 		clock2.start();
