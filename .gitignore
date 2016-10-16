@@ -62,8 +62,9 @@ hs_err_pid*
 
 # External libs
 lib/
-
 bin/
+.euml2
+.umlproject
 
 # Serialized file
 
