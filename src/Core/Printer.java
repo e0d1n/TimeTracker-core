@@ -68,16 +68,14 @@ public class Printer implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		
 		// Sleep 250ms because we need sincronize the update of the activities with 
 		// the print of the tree.
-		/*
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			
 			e.printStackTrace();
-		}*/
+		}
 		
 		System.out.println("Nom           Temps inici                     Temps final            Durada (hh:mm:ss)");
 		System.out.println("----+------------------------------+-------------------------------+------------------");

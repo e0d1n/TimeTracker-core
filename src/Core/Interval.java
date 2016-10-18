@@ -79,7 +79,6 @@ public class Interval implements Observer, Serializable{
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-		
 		return "Interval " + this.task.name + ", Duracion:" + String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
 	}
 
