@@ -3,7 +3,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class Task extends Activity {
-	
+
 	/**
 	 * isStartable: Used to control when a task can be turned on
 	 * @uml.property name="isStartable"
@@ -28,12 +28,12 @@ public class Task extends Activity {
 	 * @param project: Father project of the task
 	 */
 	public Task(String name, String description, Project project) {
-		// TODO Auto-generated constructor stub
+
 		super(name, description, project);
 		this.intervals = new java.util.ArrayList<Interval>();
 		this.isStartable = true;
 	}
-	
+
 	/**
 	 * start: If the task is able to start we create an interval and add it to the list 
 	 * intervals of the task and clock observers and change the state of the 
@@ -41,12 +41,16 @@ public class Task extends Activity {
 	 * @param clock: Needed to create the observer
 	 */
 	public void start(Clock clock) {
+
 		if (this.isStartable == true) {
+
 			Interval interval = new Interval(this);
 			this.intervals.add(interval);
 			clock.addObserver(interval);
 			this.isStartable = false;
+
 		} else {
+
 			logger.warn("The task is already running");
 		}
 		logger.info("New interval added to: "+this.name);
@@ -69,23 +73,31 @@ public class Task extends Activity {
 	 */
 	@Override
 	public String toString() {
+
 		int seconds = (int) (this.duration / 1000) % 60;
 		int minutes = (int) ((this.duration / (1000 * 60)) % 60);
 		int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+
 		if( this.startDate == null ){
-			return this.name + "   " + "                             "+"   "+ "                             " +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+			return this.name + "   " + "                             " +
+							   "   " + "                             " +
+					"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 		}
-		return this.name + "   " +this.startDate +"   " + this.finishDate +"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+		return this.name + "   " + this.startDate +
+				"   " + this.finishDate +
+				"   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
-	
+
 	/**
 	 * accept: Function part of the visitor design pattern that we use to print 
 	 * @param printer: Object of the class printer used to visit the activity
 	 */
 	@Override
 	public void accept(Printer printer) {
-		// TODO Auto-generated method stub
+
 		printer.print(this);
 	}
-	
+
 }

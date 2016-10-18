@@ -21,6 +21,7 @@ public class Project extends Activity {
 	 * @param project: Father project of the project
 	 */
 	public Project(String name, String description, Project project) {
+		
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
 	}
@@ -31,6 +32,7 @@ public class Project extends Activity {
 	 * @param activity: the activity to add
 	 */
 	public void addActivity(Activity activity) {
+		
 		this.activities.add(activity);
 		logger.info("New activity added: "+activity.name);
 	}
@@ -65,6 +67,7 @@ public class Project extends Activity {
 	 */
 	@Override
 	public void accept(Printer printer) {
+
 		printer.print(this);
 		// Call each of it sub activities
 		for (Activity act:this.activities){
