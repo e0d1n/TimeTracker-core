@@ -100,9 +100,9 @@ public class Clock extends Observable {
 	 * @uml.property  name="go"
 	 */
 	public void start() {
-		this.go = true;
 		Thread th = new Thread(ct);
 		th.start();
+		this.go = true;
 	}
 
 	/**
