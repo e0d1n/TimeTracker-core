@@ -1,9 +1,17 @@
 package Core;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SuppressWarnings("serial")
 public class Task extends Activity {
 
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Task");
+	
 	/**
 	 * isStartable: Used to control when a task can be turned on
 	 * @uml.property name="isStartable"
@@ -49,11 +57,12 @@ public class Task extends Activity {
 			clock.addObserver(interval);
 			this.isStartable = false;
 
+			logger.info("New interval added to: "+this.name);
+
 		} else {
 
 			logger.warn("The task is already running");
 		}
-		logger.info("New interval added to: "+this.name);
 	}
 
 	/**
@@ -65,6 +74,7 @@ public class Task extends Activity {
 		// Delete the observer of the last interval
 		clock.deleteObserver(this.intervals.get(this.intervals.size()-1));
 		this.isStartable = true;
+		logger.debug("Task stopped "+ this.name);
 	}
 
 	/**

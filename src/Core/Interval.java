@@ -3,11 +3,18 @@ import java.util.Date;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
-import ch.qos.logback.classic.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public class Interval implements Observer, Serializable{
 
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Interval");
+	
 	/**
 	 * startDate: Start date of a interval
 	 * @uml.property name="startDate"
@@ -66,7 +73,9 @@ public class Interval implements Observer, Serializable{
 		}else{
 			this.duration = this.duration + ((Clock) clock).getUpdatePeriod();
 			this.task.updateActivity(clock,false);
-		}	
+		}
+
+		logger.debug("Interval updated from task " + this.task.name);
 	}
 
 	/**

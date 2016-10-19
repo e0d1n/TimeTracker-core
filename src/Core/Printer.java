@@ -3,9 +3,16 @@ package Core;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Printer implements Observer {
 
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Printer");
+	
 	/**
 	 * Used to store our root project node.
 	 */
@@ -37,7 +44,7 @@ public class Printer implements Observer {
 	 * @param interval <Interval>
 	 */
 	public void print(Interval interval) {
-		
+		logger.debug("Printing Interval");
 		System.out.println(interval);
 	}
 
@@ -47,7 +54,7 @@ public class Printer implements Observer {
 	 * @param task <Task> 
 	 */
 	public void print(Task task) {
-		
+		logger.debug("Printing Task "+task.name);
 		System.out.println(task);
 	}
 
@@ -57,8 +64,8 @@ public class Printer implements Observer {
 	 * @param project <Project>
 	 */
 	public void print(Project project) {
-
-		System.out.println(project);		
+		logger.debug("Printing Project "+ project.name);
+		System.out.println(project);
 	}
 
 	/**
@@ -67,15 +74,6 @@ public class Printer implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		// Sleep 250ms because we need sincronize the update of the activities with 
-		// the print of the tree.
-		/*try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-		}*/
 		
 		System.out.println("Nom           Temps inici                     Temps final            Durada (hh:mm:ss)");
 		System.out.println("----+------------------------------+-------------------------------+------------------");

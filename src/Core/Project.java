@@ -1,8 +1,16 @@
 package Core;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SuppressWarnings("serial")
 public class Project extends Activity {
+	
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Project");
 
 	/** 
 	 * activities: List with activities
@@ -21,9 +29,9 @@ public class Project extends Activity {
 	 * @param project: Father project of the project
 	 */
 	public Project(String name, String description, Project project) {
-		
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
+		logger.debug("Project created " + name);
 	}
 
 	/**
@@ -34,7 +42,7 @@ public class Project extends Activity {
 	public void addActivity(Activity activity) {
 		
 		this.activities.add(activity);
-		logger.info("New activity added: "+activity.name);
+		logger.info("New activity added: " + activity.name);
 	}
 
 	/**

@@ -4,9 +4,18 @@ import java.util.TimerTask;
 import java.util.Timer;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SuppressWarnings("unused")
 public class Clock extends Observable {
+	
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Clock");
 
+	
 	/**
 	 * ClockTimer: Needed to run the clock
 	 * @uml.property name="ct"
@@ -100,9 +109,11 @@ public class Clock extends Observable {
 	 * @uml.property  name="go"
 	 */
 	public void start() {
+		
 		Thread th = new Thread(ct);
 		th.start();
 		this.go = true;
+		logger.debug("Clock started");
 	}
 
 	/**
@@ -110,7 +121,9 @@ public class Clock extends Observable {
 	 * @uml.property  name="go"
 	 */
 	public void stop() {
+
 		this.go = false;
+		logger.debug("Clock stoped");
 	}
 
 }

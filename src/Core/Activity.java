@@ -1,7 +1,8 @@
 package Core;
 import java.util.Date;
 import java.io.Serializable;
-import ch.qos.logback.classic.Level;
+
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
@@ -10,8 +11,7 @@ public abstract class Activity implements Serializable, Printable {
 	/** Declaration of the logger
 	 *  used for debugging purposes
 	 */
-	ch.qos.logback.classic.Logger logger = 
-		(ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+	static Logger logger = LoggerFactory.getLogger("Activity");
 	
 	/**
 	 * name: Name of the Activity
@@ -69,7 +69,6 @@ public abstract class Activity implements Serializable, Printable {
 		this.startDate = null;
 		this.finishDate = null;
 		this.duration = (long) 0;
-		this.logger.setLevel(Level.WARN);
 	}
 
 	/**
@@ -84,6 +83,7 @@ public abstract class Activity implements Serializable, Printable {
 	 * @param clock: Used watch for updates
 	 */
 	protected void updateActivity(Object clock, boolean first) {
+		
 		// If no start date defined
 		if (this.startDate == null) {
 			this.startDate = ((Clock) clock).getDate();
@@ -95,5 +95,7 @@ public abstract class Activity implements Serializable, Printable {
 		if (this.project != null) {
 			this.project.updateActivity(clock,first);
 		}
+		
+		logger.debug("Updated activity "+ this.name);
 	}
 }

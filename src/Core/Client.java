@@ -6,10 +6,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Client {
+	
+	/** Declaration of the logger
+	 *  used for debugging purposes
+	 */
+	static Logger logger = LoggerFactory.getLogger("Client");
 	
 	// First test
 	public static void a1Test() throws InterruptedException, FileNotFoundException, IOException{
+		logger.info("Test 1 start");
 		Clock clock = new Clock(2000);
 		clock.start();
 		Clock clock2 = new Clock(2000);
@@ -43,13 +52,16 @@ public class Client {
 		clock2.deleteObservers();
 		clock.stop();
 		clock2.stop();
-		
+		logger.info("Test 1 stop");
+		logger.info("Test serialize start save");
 		SerialSave guardar = new SerialSave();
 		guardar.Save(proot);
+		logger.info("Test serialize end save");
 	}
 	
 	//Second test
 	public static void a2Test() throws InterruptedException{
+		logger.info("Test 2 start");
 		Clock clock = new Clock(2000);
 		clock.start();
 		Clock clock2 = new Clock(2000);
@@ -88,10 +100,12 @@ public class Client {
 		clock2.deleteObservers();
 		clock.stop();
 		clock2.stop();	
+		logger.info("Test 2 stop");
 	}
 	
 	//Test for serialize
 	public static void serializeTest() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException{
+		logger.info("Test serialize start");
 		SerialSave cargar = new SerialSave();
 		Project project = cargar.Load();
 		Printer printer = new Printer(project);
@@ -102,13 +116,13 @@ public class Client {
 		Thread.sleep(2000);
 		clock.deleteObservers();	
 		clock.stop();
+		logger.info("Test serialize stop");
 	}
 	
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-		//a1Test();
-		//System.out.println("\n------------------------------------------------------------\n TEST SERIALIZE \n------------------------------------------------------------\n");
-		//serializeTest();
-		a2Test();
+		a1Test();
+		serializeTest();
+		//a2Test();
 	}
 
 }
