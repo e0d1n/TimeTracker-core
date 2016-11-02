@@ -1,4 +1,4 @@
-package Core;
+package core;
 import java.util.Observable;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -39,7 +39,7 @@ public class Clock extends Observable {
 	 * @return  Returns the updatePeriod.
 	 * @uml.property  name="updatePeriod"
 	 */
-	public long getUpdatePeriod() {
+	public final long getUpdatePeriod() {
 		return updatePeriod;
 	}
 
@@ -48,7 +48,7 @@ public class Clock extends Observable {
 	 * @return Returns the date.
 	 * @uml.property name="date"
 	 */
-	public Date getDate() {
+	public final Date getDate() {
 		return date;
 	}
 

@@ -1,4 +1,4 @@
-package Core;
+package core;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,12 +12,11 @@ public class Project extends Activity {
 	 */
 	static Logger logger = LoggerFactory.getLogger("Project");
 
-	/** 
-	 * activities: List with activities
-	 * @uml.property name="activities" readOnly="true" ordering="true"
-	 * @uml.property name="activities"
-	 * @uml.associationEnd readOnly="true" ordering="true" aggregation="composite" inverse="project:Core.Activity"
-	 */
+	/**
+     * activities: List with activities
+     * @uml.property   name="activities"
+     * @uml.associationEnd   readOnly="true" ordering="true" aggregation="composite" inverse="project:core.Activity"
+     */
 	private List<Activity> activities;
 
 	/**

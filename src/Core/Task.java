@@ -1,4 +1,4 @@
-package Core;
+package core;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,17 +13,16 @@ public class Task extends Activity {
 	static Logger logger = LoggerFactory.getLogger("Task");
 	
 	/**
-	 * isStartable: Used to control when a task can be turned on
-	 * @uml.property name="isStartable"
-	 */
+     * isStartable: Used to control when a task can be turned on
+     * @uml.property   name="isStartable"
+     */
 	private Boolean isStartable;
 
 	/**
-	 * intervals: List of intervals 
-	 * @uml.property name="intervals"
-	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true"
-	 * aggregation="composite" inverse="task:Core.Interval"
-	 */
+     * intervals: List of intervals
+     * @uml.property   name="intervals"
+     * @uml.associationEnd   multiplicity="(0 -1)" ordering="true" aggregation="composite" inverse="task:core.Interval"
+     */
 	private List<Interval> intervals;
 
 	/**
@@ -57,7 +56,7 @@ public class Task extends Activity {
 			clock.addObserver(interval);
 			this.isStartable = false;
 
-			logger.info("New interval added to: "+this.name);
+			logger.debug("New interval added to: "+this.name);
 
 		} else {
 

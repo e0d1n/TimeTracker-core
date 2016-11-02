@@ -1,3 +1,5 @@
+*.html
+*.txt
 tmp/
 *.tmp
 *.bak
@@ -65,6 +67,7 @@ lib/
 bin/
 .euml2
 .umlproject
+.checkstyle
 
 # Serialized file
 

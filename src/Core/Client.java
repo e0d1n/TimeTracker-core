@@ -1,13 +1,19 @@
-package Core;
+package core;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import reports.*;
 
 public class Client {
 	
@@ -109,7 +115,6 @@ public class Client {
 		SerialSave cargar = new SerialSave();
 		Project project = cargar.Load();
 		Printer printer = new Printer(project);
-		
 		Clock clock = new Clock(1000);
 		clock.start();
 		clock.addObserver(printer);
@@ -120,9 +125,18 @@ public class Client {
 	}
 	
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-		a1Test();
-		serializeTest();
+		//a1Test();
+		//serializeTest();
 		//a2Test();
+	    PrintWriter writer = new PrintWriter("prueba.html");
+	    ExtendedReport report = new ExtendedReport();
+	    //ShortReport report = new ShortReport();
+	    ReportTextVisitor visitor = new ReportTextVisitor(writer);
+	    //ReportHTMLVisitor visitor = new ReportHTMLVisitor(writer);
+	    report.printReport(writer,visitor);
+	    writer.close();
+	    
+	    
 	}
 
 }

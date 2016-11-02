@@ -1,4 +1,4 @@
-package Core;
+package core;
 import java.util.Date;
 import java.io.Serializable;
 import java.util.Observable;
@@ -16,28 +16,28 @@ public class Interval implements Observer, Serializable{
 	static Logger logger = LoggerFactory.getLogger("Interval");
 	
 	/**
-	 * startDate: Start date of a interval
-	 * @uml.property name="startDate"
-	 */
+     * startDate: Start date of a interval
+     * @uml.property   name="startDate"
+     */
 	private Date startDate;
 
 	/**
-	 * finishDate: Finish date of a interval
-	 * @uml.property name="finishDate"
-	 */
+     * finishDate: Finish date of a interval
+     * @uml.property   name="finishDate"
+     */
 	private Date finishDate;
 
 	/**
-	 * task: What task has created this interval
-	 * @uml.property name="task"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="intervals:Core.Task"
-	 */
+     * task: What task has created this interval
+     * @uml.property   name="task"
+     * @uml.associationEnd   multiplicity="(1 1)" inverse="intervals:core.Task"
+     */
 	private Task task;
 
 	/**
-	 * duration: Duration of a interval
-	 * @uml.property name="duration"
-	 */
+     * duration: Duration of a interval
+     * @uml.property   name="duration"
+     */
 	private Long duration;
 
 	/**
