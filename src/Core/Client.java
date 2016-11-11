@@ -16,127 +16,127 @@ import org.slf4j.LoggerFactory;
 import reports.*;
 
 public class Client {
-	
-	/** Declaration of the logger
-	 *  used for debugging purposes
-	 */
-	static Logger logger = LoggerFactory.getLogger("Client");
-	
-	// First test
-	public static void a1Test() throws InterruptedException, FileNotFoundException, IOException{
-		logger.info("Test 1 start");
-		Clock clock = new Clock(2000);
-		clock.start();
-		Clock clock2 = new Clock(2000);
-		clock2.start();
-		Project proot = new Project("RT","proot",null);
-		Project project = new Project("P1","p1",proot);
-		Printer printer = new Printer(proot);
-		clock2.addObserver(printer);
-		proot.addActivity(project);
-		Task T3 = new Task("T3","",project);
-		project.addActivity(T3);
-		Project neew = new Project("P2","",project);
-		project.addActivity(neew);
-		Task T1 = new Task("T1","",neew);
-		Task T2 = new Task("T2","",neew);
-		neew.addActivity(T1);
-		neew.addActivity(T2);
-		Thread.sleep(1000);
-		T3.start(clock);
-		Thread.sleep(3000);
-		T3.stop(clock);
-		Thread.sleep(7000);
-		T2.start(clock);
-		Thread.sleep(10000);
-		T2.stop(clock);
-		T3.start(clock);
-		Thread.sleep(2000);
-		T3.stop(clock);
-		Thread.sleep(1000);
-		clock.deleteObservers();
-		clock2.deleteObservers();
-		clock.stop();
-		clock2.stop();
-		logger.info("Test 1 stop");
-		logger.info("Test serialize start save");
-		SerialSave guardar = new SerialSave();
-		guardar.Save(proot);
-		logger.info("Test serialize end save");
-	}
-	
-	//Second test
-	public static void a2Test() throws InterruptedException{
-		logger.info("Test 2 start");
-		Clock clock = new Clock(2000);
-		clock.start();
-		Clock clock2 = new Clock(2000);
-		clock2.start();
-		Project proot = new Project("RT","proot",null);
-		Printer printer = new Printer(proot);
-		clock2.addObserver(printer);
-		Project project = new Project("P1","p1",proot);
-		proot.addActivity(project);
-		Task T3 = new Task("T3","",project);
-		project.addActivity(T3);
-		Project neew = new Project("P2","",project);
-		project.addActivity(neew);
-		Task T1 = new Task("T1","",neew);
-		Task T2 = new Task("T2","",neew);
-		neew.addActivity(T1);
-		neew.addActivity(T2);
-		Thread.sleep(1000);
-		T3.start(clock);
-		Thread.sleep(4000);
-		T2.start(clock);
-		Thread.sleep(2000);
-		T3.stop(clock);
-		Thread.sleep(2000);
-		T1.start(clock);
-		Thread.sleep(4000);
-		T1.stop(clock);
-		Thread.sleep(2000);
-		T2.stop(clock);
-		Thread.sleep(4000);
-		T3.start(clock);
-		Thread.sleep(2000);
-		T3.stop(clock);
-		Thread.sleep(1000);
-		clock.deleteObservers();
-		clock2.deleteObservers();
-		clock.stop();
-		clock2.stop();	
-		logger.info("Test 2 stop");
-	}
-	
-	//Test for serialize
-	public static void serializeTest() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException{
-		logger.info("Test serialize start");
-		SerialSave cargar = new SerialSave();
-		Project project = cargar.Load();
-		Printer printer = new Printer(project);
-		Clock clock = new Clock(1000);
-		clock.start();
-		clock.addObserver(printer);
-		Thread.sleep(2000);
-		clock.deleteObservers();	
-		clock.stop();
-		logger.info("Test serialize stop");
-	}
-	
-	public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-		//a1Test();
-		//serializeTest();
-		//a2Test();
-	    PrintWriter writer = new PrintWriter("prueba.html");
+
+    /** Declaration of the logger
+     *  used for debugging purposes
+     */
+    static Logger logger = LoggerFactory.getLogger("Client");
+
+    // First test
+    public static void a1Test() throws InterruptedException, FileNotFoundException, IOException{
+        logger.info("Test 1 start");
+        Clock clock = new Clock(2000);
+        clock.start();
+        Clock clock2 = new Clock(2000);
+        clock2.start();
+        Project proot = new Project("RT","proot",null);
+        Project project = new Project("P1","p1",proot);
+        Printer printer = new Printer(proot);
+        clock2.addObserver(printer);
+        proot.addActivity(project);
+        Task T3 = new Task("T3","",project);
+        project.addActivity(T3);
+        Project neew = new Project("P2","",project);
+        project.addActivity(neew);
+        Task T1 = new Task("T1","",neew);
+        Task T2 = new Task("T2","",neew);
+        neew.addActivity(T1);
+        neew.addActivity(T2);
+        Thread.sleep(1000);
+        T3.start(clock);
+        Thread.sleep(3000);
+        T3.stop(clock);
+        Thread.sleep(7000);
+        T2.start(clock);
+        Thread.sleep(10000);
+        T2.stop(clock);
+        T3.start(clock);
+        Thread.sleep(2000);
+        T3.stop(clock);
+        Thread.sleep(1000);
+        clock.deleteObservers();
+        clock2.deleteObservers();
+        clock.stop();
+        clock2.stop();
+        logger.info("Test 1 stop");
+        logger.info("Test serialize start save");
+        SerialSave guardar = new SerialSave();
+        guardar.Save(proot);
+        logger.info("Test serialize end save");
+    }
+
+    //Second test
+    public static void a2Test() throws InterruptedException{
+        logger.info("Test 2 start");
+        Clock clock = new Clock(2000);
+        clock.start();
+        Clock clock2 = new Clock(2000);
+        clock2.start();
+        Project proot = new Project("RT","proot",null);
+        Printer printer = new Printer(proot);
+        clock2.addObserver(printer);
+        Project project = new Project("P1","p1",proot);
+        proot.addActivity(project);
+        Task T3 = new Task("T3","",project);
+        project.addActivity(T3);
+        Project neew = new Project("P2","",project);
+        project.addActivity(neew);
+        Task T1 = new Task("T1","",neew);
+        Task T2 = new Task("T2","",neew);
+        neew.addActivity(T1);
+        neew.addActivity(T2);
+        Thread.sleep(1000);
+        T3.start(clock);
+        Thread.sleep(4000);
+        T2.start(clock);
+        Thread.sleep(2000);
+        T3.stop(clock);
+        Thread.sleep(2000);
+        T1.start(clock);
+        Thread.sleep(4000);
+        T1.stop(clock);
+        Thread.sleep(2000);
+        T2.stop(clock);
+        Thread.sleep(4000);
+        T3.start(clock);
+        Thread.sleep(2000);
+        T3.stop(clock);
+        Thread.sleep(1000);
+        clock.deleteObservers();
+        clock2.deleteObservers();
+        clock.stop();
+        clock2.stop();	
+        logger.info("Test 2 stop");
+    }
+
+    //Test for serialize
+    public static void serializeTest() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException{
+        logger.info("Test serialize start");
+        SerialSave cargar = new SerialSave();
+        Project project = cargar.Load();
+        Printer printer = new Printer(project);
+        Clock clock = new Clock(1000);
+        clock.start();
+        clock.addObserver(printer);
+        Thread.sleep(2000);
+        clock.deleteObservers();	
+        clock.stop();
+        logger.info("Test serialize stop");
+    }
+
+    public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
+        a1Test();
+        serializeTest();
+        //a2Test();
+        /*PrintWriter writer = new PrintWriter("prueba.html");
 	    ExtendedReport report = new ExtendedReport();
 	    //ShortReport report = new ShortReport();
-	    ReportTextVisitor visitor = new ReportTextVisitor(writer);
-	    //ReportHTMLVisitor visitor = new ReportHTMLVisitor(writer);
+	    //ReportTextVisitor visitor = new ReportTextVisitor(writer);
+	    ReportHTMLVisitor visitor = new ReportHTMLVisitor(writer);
 	    report.printReport(writer,visitor);
 	    writer.close();
-	    
-	    
-	}
+         */
+
+    }
 
 }
