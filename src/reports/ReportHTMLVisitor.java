@@ -1,15 +1,18 @@
 package reports;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
 public class ReportHTMLVisitor extends ReportVisitor {
 
     private PaginaWeb webPage;
-    private PrintWriter write;
+    private PrintWriter writer;
 
-    public ReportHTMLVisitor(PrintWriter writer){
+    public ReportHTMLVisitor(String filename) throws FileNotFoundException{
+    	writer = new PrintWriter(filename);
         this.webPage = new PaginaWeb(writer);
     }
 
@@ -28,7 +31,7 @@ public class ReportHTMLVisitor extends ReportVisitor {
     @Override
     public void visitFooter(Footer footer) {
         this.webPage.afegeixTextNormal(footer.getText());
-        this.webPage.escriuPagina();
+        
     }
 
     @Override
@@ -45,11 +48,15 @@ public class ReportHTMLVisitor extends ReportVisitor {
 
     @Override
     public void visitTable(Taula table) {
-        //Collection<?> colle = table.getTaula();
-        //this.webPage.afegeixTaula(colle, true, true);
+    	Collection tableCollection = table.getTaula();
+        this.webPage.afegeixTaula(tableCollection, true, true);
 
     }
 
-
+    @Override
+    public void writeAndCloseFile(){
+    	this.webPage.escriuPagina();
+    	writer.close();
+    }
 
 }

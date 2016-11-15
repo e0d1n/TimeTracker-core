@@ -125,17 +125,17 @@ public class Client {
     }
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
-        a1Test();
-        serializeTest();
+        //a1Test();
+        //serializeTest();
         //a2Test();
-        /*PrintWriter writer = new PrintWriter("prueba.html");
+        
 	    ExtendedReport report = new ExtendedReport();
 	    //ShortReport report = new ShortReport();
-	    //ReportTextVisitor visitor = new ReportTextVisitor(writer);
-	    ReportHTMLVisitor visitor = new ReportHTMLVisitor(writer);
-	    report.printReport(writer,visitor);
-	    writer.close();
-         */
+	    ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
+	    //ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
+	    report.printReport(visitor);
+	    
+        
 
     }
 

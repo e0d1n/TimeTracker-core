@@ -1,6 +1,8 @@
 package reports;
 
 import java.io.*;
+import java.util.ArrayList;
+
 import org.apache.commons.lang3.text.*;
 
 
@@ -14,8 +16,8 @@ public class ReportTextVisitor extends ReportVisitor  {
 
     }
 
-    public ReportTextVisitor(PrintWriter writer2) throws IOException{
-        this.writer = writer2;
+    public ReportTextVisitor(String filename) throws IOException{
+    	this.writer = new PrintWriter(filename);
     }
 
     @Override
@@ -58,7 +60,18 @@ public class ReportTextVisitor extends ReportVisitor  {
 
     @Override
     public void visitTable(Taula table) {
-        this.writer.println(table.getTaula());
-
+    	
+    	ArrayList tableArray = table.getTaula();
+    	for(Object fila: tableArray){
+    		for (Object columna: (ArrayList) fila){
+    		    this.writer.print(columna+"  ");
+    		}
+    		this.writer.println();
+    	}
+    }
+    
+    @Override
+    public void writeAndCloseFile(){
+    	writer.close();
     }
 }

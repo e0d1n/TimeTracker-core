@@ -108,12 +108,20 @@ public class PaginaWeb {
 					 (primeraColumna && primeraColumnaCapsalera) ) { // th en comptes de td
 					Tag th = new Tag("th"); 
 					th.addAttribute(estilTh);
-					th.add(itColumnes.next().toString());
+					try{
+						th.add(itColumnes.next().toString());
+					}catch (Exception e){
+						th.add("Emtpy");
+					}
 					tr.add(th);
 				} else {
 					Tag td = new Tag("td"); 
 					td.addAttribute(estilTd); 
-					td.add(itColumnes.next().toString());
+					try{
+						td.add(itColumnes.next().toString());
+					}catch (Exception e){
+						td.add("Emtpy");
+					}
 					tr.add(td);
 				}
 				primeraColumna = false;

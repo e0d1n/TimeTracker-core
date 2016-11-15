@@ -44,10 +44,11 @@ public abstract class Report {
 
     /**
      */
-    public void printReport(PrintWriter writer, ReportVisitor visitor) throws IOException {
+    public void printReport(ReportVisitor visitor) throws IOException {
 
         for (ReportElement element : reportElements) {
             element.accept(visitor);
         }
+        visitor.writeAndCloseFile();
     }
 }

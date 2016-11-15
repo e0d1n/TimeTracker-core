@@ -8,7 +8,6 @@ public class ExtendedReport extends Report {
         this.addElement(new Taula(4,2));
         this.addElement(new Line());
         this.addElement(new Subtitle("Projectes Arrel"));
-        //TODO: Table size
         this.addElement(new Taula(5,4)); 
         this.addElement(new Line());
         this.addElement(new Subtitle("Subprojectes"));

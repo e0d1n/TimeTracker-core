@@ -35,5 +35,9 @@ public abstract class ReportVisitor {
      /**
      */
      public abstract void visitTable(Taula table);
+     
+     /**
+      */
+     public abstract void writeAndCloseFile();
     
 }
