@@ -9,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -123,19 +126,42 @@ public class Client {
         clock.stop();
         logger.info("Test serialize stop");
     }
+    
+    public static Date stringToDate(String doteInString) throws ParseException{
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");
+    	Date parsedDate = formatter.parse(doteInString);
+    	return parsedDate;
+    }
 
-    public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException, ParseException {
         //a1Test();
         //serializeTest();
         //a2Test();
         
-	    ExtendedReport report = new ExtendedReport();
+	    //ExtendedReport report = new ExtendedReport();
 	    //ShortReport report = new ShortReport();
-	    ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
+	    //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
 	    //ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
-	    report.printReport(visitor);
+	    //report.printReport(visitor);
 	    
+    	
+    	
+    	Periode p1 = new Periode(stringToDate("15/11/2016/19:30:00"),stringToDate("15/11/2016/19:40:00"));
+    	p1.print();
+    	
+    	Periode p2 = new Periode(stringToDate("15/11/2016/19:25:00"),stringToDate("15/11/2016/19:45:00"));
+    	
+    	p2.print();
+    	
+    	Periode intersected = p1.intersect(p2);
         
+    	System.out.println("Intersect:");
+    	if (intersected != null){
+    		intersected.print();
+    	}else{
+    		
+    		System.out.println("NO INTERSECT");
+    	}
 
     }
 
