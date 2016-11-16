@@ -11,14 +11,14 @@ public class Printer implements Observer {
     static Logger logger = LoggerFactory.getLogger("Printer");
 
     //Used to store our root project node.
-    private Project root;
+    private Activity root;
 
     /**
      * Constructor Printer
      * Visitable class of the visitor pattern for print activities
      * @param root: Project root
      */
-    public Printer(Project root) {
+    public Printer(Activity root) {
         this.root = root;
     }
 
@@ -31,36 +31,17 @@ public class Printer implements Observer {
         this.root.accept(this);
     }
 
+    
     /**
      * Print function of visitor pattern that accepts
-     * an interval as parameter.
-     * @param interval <Interval>
+     * an Activity as parameter.
+     * @param activity <Activity>
      */
-    public void print(Interval interval) {
-        logger.debug("Printing Interval");
-        System.out.println(interval);
+    public void print(Activity activity) {
+        logger.debug("Printing Activity "+ activity.name);
+        System.out.println(activity);
     }
-
-    /**
-     * Print function of visitor pattern that accepts
-     * a task as parameter. 
-     * @param task <Task> 
-     */
-    public void print(Task task) {
-        logger.debug("Printing Task "+task.name);
-        System.out.println(task);
-    }
-
-    /**
-     * Print function of visitor pattern that accepts
-     * a project as parameter.
-     * @param project <Project>
-     */
-    public void print(Project project) {
-        logger.debug("Printing Project "+ project.name);
-        System.out.println(project);
-    }
-
+    
     /**
      * update: Method of the observer 
      * Prints the header and the other elements of the project

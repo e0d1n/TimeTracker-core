@@ -45,7 +45,7 @@ public class Client {
         Task T2 = new Task("T2","",neew);
         neew.addActivity(T1);
         neew.addActivity(T2);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         T3.start(clock);
         Thread.sleep(3000);
         T3.stop(clock);
@@ -88,7 +88,7 @@ public class Client {
         Task T2 = new Task("T2","",neew);
         neew.addActivity(T1);
         neew.addActivity(T2);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         T3.start(clock);
         Thread.sleep(4000);
         T2.start(clock);
@@ -116,8 +116,8 @@ public class Client {
     public static void serializeTest() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException{
         logger.info("Test serialize start");
         SerialSave cargar = new SerialSave();
-        Project project = cargar.Load();
-        Printer printer = new Printer(project);
+        Activity root = cargar.Load();
+        Printer printer = new Printer(root);
         Clock clock = new Clock(1000);
         clock.start();
         clock.addObserver(printer);
@@ -138,11 +138,11 @@ public class Client {
         //serializeTest();
         //a2Test();
         
-	    //ExtendedReport report = new ExtendedReport();
+	    ExtendedReport report = new ExtendedReport();
 	    //ShortReport report = new ShortReport();
 	    //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
-	    //ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
-	    //report.printReport(visitor);
+	    ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
+	    report.printReport(visitor);
 	    
     	
     	
@@ -162,7 +162,7 @@ public class Client {
     		
     		System.out.println("NO INTERSECT");
     	}
-
+		
     }
 
 }

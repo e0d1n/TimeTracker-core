@@ -20,16 +20,6 @@ public abstract class Activity implements Serializable, Printable {
     protected String description;
 
     /**
-     * @uml.property   name="finishDate"
-     */
-    protected Date finishDate;
-
-    /**
-     * @uml.property   name="startDate"
-     */
-    protected Date startDate;
-
-    /**
      * An activity has a project
      * @uml.property   name="project"
      * @uml.associationEnd   multiplicity="(1 1)" inverse="activities:core.Project"
@@ -37,9 +27,10 @@ public abstract class Activity implements Serializable, Printable {
     protected Project project;
 
     /**
-     * @uml.property   name="duration"
+     * Used to store initial, final and duration times
      */
-    protected Long duration;
+    protected Periode periode;
+    
 
     /** 
      * Activity is a abstract class for project and task
@@ -55,9 +46,7 @@ public abstract class Activity implements Serializable, Printable {
         this.name = name;
         this.description = description;
         this.project = project;
-        this.startDate = null;
-        this.finishDate = null;
-        this.duration = (long) 0;
+        this.periode = new Periode(null,null);
     }
 
     /**
@@ -73,13 +62,14 @@ public abstract class Activity implements Serializable, Printable {
      */
     protected final void updateActivity(final Object clock, final boolean first) {
         // If no start date defined
-        if (this.startDate == null) {
-            this.startDate = ((Clock) clock).getDate();
-            this.duration = (long) 0;
+        if (this.periode.getDataInici() == null) {
+            this.periode.setDataInici(((Clock) clock).getDate());
+            this.periode.setDuration((long) 0);
         } else if (!first) {
-            this.duration = this.duration + ((Clock) clock).getUpdatePeriod();
+        	this.periode.incrementDuration(((Clock) clock).getUpdatePeriod());
         }
-        this.finishDate = ((Clock) clock).getDate();
+        this.periode.setDataFi(((Clock) clock).getDate());
+        
         if (this.project != null) {
             this.project.updateActivity(clock, first);
         }

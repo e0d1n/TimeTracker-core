@@ -48,19 +48,19 @@ public class Project extends Activity {
     @Override
     public String toString() {
 
-        int seconds = (int) (this.duration / 1000) % 60;
-        int minutes = (int) ((this.duration / (1000 * 60)) % 60);
-        int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+        int seconds = (int) (this.periode.getDuration() / 1000) % 60;
+        int minutes = (int) ((this.periode.getDuration() / (1000 * 60)) % 60);
+        int hours = (int) ((this.periode.getDuration() / (1000 * 60 * 60)) % 24);
 
-        if( this.startDate == null ){
+        if( this.periode.getDataInici() == null ){
 
             return this.name + "   " + "                             " +
-                    "   " + "                             " +
+                    		"   " + "                             " +
                     "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
         }
 
-        return this.name + "   " + this.startDate +
-                "   " + this.finishDate +
+        return this.name + "   " + this.periode.getDataInici() +
+                "   " + this.periode.getDataFi() +
                 "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 

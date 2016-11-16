@@ -1,9 +1,11 @@
-package reports;
+package core;
 
 import java.util.Date;
+import java.io.Serializable;
 
 
-public class Periode {
+@SuppressWarnings("serial")
+public class Periode implements Serializable {
 	
 	private Date dataInici;
 	private Date dataFi;
@@ -15,7 +17,12 @@ public class Periode {
 	public Periode(Date dataInici, Date dataFi){
 		this.dataInici = dataInici;
 		this.dataFi = dataFi;
-		this.duration = (dataFi.getTime() - dataInici.getTime())/1000;
+		if (dataInici == null || dataFi == null){
+			this.duration = (long) 0;
+		}else{
+			this.duration = (dataFi.getTime() - dataInici.getTime())/1000;
+		}
+		
 	}
 	/**
 	 * Getter for dataInici
@@ -66,6 +73,14 @@ public class Periode {
 	}
 	
 	/**
+	 * Increment duration with newIncrement
+	 * @param newIncrement
+	 */
+	public void incrementDuration(Long newIncrement){
+		this.duration += newIncrement;
+	}
+	
+	/**
 	 * Periode intersection returning a new periode with the intersected
 	 * segment time
 	 * @param periodeToIntersect
@@ -84,7 +99,7 @@ public class Periode {
 		
 		Date newFi = min(this.dataFi,periodeToIntersect.getDataFi());
 		Date newInici = max(this.dataInici, periodeToIntersect.getDataInici());
-		Long newDuration = (newFi.getTime() - newInici.getTime())/1000;
+		//Long newDuration = (newFi.getTime() - newInici.getTime())/1000;
 		Periode newPeriode = new Periode(newInici,newFi);
 		//newPeriode.setDataInici(newInici);
 		//newPeriode.setDataFi(newFi);

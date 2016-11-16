@@ -4,7 +4,7 @@ package reports;
 public class ShortReport extends Report {
 	public ShortReport(){
 		super("Short Report");
-		this.addElement(new Subtitle("Període"));
+		this.addElement(new Subtitle("Per’ode"));
 		Taula tableOne = new Taula(4,2);
 		this.addElement(tableOne);
 		this.addElement(new Line());
