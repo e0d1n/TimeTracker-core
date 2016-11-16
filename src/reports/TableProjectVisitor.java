@@ -21,9 +21,9 @@ public class TableProjectVisitor extends TableVisitor {
 		if (periodeIntersection != null){
 			
 			projectArray.add(project.getName());
-			projectArray.add(periodeIntersection.getDataInici());
-			projectArray.add(periodeIntersection.getDataFi());
-			projectArray.add(periodeIntersection.getDuration());
+			projectArray.add(periodeIntersection.getDataIniciAsStringFormated());
+			projectArray.add(periodeIntersection.getDataFiAsStringFormated());
+			projectArray.add(periodeIntersection.getDurationAsStringFormated());
 			table.afegeixFila((ArrayList) projectArray);
 			
 			List<Activity> subprojects = project.getActivities();

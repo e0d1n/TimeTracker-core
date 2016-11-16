@@ -32,6 +32,7 @@ public class ExtendedReport extends Report {
 	
 	public Taula createProjectTable(Periode periode){
 		Taula projectTable = new Taula(1,4);
+		projectTable.setFirstRowHeader(true);
 		projectTable.setPosicio(1, 1, "Project");
 		projectTable.setPosicio(1, 2, "Data d'inici");
 		projectTable.setPosicio(1, 3, "Data final");
@@ -46,6 +47,7 @@ public class ExtendedReport extends Report {
 	
 	public Taula createTaskTable(Periode periode){
 		Taula taskTable = new Taula(1,5);
+		taskTable.setFirstRowHeader(true);
 		taskTable.setPosicio(1, 1, "Nom Projecte");
 		taskTable.setPosicio(1, 2, "Tasca");
 		taskTable.setPosicio(1, 3, "Data d'inici");
@@ -61,6 +63,7 @@ public class ExtendedReport extends Report {
 	
 	public Taula createIntervalTable(Periode periode){
 		Taula intervalTable = new Taula(1,5);
+		intervalTable.setFirstRowHeader(true);
 		intervalTable.setPosicio(1, 1, "Tasca");
 		intervalTable.setPosicio(1, 2, "Interval");
 		intervalTable.setPosicio(1, 3, "Data d'inici");

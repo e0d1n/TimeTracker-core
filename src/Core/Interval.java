@@ -80,10 +80,7 @@ public class Interval implements Observer, Serializable{
     @Override
     public String toString() {
 
-        int seconds = (int) (this.periode.getDuration() % 60);
-        int minutes = (int) ((this.periode.getDuration() / (60)) % 60);
-        int hours = (int) ((this.periode.getDuration() / (60 * 60)) % 24);
-        return "Interval " + this.task.name + ", Duracion:" + String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
+        return "Interval " + this.task.name + ", Duracion:" + this.periode.getDurationAsStringFormated();
     }
     
     public void acceptTableVisitor(TableVisitor tableVisitor, Taula table, Periode periode){

@@ -21,9 +21,9 @@ public class TableIntervalVisitor extends TableVisitor {
 		if (periodeIntersection != null){
 			intervalArray.add(interval.getTask().getName());
 			intervalArray.add(counter);
-			intervalArray.add(periodeIntersection.getDataInici());
-			intervalArray.add(periodeIntersection.getDataFi());
-			intervalArray.add(periodeIntersection.getDuration());
+			intervalArray.add(periodeIntersection.getDataIniciAsStringFormated());
+			intervalArray.add(periodeIntersection.getDataFiAsStringFormated());
+			intervalArray.add(periodeIntersection.getDurationAsStringFormated());
 			table.afegeixFila((ArrayList) intervalArray);
 		}
 	}

@@ -44,14 +44,16 @@ public abstract class Report {
     
     public Taula createUserPeriodeTable(Periode periode){
         Taula tableUserPeriode = new Taula(4,2);
+        tableUserPeriode.setFirstColumnHeader(true);
+        tableUserPeriode.setFirstRowHeader(true);
         tableUserPeriode.setPosicio(1, 2, "Data");
         tableUserPeriode.setPosicio(2, 1, "Desde");
         tableUserPeriode.setPosicio(3, 1, "Fins a");
         tableUserPeriode.setPosicio(4, 1, "Data de generaci—");
         // Data
-        tableUserPeriode.setPosicio(2, 2, periode.getDataInici().toString());
-        tableUserPeriode.setPosicio(3, 2, periode.getDataFi().toString());
-        tableUserPeriode.setPosicio(4, 2, new Date().toString());
+        tableUserPeriode.setPosicio(2, 2, periode.getDataIniciAsStringFormated());
+        tableUserPeriode.setPosicio(3, 2, periode.getDataFiAsStringFormated());
+        tableUserPeriode.setPosicio(4, 2, periode.getDateAsStringFormated(new Date()));
 
     	return tableUserPeriode;
     	

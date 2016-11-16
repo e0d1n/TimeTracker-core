@@ -89,21 +89,18 @@ public class Task extends Activity {
     @Override
     public String toString() {
 
-        int seconds = (int) (this.periode.getDuration() % 60);
-        int minutes = (int) ((this.periode.getDuration() / (60)) % 60);
-        int hours = (int) ((this.periode.getDuration() / (60 * 60)) % 24);
-
         if( this.periode.getDataInici() == null ){
 
-            return this.name + "   " + "                             " +
-                    		"   " + "                             " +
-                    "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+            return this.name + "   " + "                     " +
+                    		"   " + "                     " +
+                    "   " + this.periode.getDurationAsStringFormated();
         }
 
-        return this.name + "   " + this.periode.getDataInici() +
-                "   " + this.periode.getDataFi() +
-                "   " + String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return this.name + "   " + this.periode.getDataIniciAsStringFormated() +
+                "   " + this.periode.getDataFiAsStringFormated() +
+                "   " + this.periode.getDurationAsStringFormated();
     }
+
 
     /**
      * accept: Function part of the visitor design pattern that we use to print 

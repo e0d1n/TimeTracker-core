@@ -23,6 +23,26 @@ public class Taula extends ReportElement {
 	protected void setNcolumnes(int ncolumnes) {
 		this.ncolumnes = ncolumnes;
 	}
+	
+	private boolean firstRowHeader = false;
+	
+	protected boolean getFirstRowHeader(){
+		return this.firstRowHeader;
+	}
+	
+	protected void setFirstRowHeader(boolean setTo){
+		this.firstRowHeader = setTo;
+	}
+	
+	private boolean firstColumnHeader = false;
+	
+	protected boolean getFirstColumnHeader(){
+		return this.firstColumnHeader;
+	}
+	
+	protected void setFirstColumnHeader(boolean setTo){
+		this.firstColumnHeader = setTo;
+	}
 
 	private ArrayList taula = null;
 

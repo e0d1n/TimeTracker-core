@@ -49,7 +49,7 @@ public class ReportHTMLVisitor extends ReportVisitor {
     @Override
     public void visitTable(Taula table) {
     	Collection tableCollection = table.getTaula();
-        this.webPage.afegeixTaula(tableCollection, true, true);
+        this.webPage.afegeixTaula(tableCollection, table.getFirstRowHeader(), table.getFirstColumnHeader());
 
     }
 

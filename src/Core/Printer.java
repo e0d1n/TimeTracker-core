@@ -49,8 +49,8 @@ public class Printer implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        System.out.println("Nom           Temps inici                     Temps final            Durada (hh:mm:ss)");
-        System.out.println("----+------------------------------+-------------------------------+------------------");
+        System.out.println("Nom        Temps inici             Temps final        Durada (hh:mm:ss)");
+        System.out.println("----+-----------------------+-----------------------+------------------");
         printAll();
     }
 

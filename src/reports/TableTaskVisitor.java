@@ -32,9 +32,9 @@ public class TableTaskVisitor extends TableVisitor {
 		if (periodeIntersection != null){
 			taskArray.add(task.getProject().getName());
 			taskArray.add(task.getName());
-			taskArray.add(periodeIntersection.getDataInici());
-			taskArray.add(periodeIntersection.getDataFi());
-			taskArray.add(periodeIntersection.getDuration());
+			taskArray.add(periodeIntersection.getDataIniciAsStringFormated());
+			taskArray.add(periodeIntersection.getDataFiAsStringFormated());
+			taskArray.add(periodeIntersection.getDurationAsStringFormated());
 			table.afegeixFila((ArrayList) taskArray);
 		}
 	}

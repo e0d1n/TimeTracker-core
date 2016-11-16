@@ -1,5 +1,6 @@
 package core;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -24,12 +25,29 @@ public class Periode implements Serializable {
 		}
 		
 	}
+	
+	public String getDateAsStringFormated(Date dateToFormat){
+		Calendar cal = Calendar.getInstance();
+	    cal.setTime(dateToFormat);
+	    int year = cal.get(Calendar.YEAR);
+	    int month = cal.get(Calendar.MONTH);
+	    int day = cal.get(Calendar.DAY_OF_MONTH);
+		int hour = cal.get(Calendar.HOUR);
+		int minute = cal.get(Calendar.MINUTE);
+		int second = cal.get(Calendar.SECOND);
+		return String.format(("%02d/%02d/%d, %02d:%02d:%02dh"),day,month,year,hour,minute,second);
+	}
+	
 	/**
 	 * Getter for dataInici
 	 * @return
 	 */
 	public Date getDataInici(){
 		return dataInici;
+	}
+	
+	public String getDataIniciAsStringFormated(){
+		return getDateAsStringFormated(dataInici);
 	}
 	
 	/**
@@ -48,6 +66,12 @@ public class Periode implements Serializable {
 		return dataFi;
 	}
 	
+	public String getDataFiAsStringFormated(){
+		return getDateAsStringFormated(dataFi);
+	}
+	
+
+	
 	/**
 	 * Setter for dataFi
 	 * @param newDataFi
@@ -57,11 +81,13 @@ public class Periode implements Serializable {
 	}
 	
 	/**
-	 * Getter for duration
-	 * @return
+	 * Getter for duration as formated String
 	 */
-	public Long getDuration(){
-		return duration/1000;
+	public String getDurationAsStringFormated(){
+		int seconds = (int) ((this.duration / 1000) % 60);
+        int minutes = (int) ((this.duration / (1000*60)) % 60);
+        int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+        return String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
 	}
 
 	/**
