@@ -8,6 +8,6 @@ public interface Printable {
 	 * accept: Method to accept a printer 
 	 * @param printer
 	 */
-	void accept(Printer printer);
+	void acceptPrinter(Printer printer);
 	
 }

@@ -20,7 +20,7 @@ public class Periode implements Serializable {
 		if (dataInici == null || dataFi == null){
 			this.duration = (long) 0;
 		}else{
-			this.duration = (dataFi.getTime() - dataInici.getTime())/1000;
+			this.duration = (dataFi.getTime() - dataInici.getTime());
 		}
 		
 	}
@@ -61,7 +61,7 @@ public class Periode implements Serializable {
 	 * @return
 	 */
 	public Long getDuration(){
-		return duration;
+		return duration/1000;
 	}
 
 	/**

@@ -1,6 +1,10 @@
 package core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import reports.TableVisitor;
+import reports.Taula;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +17,10 @@ public abstract class Activity implements Serializable, Printable {
      * @uml.property   name="name"
      */
     protected String name;
+    
+    public String getName(){
+    	return this.name;
+    }
 
     /**
      * @uml.property   name="description"
@@ -25,11 +33,21 @@ public abstract class Activity implements Serializable, Printable {
      * @uml.associationEnd   multiplicity="(1 1)" inverse="activities:core.Project"
      */
     protected Project project;
+    
+    public Project getProject(){
+    	return this.project;
+    }
 
     /**
      * Used to store initial, final and duration times
      */
     protected Periode periode;
+    
+    
+    public Periode getPeriode(){
+    	
+    	return this.periode;
+    }
     
 
     /** 
@@ -75,4 +93,6 @@ public abstract class Activity implements Serializable, Printable {
         }
         logger.debug("Updated activity " + this.name);
     }
+    
+    public abstract void acceptTableVisitor(TableVisitor tableVisitor, Taula table, Periode periode);
 }

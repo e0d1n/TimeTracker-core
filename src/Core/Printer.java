@@ -28,7 +28,7 @@ public class Printer implements Observer {
      * describe for each of the called object.
      */
     private void printAll() {
-        this.root.accept(this);
+        this.root.acceptPrinter(this);
     }
 
     

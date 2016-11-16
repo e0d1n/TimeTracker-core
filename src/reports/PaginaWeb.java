@@ -111,7 +111,7 @@ public class PaginaWeb {
 					try{
 						th.add(itColumnes.next().toString());
 					}catch (Exception e){
-						th.add("Emtpy");
+						th.add("");
 					}
 					tr.add(th);
 				} else {
@@ -120,7 +120,7 @@ public class PaginaWeb {
 					try{
 						td.add(itColumnes.next().toString());
 					}catch (Exception e){
-						td.add("Emtpy");
+						td.add("");
 					}
 					tr.add(td);
 				}

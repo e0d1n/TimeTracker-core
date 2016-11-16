@@ -8,8 +8,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
-import core.Activity;
+import core.*;
 
 public abstract class Report {
 
@@ -19,17 +20,41 @@ public abstract class Report {
      *                     inverse="report:reports.ReportElement"
      */
     protected List<ReportElement> reportElements;
+    
+    protected Periode userPeriode;
+    protected Activity root;
 
     protected void addElement(ReportElement element) {
         reportElements.add(element);
     }
 
     // List<Activity> activities, Date startDate, Date finishDate
-    public Report(String title) {
+    public Report(String title, Periode periode, Activity root) {
+    	this.userPeriode = periode;
+    	this.root = root;
         this.reportElements = new java.util.ArrayList<ReportElement>();
         this.reportElements.add(new Line());
         this.reportElements.add(new Title(title));
         this.reportElements.add(new Line());
+        this.addElement(new Subtitle("Per’ode"));
+        Taula tableUserPeriode = createUserPeriodeTable(periode);
+        
+		this.reportElements.add(tableUserPeriode);
+    }
+    
+    public Taula createUserPeriodeTable(Periode periode){
+        Taula tableUserPeriode = new Taula(4,2);
+        tableUserPeriode.setPosicio(1, 2, "Data");
+        tableUserPeriode.setPosicio(2, 1, "Desde");
+        tableUserPeriode.setPosicio(3, 1, "Fins a");
+        tableUserPeriode.setPosicio(4, 1, "Data de generaci—");
+        // Data
+        tableUserPeriode.setPosicio(2, 2, periode.getDataInici().toString());
+        tableUserPeriode.setPosicio(3, 2, periode.getDataFi().toString());
+        tableUserPeriode.setPosicio(4, 2, new Date().toString());
+
+    	return tableUserPeriode;
+    	
     }
 
     /**
@@ -51,4 +76,5 @@ public abstract class Report {
         }
         visitor.writeAndCloseFile();
     }
+
 }

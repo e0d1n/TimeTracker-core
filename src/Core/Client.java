@@ -132,20 +132,67 @@ public class Client {
     	Date parsedDate = formatter.parse(doteInString);
     	return parsedDate;
     }
+    
+    public static void reportTest() throws ParseException, IOException, InterruptedException{
+    	
+    	Clock clock = new Clock(1000);
+        clock.start();
+        Clock clock2 = new Clock(1000);
+        clock2.start();
+        Project proot = new Project("RT","proot",null);
+        Printer printer = new Printer(proot);
+        clock2.addObserver(printer);
+        Project project = new Project("P1","p1",proot);
+        proot.addActivity(project);
+        Task T3 = new Task("T3","",project);
+        project.addActivity(T3);
+        Project neew = new Project("P2","",project);
+        project.addActivity(neew);
+        Task T1 = new Task("T1","",neew);
+        Task T2 = new Task("T2","",neew);
+        neew.addActivity(T1);
+        neew.addActivity(T2);
+        Thread.sleep(2000);
+        T3.start(clock);
+        Thread.sleep(4000);
+        T2.start(clock);
+        Thread.sleep(2000);
+        T3.stop(clock);
+        Thread.sleep(2000);
+        T1.start(clock);
+        Thread.sleep(4000);
+        T1.stop(clock);
+        Thread.sleep(2000);
+        T2.stop(clock);
+        T3.start(clock);
+        Thread.sleep(2000);
+        T3.stop(clock);
+        Thread.sleep(1000);
+        clock.deleteObservers();
+        clock2.deleteObservers();
+        clock.stop();
+        clock2.stop();	
+        
+        Periode userPeriode = new Periode(stringToDate("15/11/2016/19:30:00"),stringToDate("18/11/2016/19:40:00"));
+	    ExtendedReport report = new ExtendedReport(userPeriode,proot);
+	    //ShortReport report = new ShortReport(userPeriode,proot);
+	    //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
+	    ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
+	    report.printReport(visitor);
+        
+    	
+    }
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException, ClassNotFoundException, ParseException {
         //a1Test();
         //serializeTest();
         //a2Test();
         
-	    ExtendedReport report = new ExtendedReport();
-	    //ShortReport report = new ShortReport();
-	    //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
-	    ReportHTMLVisitor visitor = new ReportHTMLVisitor("out.html");
-	    report.printReport(visitor);
+
+    	reportTest();
 	    
     	
-    	
+    	/*
     	Periode p1 = new Periode(stringToDate("15/11/2016/19:30:00"),stringToDate("15/11/2016/19:40:00"));
     	p1.print();
     	
@@ -162,6 +209,9 @@ public class Client {
     		
     		System.out.println("NO INTERSECT");
     	}
+    	*/
+    	
+    	//tableVisitorTest();
 		
     }
 

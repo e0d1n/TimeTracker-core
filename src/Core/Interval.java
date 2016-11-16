@@ -7,6 +7,9 @@ import java.util.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import reports.TableVisitor;
+import reports.Taula;
+
 @SuppressWarnings("serial")
 public class Interval implements Observer, Serializable{
 
@@ -14,31 +17,24 @@ public class Interval implements Observer, Serializable{
      *  used for debugging purposes
      */
     static Logger logger = LoggerFactory.getLogger("Interval");
-
-    /**
-     * startDate: Start date of a interval
-     * @uml.property   name="startDate"
-     */
-    private Date startDate;
-
-    /**
-     * finishDate: Finish date of a interval
-     * @uml.property   name="finishDate"
-     */
-    private Date finishDate;
-
+    
     /**
      * task: What task has created this interval
      * @uml.property   name="task"
      * @uml.associationEnd   multiplicity="(1 1)" inverse="intervals:core.Task"
      */
     private Task task;
-
-    /**
-     * duration: Duration of a interval
-     * @uml.property   name="duration"
-     */
-    private Long duration;
+    
+    public Task getTask(){
+    	
+    	return this.task;
+    }
+    
+    private Periode periode;
+    
+    public Periode getPeriode(){
+    	return this.periode;
+    }
 
     /**
      * Interval constructor: It's used to create an interval. At first it defines 
@@ -49,9 +45,7 @@ public class Interval implements Observer, Serializable{
     public Interval(Task task) {
 
         this.task = task;
-        this.startDate = null;
-        this.finishDate = null;
-        this.duration = (long) 0;
+        this.periode = new Periode(null,null);
     }
 
     /**
@@ -65,13 +59,14 @@ public class Interval implements Observer, Serializable{
      */
     @Override
     public void update(Observable arg0, Object clock) {
-
-        this.finishDate = ((Clock) clock).getDate();
-        if (this.startDate == null) {
-            this.startDate = ((Clock) clock).getDate();
+    	
+    	this.periode.setDataFi(((Clock) clock).getDate());
+        
+        if (this.periode.getDataInici() == null) {
+        	this.periode.setDataInici(((Clock) clock).getDate());
             this.task.updateActivity(clock,true);
         }else{
-            this.duration = this.duration + ((Clock) clock).getUpdatePeriod();
+        	this.periode.incrementDuration(((Clock) clock).getUpdatePeriod());
             this.task.updateActivity(clock,false);
         }
 
@@ -85,10 +80,16 @@ public class Interval implements Observer, Serializable{
     @Override
     public String toString() {
 
-        int seconds = (int) (this.duration / 1000) % 60;
-        int minutes = (int) ((this.duration / (1000 * 60)) % 60);
-        int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
+        int seconds = (int) (this.periode.getDuration() % 60);
+        int minutes = (int) ((this.periode.getDuration() / (60)) % 60);
+        int hours = (int) ((this.periode.getDuration() / (60 * 60)) % 24);
         return "Interval " + this.task.name + ", Duracion:" + String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
+    }
+    
+    public void acceptTableVisitor(TableVisitor tableVisitor, Taula table, Periode periode){
+    	
+    	tableVisitor.visitInterval(this, table, periode);
+    	
     }
 
 }

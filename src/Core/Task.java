@@ -4,6 +4,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import reports.*;
+
 @SuppressWarnings("serial")
 public class Task extends Activity {
 
@@ -24,6 +26,10 @@ public class Task extends Activity {
      * @uml.associationEnd   multiplicity="(0 -1)" ordering="true" aggregation="composite" inverse="task:core.Interval"
      */
     private List<Interval> intervals;
+    
+    public List<Interval> getIntervals(){
+    	return this.intervals;
+    }
 
     /**
      * Constructor task: It complains the leaf element of the composite design pattern
@@ -83,9 +89,9 @@ public class Task extends Activity {
     @Override
     public String toString() {
 
-        int seconds = (int) (this.periode.getDuration() / 1000) % 60;
-        int minutes = (int) ((this.periode.getDuration() / (1000 * 60)) % 60);
-        int hours = (int) ((this.periode.getDuration() / (1000 * 60 * 60)) % 24);
+        int seconds = (int) (this.periode.getDuration() % 60);
+        int minutes = (int) ((this.periode.getDuration() / (60)) % 60);
+        int hours = (int) ((this.periode.getDuration() / (60 * 60)) % 24);
 
         if( this.periode.getDataInici() == null ){
 
@@ -104,9 +110,16 @@ public class Task extends Activity {
      * @param printer: Object of the class printer used to visit the activity
      */
     @Override
-    public void accept(Printer printer) {
+    public void acceptPrinter(Printer printer) {
 
         printer.print(this);
+    }
+    
+    
+    public void acceptTableVisitor(TableVisitor tableVisitor, Taula table, Periode periode){
+    	
+    	tableVisitor.visitTask(this, table, periode);
+    	
     }
 
 }

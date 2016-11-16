@@ -4,6 +4,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import reports.TableVisitor;
+import reports.Taula;
+
 @SuppressWarnings("serial")
 public class Project extends Activity {
 
@@ -15,6 +18,10 @@ public class Project extends Activity {
      * @uml.associationEnd   readOnly="true" ordering="true" aggregation="composite" inverse="project:core.Activity"
      */
     private List<Activity> activities;
+    
+    public List<Activity> getActivities(){
+    	return this.activities;
+    }
 
     /**
      * Constructor project: It complains the composite element of the composite design pattern
@@ -48,9 +55,9 @@ public class Project extends Activity {
     @Override
     public String toString() {
 
-        int seconds = (int) (this.periode.getDuration() / 1000) % 60;
-        int minutes = (int) ((this.periode.getDuration() / (1000 * 60)) % 60);
-        int hours = (int) ((this.periode.getDuration() / (1000 * 60 * 60)) % 24);
+        int seconds = (int) (this.periode.getDuration() % 60);
+        int minutes = (int) ((this.periode.getDuration() / (60)) % 60);
+        int hours = (int) ((this.periode.getDuration() / (60 * 60)) % 24);
 
         if( this.periode.getDataInici() == null ){
 
@@ -70,13 +77,19 @@ public class Project extends Activity {
      * @param printer: Object of the class printer used to visit the activity
      */
     @Override
-    public void accept(Printer printer) {
+    public void acceptPrinter(Printer printer) {
 
         printer.print(this);
         // Call each of it sub activities
         for (Activity act:this.activities){
-            act.accept(printer);
+            act.acceptPrinter(printer);
         }
+    }
+    
+    public void acceptTableVisitor(TableVisitor tableVisitor, Taula table, Periode periode){
+    	
+    	tableVisitor.visitProject(this, table, periode);
+    	
     }
 
 }
