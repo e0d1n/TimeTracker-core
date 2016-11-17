@@ -1,10 +1,12 @@
 package reports;
 
+import java.util.List;
+
 import core.*;
 
 
 public class ExtendedReport extends Report {
-	public ExtendedReport(Periode periode, Activity root){
+	public ExtendedReport(Periode periode, Project root){
 		super("Extended Report", periode, root);
         this.addElement(new Line());
         this.addElement(new Subtitle("Projectes Arrel"));
@@ -27,6 +29,11 @@ public class ExtendedReport extends Report {
         this.addElement(new Line());
         this.addElement(new Footer("Time Tracker v1.0"));
         
+        /*
+        Taula subprojectTable = createSubProjectTable(periode);
+        this.addElement(subprojectTable);
+        */
+        
 	}
 	
 	
@@ -39,10 +46,36 @@ public class ExtendedReport extends Report {
 		projectTable.setPosicio(1, 4, "Durada");
 		
 		TableProjectVisitor projectVisitor = new TableProjectVisitor();
-		this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
+		
+		List<Activity> baseProjects = this.root.getActivities();
+		
+		for ( Activity activity : baseProjects ){
+			activity.acceptTableVisitor(projectVisitor,projectTable,periode);
+		}
+		
+		//this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
 		
 		return projectTable;
 		
+	}
+	
+	public Taula createSubProjectTable(Periode periode){
+		Taula subProjectTable = new Taula(1,4);
+		subProjectTable.setFirstRowHeader(true);
+		subProjectTable.setPosicio(1, 1, "Project");
+		subProjectTable.setPosicio(1, 2, "Data d'inici");
+		subProjectTable.setPosicio(1, 3, "Data final");
+		subProjectTable.setPosicio(1, 4, "Durada");
+		
+		TableSubProjectVisitor subProjectVisitor = new TableSubProjectVisitor();
+
+		List<Activity> baseProjects = this.root.getActivities();
+		
+		for ( Activity activity : baseProjects ){
+			activity.acceptTableVisitor(subProjectVisitor,subProjectTable,periode);
+		}
+		
+		return subProjectTable;
 	}
 	
 	public Taula createTaskTable(Periode periode){

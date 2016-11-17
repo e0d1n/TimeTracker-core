@@ -35,6 +35,10 @@ public class Interval implements Observer, Serializable{
     public Periode getPeriode(){
     	return this.periode;
     }
+    
+    public void setPeriode(Periode periode){
+    	this.periode = periode;
+    }
 
     /**
      * Interval constructor: It's used to create an interval. At first it defines 

@@ -35,7 +35,7 @@ public class Periode implements Serializable {
 		int hour = cal.get(Calendar.HOUR);
 		int minute = cal.get(Calendar.MINUTE);
 		int second = cal.get(Calendar.SECOND);
-		return String.format(("%02d/%02d/%d, %02d:%02d:%02dh"),day,month,year,hour,minute,second);
+		return String.format(("%02d/%02d/%d, %d:%02d:%02dh"),day,month,year,hour,minute,second);
 	}
 	
 	/**
@@ -84,10 +84,12 @@ public class Periode implements Serializable {
 	 * Getter for duration as formated String
 	 */
 	public String getDurationAsStringFormated(){
+		
 		int seconds = (int) ((this.duration / 1000) % 60);
         int minutes = (int) ((this.duration / (1000*60)) % 60);
-        int hours = (int) ((this.duration / (1000 * 60 * 60)) % 24);
-        return String.format(("%02d:%02d:%02d"), hours, minutes, seconds);
+        int hours = (int) ((this.duration / (1000 * 60 * 60)));
+        
+        return String.format(("%d:%02d:%02d"), hours, minutes, seconds);
 	}
 
 	/**

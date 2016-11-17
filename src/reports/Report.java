@@ -22,14 +22,14 @@ public abstract class Report {
     protected List<ReportElement> reportElements;
     
     protected Periode userPeriode;
-    protected Activity root;
+    protected Project root;
 
     protected void addElement(ReportElement element) {
         reportElements.add(element);
     }
 
     // List<Activity> activities, Date startDate, Date finishDate
-    public Report(String title, Periode periode, Activity root) {
+    public Report(String title, Periode periode, Project root) {
     	this.userPeriode = periode;
     	this.root = root;
         this.reportElements = new java.util.ArrayList<ReportElement>();

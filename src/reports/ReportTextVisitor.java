@@ -64,7 +64,11 @@ public class ReportTextVisitor extends ReportVisitor  {
     	ArrayList tableArray = table.getTaula();
     	for(Object fila: tableArray){
     		for (Object columna: (ArrayList) fila){
-    		    this.writer.print(columna+"  ");
+    			if(columna == null){
+    				this.writer.print("      ");
+    			}else{
+    				this.writer.print(columna+"  ");
+    			}
     		}
     		this.writer.println();
     	}

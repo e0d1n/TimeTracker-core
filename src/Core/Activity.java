@@ -49,6 +49,10 @@ public abstract class Activity implements Serializable, Printable {
     	return this.periode;
     }
     
+    public void setPeriode(Periode periode){
+    	this.periode = periode;
+    }
+    
 
     /** 
      * Activity is a abstract class for project and task
