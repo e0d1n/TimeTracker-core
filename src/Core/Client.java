@@ -185,8 +185,8 @@ public class Client {
         R.setPeriode(periodeR);
         
         // User Choose
-        Date dataIniciUser = stringToDate("10/11/2016 11:00:00");
-        Date dataFiUser = stringToDate("20/11/2016 9:00:00");
+        Date dataIniciUser = stringToDate("16/11/2016 11:00:00");
+        Date dataFiUser = stringToDate("17/11/2016 9:00:00");
         
         Periode userPeriode = new Periode(dataIniciUser,dataFiUser);
 	    ExtendedReport report = new ExtendedReport(userPeriode,R);
@@ -269,7 +269,7 @@ public static void reportTestDynamic() throws ParseException, IOException, Inter
         //serializeTest();
         //a2Test();
 
-    	//reportTestStatic();
+    	reportTestStatic();
     	//reportTestDynamic();
 		
     }
