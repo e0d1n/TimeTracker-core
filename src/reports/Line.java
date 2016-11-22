@@ -1,12 +1,10 @@
 package reports;
 
-
 public class Line extends ReportElement {
-
+	
 	@Override
-	public void accept(ReportVisitor visitor) {
+    public final void accept(final ReportVisitor visitor) {
 		visitor.visitLine(this);
 	}
-
-
+	
 }

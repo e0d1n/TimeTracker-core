@@ -3,55 +3,63 @@ package reports;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.*;
-
+import core.Activity;
+import core.Interval;
+import core.Periode;
+import core.Project;
+import core.Task;
 
 public class TableIntervalVisitor extends TableVisitor {
-
-	static int counter;
+	
+	private static int counter;
 	
 	@Override
-	public void visitInterval(Interval interval, Taula table, Periode periode) {
+    public final void visitInterval(final Interval interval,
+    		final Taula table, final Periode periode) {
 		System.out.println(interval);
 		
 		List<Object> intervalArray = new ArrayList<Object>();
 		
 		Periode periodeIntersection = interval.getPeriode().intersect(periode);
 		
-		if (periodeIntersection != null){
+		if (periodeIntersection != null) {
 			intervalArray.add(interval.getTask().getName());
 			intervalArray.add(counter);
-			intervalArray.add(periodeIntersection.getDataIniciAsStringFormated());
+			intervalArray.add(periodeIntersection
+			        .getDataIniciAsStringFormated());
 			intervalArray.add(periodeIntersection.getDataFiAsStringFormated());
-			intervalArray.add(periodeIntersection.getDurationAsStringFormated());
-			table.afegeixFila((ArrayList) intervalArray);
+			intervalArray
+			        .add(periodeIntersection.getDurationAsStringFormated());
+			table.afegeixFila((ArrayList<Object>) intervalArray);
 		}
 	}
-
+	
 	@Override
-	public void visitProject(Project project, Taula table, Periode periode) {
-
+    public final void visitProject(final Project project,
+    		final Taula table, final Periode periode) {
+		
 		List<Activity> subprojects = project.getActivities();
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
-		if (periodeIntersection != null){
-			for ( Activity activity : subprojects ){
-				activity.acceptTableVisitor(this,table, periode);
+		if (periodeIntersection != null) {
+			for (Activity activity : subprojects) {
+				activity.acceptTableVisitor(this, table, periode);
 			}
 		}
 	}
-
+	
 	@Override
-	public void visitTask(Task task, Taula table, Periode periode) {
+    public final void visitTask(final Task task, 
+    		final Taula table, final Periode periode) {
 		List<Interval> intervals = task.getIntervals();
 		counter = 1;
 		Periode periodeIntersection = task.getPeriode().intersect(periode);
-		if (periodeIntersection != null){
-			for ( Interval interval : intervals ){
+		if (periodeIntersection != null) {
+			for (Interval interval : intervals) {
 				interval.acceptTableVisitor(this, table, periode);
-				counter ++;
+				counter++;
 			}
 		}
 		
 	}
-
+	
 }

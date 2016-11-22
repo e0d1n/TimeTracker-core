@@ -9,40 +9,43 @@ import core.Periode;
 import core.Project;
 import core.Task;
 
-
 public class TableSubProjectVisitor extends TableVisitor {
 	
-	static int treeLevel = 1;
-
+	private static int treeLevel = 1;
+	
 	@Override
-	public void visitInterval(Interval interval, Taula table, Periode periode) {
+	public void visitInterval(final Interval interval, 
+			final Taula table, final Periode periode) {
 	}
-
+	
 	@Override
-	public void visitProject(Project project, Taula table, Periode periode) {
+    public final void visitProject(final Project project, 
+    		final Taula table, final Periode periode) {
 		System.out.println(project);
 		
-		List<Object> projectArray = new ArrayList<Object>();		
+		List<Object> projectArray = new ArrayList<Object>();
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
-		if (periodeIntersection != null){
+		if (periodeIntersection != null) {
 			
 			projectArray.add(project.getName());
-			projectArray.add(periodeIntersection.getDataIniciAsStringFormated());
+			projectArray
+			        .add(periodeIntersection.getDataIniciAsStringFormated());
 			projectArray.add(periodeIntersection.getDataFiAsStringFormated());
 			projectArray.add(periodeIntersection.getDurationAsStringFormated());
-			table.afegeixFila((ArrayList) projectArray);
+			table.afegeixFila((ArrayList<Object>) projectArray);
 			
 			List<Activity> subprojects = project.getActivities();
-			for ( Activity activity : subprojects ){
+			for (Activity activity : subprojects) {
 				treeLevel = 2;
 				activity.acceptTableVisitor(this, table, periode);
 			}
 			
 		}
 	}
-
+	
 	@Override
-	public void visitTask(Task task, Taula table, Periode periode) {
+	public void visitTask(final Task task, 
+			final Taula table, final Periode periode) {
 	}
-
+	
 }

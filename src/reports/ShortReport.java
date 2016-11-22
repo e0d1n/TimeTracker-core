@@ -1,30 +1,34 @@
 package reports;
 
-import core.*;
-
+import core.Periode;
+import core.Project;
 
 public class ShortReport extends Report {
+	private static final int UNO = 1;
+	private static final int DOS = 2;
+	private static final int TRES = 3;
+	private static final int CUATRO = 4;
 	
-	public ShortReport(Periode periode, Project root){
-		super("Short Report",periode,root);
+	public ShortReport(final Periode periode, final Project root) {
+		super("Short Report", periode, root);
 		this.addElement(new Line());
 		this.addElement(new Subtitle("Projectes Arrel"));
 		Taula projectTable = createProjectTable(periode);
 		this.addElement(projectTable);
 		this.addElement(new Line());
-	    this.addElement(new Footer("Time Tracker v1.0"));
+		this.addElement(new Footer("Time Tracker v1.0"));
 	}
 	
-	public Taula createProjectTable(Periode periode){
-		Taula projectTable = new Taula(1,4);
+	public final Taula createProjectTable(final Periode periode) {
+		Taula projectTable = new Taula(UNO, CUATRO);
 		projectTable.setFirstRowHeader(true);
-		projectTable.setPosicio(1, 1, "Project");
-		projectTable.setPosicio(1, 2, "Data d'inici");
-		projectTable.setPosicio(1, 3, "Data final");
-		projectTable.setPosicio(1, 4, "Durada");
+		projectTable.setPosicio(UNO, UNO, "Project");
+		projectTable.setPosicio(UNO, DOS, "Data d'inici");
+		projectTable.setPosicio(UNO, TRES, "Data final");
+		projectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableProjectVisitor projectVisitor = new TableProjectVisitor();
-		this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
+		this.root.acceptTableVisitor(projectVisitor, projectTable, periode);
 		
 		return projectTable;
 		

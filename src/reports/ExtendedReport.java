@@ -2,114 +2,127 @@ package reports;
 
 import java.util.List;
 
-import core.*;
-
+import core.Activity;
+import core.Periode;
+import core.Project;
 
 public class ExtendedReport extends Report {
-	public ExtendedReport(Periode periode, Project root){
+	private static final int UNO = 1;
+	private static final int DOS = 2;
+	private static final int TRES = 3;
+	private static final int CUATRO = 4;
+	private static final int CINCO = 5;
+	
+	public ExtendedReport(final Periode periode, final Project root) {
 		super("Extended Report", periode, root);
-        this.addElement(new Line());
-        this.addElement(new Subtitle("Projectes Arrel"));
-        Taula projectTable = createProjectTable(periode);
-        this.addElement(projectTable); 
-        this.addElement(new Line());
-        //this.addElement(new Subtitle("Subprojectes"));
-        //this.addElement(new Paragraph("S'inclouen en la segŸent taula nomŽs els subprojectes que tinguin alguna tasca amb algun interval dins del per’ode."));
-        //this.addElement(new Taula(5,5)); 
-        //this.addElement(new Line());
-        this.addElement(new Subtitle("Tasques"));
-        this.addElement(new Paragraph("S'inclouen en la segŸent taula la durada de totes tasques i el projecte al qual pertanyen."));
-        Taula taskTable = createTaskTable(periode);
-        this.addElement(taskTable); 
-        this.addElement(new Line());
-        this.addElement(new Subtitle("Intervals"));
-        this.addElement(new Paragraph("S'inclouen en la segŸent taula el temps d'inici, final i durada de tots els intervals entre la data inicial i final especificades, i la tasca i projecte al qual pertanyen."));
-        Taula intervalTable = createIntervalTable(periode);
-        this.addElement(intervalTable); 
-        this.addElement(new Line());
-        this.addElement(new Footer("Time Tracker v1.0"));
-        
-        /*
-        Taula subprojectTable = createSubProjectTable(periode);
-        this.addElement(subprojectTable);
-        */
-        
+		this.addElement(new Line());
+		this.addElement(new Subtitle("Projectes Arrel"));
+		Taula projectTable = createProjectTable(periode);
+		this.addElement(projectTable);
+		this.addElement(new Line());
+		// this.addElement(new Subtitle("Subprojectes"));
+		// this.addElement(new
+		// Paragraph("S'inclouen en la segŸent taula nomŽs els subprojectes 
+		//+ "que tinguin alguna tasca amb algun interval dins del per’ode."));
+		// this.addElement(new Taula(5,5));
+		// this.addElement(new Line());
+		this.addElement(new Subtitle("Tasques"));
+		this.addElement(new Paragraph(
+		        "S'inclouen en la segŸent taula la durada de" 
+				+ "totes tasques i el projecte al qual pertanyen."));
+		Taula taskTable = createTaskTable(periode);
+		this.addElement(taskTable);
+		this.addElement(new Line());
+		this.addElement(new Subtitle("Intervals"));
+		this.addElement(new Paragraph(
+		        "S'inclouen en la segŸent taula el temps d'inici, final"
+				+ "i durada de tots els intervals entre la data inicial"
+		        + " i final especificades, i la tasca i projecte al qual"
+				+ "pertanyen."));
+		Taula intervalTable = createIntervalTable(periode);
+		this.addElement(intervalTable);
+		this.addElement(new Line());
+		this.addElement(new Footer("Time Tracker v1.0"));
+		
+		/*
+		 * Taula subprojectTable = createSubProjectTable(periode);
+		 * this.addElement(subprojectTable);
+		 */
+		
 	}
 	
-	
-	public Taula createProjectTable(Periode periode){
-		Taula projectTable = new Taula(1,4);
+	public final Taula createProjectTable(final Periode periode) {
+		Taula projectTable = new Taula(UNO, CUATRO);
 		projectTable.setFirstRowHeader(true);
-		projectTable.setPosicio(1, 1, "Project");
-		projectTable.setPosicio(1, 2, "Data d'inici");
-		projectTable.setPosicio(1, 3, "Data final");
-		projectTable.setPosicio(1, 4, "Durada");
+		projectTable.setPosicio(UNO, UNO, "Project");
+		projectTable.setPosicio(UNO, DOS, "Data d'inici");
+		projectTable.setPosicio(UNO, TRES, "Data final");
+		projectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableProjectVisitor projectVisitor = new TableProjectVisitor();
 		
 		List<Activity> baseProjects = this.root.getActivities();
 		
-		for ( Activity activity : baseProjects ){
-			activity.acceptTableVisitor(projectVisitor,projectTable,periode);
+		for (Activity activity : baseProjects) {
+			activity.acceptTableVisitor(projectVisitor, projectTable, periode);
 		}
 		
-		//this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
+		// this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
 		
 		return projectTable;
 		
 	}
 	
-	public Taula createSubProjectTable(Periode periode){
-		Taula subProjectTable = new Taula(1,4);
+	public final Taula createSubProjectTable(final Periode periode) {
+		Taula subProjectTable = new Taula(UNO, CUATRO);
 		subProjectTable.setFirstRowHeader(true);
-		subProjectTable.setPosicio(1, 1, "Project");
-		subProjectTable.setPosicio(1, 2, "Data d'inici");
-		subProjectTable.setPosicio(1, 3, "Data final");
-		subProjectTable.setPosicio(1, 4, "Durada");
+		subProjectTable.setPosicio(UNO, UNO, "Project");
+		subProjectTable.setPosicio(UNO, DOS, "Data d'inici");
+		subProjectTable.setPosicio(UNO, TRES, "Data final");
+		subProjectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableSubProjectVisitor subProjectVisitor = new TableSubProjectVisitor();
-
+		
 		List<Activity> baseProjects = this.root.getActivities();
 		
-		for ( Activity activity : baseProjects ){
-			activity.acceptTableVisitor(subProjectVisitor,subProjectTable,periode);
+		for (Activity activity : baseProjects) {
+			activity.acceptTableVisitor(subProjectVisitor, subProjectTable,
+			        periode);
 		}
 		
 		return subProjectTable;
 	}
 	
-	public Taula createTaskTable(Periode periode){
-		Taula taskTable = new Taula(1,5);
+	public final Taula createTaskTable(final Periode periode) {
+		Taula taskTable = new Taula(UNO, CINCO);
 		taskTable.setFirstRowHeader(true);
-		taskTable.setPosicio(1, 1, "Nom Projecte");
-		taskTable.setPosicio(1, 2, "Tasca");
-		taskTable.setPosicio(1, 3, "Data d'inici");
-		taskTable.setPosicio(1, 4, "Data final");
-		taskTable.setPosicio(1, 5, "Durada");
+		taskTable.setPosicio(UNO, UNO, "Nom Projecte");
+		taskTable.setPosicio(UNO, DOS, "Tasca");
+		taskTable.setPosicio(UNO, TRES, "Data d'inici");
+		taskTable.setPosicio(UNO, CUATRO, "Data final");
+		taskTable.setPosicio(UNO, CINCO, "Durada");
 		
 		TableTaskVisitor taskVisitor = new TableTaskVisitor();
-		this.root.acceptTableVisitor(taskVisitor,taskTable,periode);
+		this.root.acceptTableVisitor(taskVisitor, taskTable, periode);
 		
 		return taskTable;
 		
 	}
 	
-	public Taula createIntervalTable(Periode periode){
-		Taula intervalTable = new Taula(1,5);
+	public final Taula createIntervalTable(final Periode periode) {
+		Taula intervalTable = new Taula(UNO, CINCO);
 		intervalTable.setFirstRowHeader(true);
-		intervalTable.setPosicio(1, 1, "Tasca");
-		intervalTable.setPosicio(1, 2, "Interval");
-		intervalTable.setPosicio(1, 3, "Data d'inici");
-		intervalTable.setPosicio(1, 4, "Data final");
-		intervalTable.setPosicio(1, 5, "Durada");
+		intervalTable.setPosicio(UNO, UNO, "Tasca");
+		intervalTable.setPosicio(UNO, DOS, "Interval");
+		intervalTable.setPosicio(UNO, TRES, "Data d'inici");
+		intervalTable.setPosicio(UNO, CUATRO, "Data final");
+		intervalTable.setPosicio(UNO, CINCO, "Durada");
 		
 		TableIntervalVisitor taskVisitor = new TableIntervalVisitor();
-		this.root.acceptTableVisitor(taskVisitor,intervalTable,periode);
+		this.root.acceptTableVisitor(taskVisitor, intervalTable, periode);
 		
 		return intervalTable;
 		
 	}
-	
-	
 	
 }

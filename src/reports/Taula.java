@@ -3,64 +3,65 @@ package reports;
 import java.util.ArrayList;
 
 public class Taula extends ReportElement {
-
+	
 	private int nfiles;
-
-	public int getNfiles() {
+	
+	public final int getNfiles() {
 		return nfiles;
 	}
-
-	protected void setNfiles(int nfiles) {
-		this.nfiles = nfiles;
+	
+	protected final void setNfiles(final int pNfiles) {
+		this.nfiles = pNfiles;
 	}
-
+	
 	private int ncolumnes;
-
-	public int getNcolumnes() {
+	
+	public final int getNcolumnes() {
 		return ncolumnes;
 	}
-
-	protected void setNcolumnes(int ncolumnes) {
-		this.ncolumnes = ncolumnes;
+	
+	protected final void setNcolumnes(final int pNcolumnes) {
+		this.ncolumnes = pNcolumnes;
 	}
 	
 	private boolean firstRowHeader = false;
 	
-	protected boolean getFirstRowHeader(){
+	protected final boolean getFirstRowHeader() {
 		return this.firstRowHeader;
 	}
 	
-	protected void setFirstRowHeader(boolean setTo){
+	protected final void setFirstRowHeader(final boolean setTo) {
 		this.firstRowHeader = setTo;
 	}
 	
 	private boolean firstColumnHeader = false;
 	
-	protected boolean getFirstColumnHeader(){
+	protected final boolean getFirstColumnHeader() {
 		return this.firstColumnHeader;
 	}
 	
-	protected void setFirstColumnHeader(boolean setTo){
+	protected final void setFirstColumnHeader(final boolean setTo) {
 		this.firstColumnHeader = setTo;
 	}
-
+	
 	private ArrayList taula = null;
-
-	public ArrayList getTaula() {
+	
+	public final ArrayList getTaula() {
 		return taula;
 	}
-
-	public void setTaula(ArrayList taula) {
-		this.taula = taula;
+	
+	public final void setTaula(final ArrayList pTaula) {
+		this.taula = pTaula;
 	}
 	
-	public Taula(int nfiles, int ncolumnes) {
-		setNfiles(nfiles);
-		setNcolumnes(ncolumnes);
+	@SuppressWarnings("unchecked")
+    public Taula(final int pNfiles, final int pNcolumnes) {
+		setNfiles(pNfiles);
+		setNcolumnes(pNcolumnes);
 		ArrayList t = new ArrayList();
-		for (int i=0 ; i<nfiles ; i++) {
+		for (int i = 0; i < pNfiles; i++) {
 			ArrayList fila = new ArrayList();
-			for (int j=0; j<ncolumnes ; j++) {
+			for (int j = 0; j < pNcolumnes; j++) {
 				// fila.add(new String());
 				fila.add(null);
 			}
@@ -69,34 +70,39 @@ public class Taula extends ReportElement {
 		setTaula(t);
 	}
 	
-	public void afegeixFila() {
-		int ncolumnes = getNcolumnes();
+	@SuppressWarnings("unchecked")
+    public final void afegeixFila() {
+		int vNcolumnes = getNcolumnes();
 		ArrayList fila = new ArrayList();
-		for (int j=0; j<ncolumnes ; j++) {
+		for (int j = 0; j < vNcolumnes; j++) {
 			// fila.add(new String());
 			fila.add(null);
 		}
-		getTaula().add(fila);		
-		setNfiles(getNfiles()+1);
-	}
-
-	public void afegeixFila(ArrayList llistaStrings) {
-		getTaula().add(llistaStrings);		
-		setNfiles(getNfiles()+1);
+		getTaula().add(fila);
+		setNfiles(getNfiles() + 1);
 	}
 	
-	public void setPosicio(int fila, int columna, String str) { // numerem de 1 ... n i no de 0 ... n-1
-		((ArrayList) getTaula().get(fila-1)).set(columna-1,str);
-	}
-
-	public String getPosicio(int fila, int columna) {
-		return (String) ((ArrayList) getTaula().get(fila-1)).get(columna-1);
+	@SuppressWarnings("unchecked")
+    public final void afegeixFila(final ArrayList llistaStrings) {
+		getTaula().add(llistaStrings);
+		setNfiles(getNfiles() + 1);
 	}
 	
+	@SuppressWarnings("unchecked")
+    public final void setPosicio(final int fila, 
+			final int columna, final String str) { // numerem de 1
+		                                                        // ... n i no de
+		                                                        // 0 ... n-1
+		((ArrayList) getTaula().get(fila - 1)).set(columna - 1, str);
+	}
+	
+	public final String getPosicio(final int fila, final int columna) {
+		return (String) ((ArrayList) getTaula().get(fila - 1)).get(columna - 1);
+	}
 	
 	@Override
-	public void accept(ReportVisitor visitor) {
+    public final void accept(final ReportVisitor visitor) {
 		visitor.visitTable(this);
 	}
-
+	
 }
