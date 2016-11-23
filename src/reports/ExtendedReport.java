@@ -20,16 +20,17 @@ public class ExtendedReport extends Report {
 		Taula projectTable = createProjectTable(periode);
 		this.addElement(projectTable);
 		this.addElement(new Line());
-		// this.addElement(new Subtitle("Subprojectes"));
-		// this.addElement(new
-		// Paragraph("S'inclouen en la següent taula només els subprojectes 
-		//+ "que tinguin alguna tasca amb algun interval dins del període."));
-		// this.addElement(new Taula(5,5));
-		// this.addElement(new Line());
+		this.addElement(new Subtitle("Subprojectes"));
+		this.addElement(new
+		Paragraph("S'inclouen en la següent taula només els subprojectes" 
+				+ "que tinguin alguna tasca amb algun interval dins del període."));
+		Taula subProjectTable = createSubProjectTable(periode);
+		this.addElement(subProjectTable);
+		this.addElement(new Line());
 		this.addElement(new Subtitle("Tasques"));
 		this.addElement(new Paragraph(
 		        "S'inclouen en la següent taula la durada de" 
-				+ "totes tasques i el projecte al qual pertanyen."));
+			  + "totes tasques i el projecte al qual pertanyen."));
 		Taula taskTable = createTaskTable(periode);
 		this.addElement(taskTable);
 		this.addElement(new Line());
@@ -67,30 +68,27 @@ public class ExtendedReport extends Report {
 			activity.acceptTableVisitor(projectVisitor, projectTable, periode);
 		}
 		
-		// this.root.acceptTableVisitor(projectVisitor,projectTable,periode);
-		
 		return projectTable;
 		
 	}
 	
 	public final Taula createSubProjectTable(final Periode periode) {
-		Taula subProjectTable = new Taula(UNO, CUATRO);
-		subProjectTable.setFirstRowHeader(true);
-		subProjectTable.setPosicio(UNO, UNO, "Project");
-		subProjectTable.setPosicio(UNO, DOS, "Data d'inici");
-		subProjectTable.setPosicio(UNO, TRES, "Data final");
-		subProjectTable.setPosicio(UNO, CUATRO, "Durada");
+		Taula subprojectTable = new Taula(UNO, CUATRO);
+		subprojectTable.setFirstRowHeader(true);
+		subprojectTable.setPosicio(UNO, UNO, "Project");
+		subprojectTable.setPosicio(UNO, DOS, "Data d'inici");
+		subprojectTable.setPosicio(UNO, TRES, "Data final");
+		subprojectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableSubProjectVisitor subProjectVisitor = new TableSubProjectVisitor();
 		
 		List<Activity> baseProjects = this.root.getActivities();
 		
 		for (Activity activity : baseProjects) {
-			activity.acceptTableVisitor(subProjectVisitor, subProjectTable,
-			        periode);
+			activity.acceptTableVisitor(subProjectVisitor, subprojectTable, periode);
 		}
 		
-		return subProjectTable;
+		return subprojectTable;
 	}
 	
 	public final Taula createTaskTable(final Periode periode) {
