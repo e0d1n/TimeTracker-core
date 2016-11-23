@@ -190,14 +190,16 @@ public class Client {
         
         Periode userPeriode = new Periode(dataIniciUser,dataFiUser);
         ExtendedReport report = new ExtendedReport(userPeriode,R);
-        //ShortReport report = new ShortReport(userPeriode,proot);
-        //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
+        //ShortReport report = new ShortReport(userPeriode,R);
         
-        String fileFormat = String.format(("report--%s--%s--(%s).html"),getDateAsStringFormated(dataIniciUser),getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new Date()));
-        ReportHTMLVisitor visitor = new ReportHTMLVisitor(fileFormat);
+        String fileFormat = String.format(("report--%s--%s--(%s).txt"),getDateAsStringFormated(dataIniciUser),getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new Date()));
+        ReportTextVisitor visitor = new ReportTextVisitor(fileFormat);
+        
+        //String fileFormat = String.format(("report--%s--%s--(%s).html"),getDateAsStringFormated(dataIniciUser),getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new Date()));
+        //ReportHTMLVisitor visitor = new ReportHTMLVisitor(fileFormat);
+        
         report.printReport(visitor);
-        
-        
+         
     }
     
 public static void reportTestDynamic() throws ParseException, IOException, InterruptedException{
@@ -251,15 +253,18 @@ public static void reportTestDynamic() throws ParseException, IOException, Inter
         
         // User Choose
         Date dataIniciUser = stringToDate("15/11/2016 19:30:00");
-        Date dataFiUser = stringToDate("18/11/2016 19:40:00");
+        Date dataFiUser = stringToDate("25/11/2016 19:40:00");
         
         Periode userPeriode = new Periode(dataIniciUser,dataFiUser);
         ExtendedReport report = new ExtendedReport(userPeriode,R);
-        //ShortReport report = new ShortReport(userPeriode,proot);
-        //ReportTextVisitor visitor = new ReportTextVisitor("out.txt");
+        //ShortReport report = new ShortReport(userPeriode,R);
+
+        //String fileFormat = String.format(("report--%s--%s--(%s).txt"),getDateAsStringFormated(dataIniciUser),getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new Date()));
+        //ReportTextVisitor visitor = new ReportTextVisitor(fileFormat);
         
         String fileFormat = String.format(("report--%s--%s--(%s).html"),getDateAsStringFormated(dataIniciUser),getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new Date()));
         ReportHTMLVisitor visitor = new ReportHTMLVisitor(fileFormat);
+        
         report.printReport(visitor);
         
     }
