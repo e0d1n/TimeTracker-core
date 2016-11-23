@@ -50,7 +50,7 @@ public class Task extends Activity {
 	 *            : Father project of the task
 	 */
 	public Task(final String name, final String description,
-			final Project project) {
+	        final Project project) {
 		
 		super(name, description, project);
 		this.intervals = new java.util.ArrayList<Interval>();
@@ -66,7 +66,7 @@ public class Task extends Activity {
 	 *            : Needed to create the observer
 	 */
 	public final void start(final Clock clock) {
-		
+		assert clock != null;
 		if (this.isStartable) {
 			
 			Interval interval = new Interval(this);
@@ -90,6 +90,7 @@ public class Task extends Activity {
 	 *            : Needed to delete the observer
 	 */
 	public final void stop(final Clock clock) {
+		assert clock != null;
 		// Delete the observer of the last interval
 		clock.deleteObserver(this.intervals.get(this.intervals.size() - 1));
 		this.isStartable = true;
@@ -100,7 +101,7 @@ public class Task extends Activity {
 	 * @Override toString: Used to print a task Controls the format of the time
 	 */
 	@Override
-    public final String toString() {
+	public final String toString() {
 		
 		if (this.periode.getDataInici() == null) {
 			
@@ -121,15 +122,16 @@ public class Task extends Activity {
 	 *            : Object of the class printer used to visit the activity
 	 */
 	@Override
-    public final void acceptPrinter(final Printer printer) {
-		
+	public final void acceptPrinter(final Printer printer) {
+		assert printer != null;
 		printer.print(this);
 	}
 	
-	public final void acceptTableVisitor(final TableVisitor tableVisitor, 
-			final Taula table,
-	        final Periode periode) {
-		
+	public final void acceptTableVisitor(final TableVisitor tableVisitor,
+	        final Taula table, final Periode periode) {
+		assert tableVisitor != null;
+		assert table != null;
+		assert periode != null;
 		tableVisitor.visitTask(this, table, periode);
 		
 	}

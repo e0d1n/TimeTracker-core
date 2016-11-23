@@ -7,6 +7,11 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * Class that implements the necessary methods to create the html 
+ * with the info and structure which it needs
+ *
+ */
 public class PaginaWeb {
 	private static final int SEIS = 6;
 	/**
@@ -26,8 +31,9 @@ public class PaginaWeb {
 	
 	private PrintWriter write;
 	
-	@SuppressWarnings("unchecked")
+
     public PaginaWeb(final PrintWriter writer) {
+    	assert writer != null;
 		Tag title = new Tag("title");
 		title.add("Informe TimeTracker");
 		head.add(title);
@@ -36,10 +42,12 @@ public class PaginaWeb {
 		this.write = writer;
 	}
 	
-	@SuppressWarnings("unchecked")
+	
     public final void afegeixHeader(final String str,
 			final int mida, final boolean centrar) {
 		// fa text h1, h2 ... h6
+		assert str != null;
+		
 		if (mida >= 1 && mida <= SEIS) {
 			Tag h = new Tag("h" + (new Integer(mida)).toString());
 			h.add(str);
@@ -50,20 +58,22 @@ public class PaginaWeb {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
+
     public final void afegeixTextNormal(final String str) {
+    	assert str != null;
 		body.add(str);
 	}
 	
-	@SuppressWarnings("unchecked")
+	
     public final void afegeixSaltDeLinia() {
 		body.add(new Tag("br", false));
 	}
 	
-	@SuppressWarnings("unchecked")
+
     public final void afegeixTaula(final Collection taula, 
     		final boolean primeraFilaCapsalera,
     		final boolean primeraColumnaCapsalera) {
+    	assert taula != null;
 		// taula es una llista (files) de llistes (columnes), implementat com un
 		// arraylist d'arraylists, encara que aqui per mes generalitat hi posem
 		// el tipus generic collection
@@ -142,7 +152,6 @@ public class PaginaWeb {
 		body.add(t);
 	}
 	
-	@SuppressWarnings("unchecked")
     public final void afegeixLiniaSeparacio() {
 		Tag hr = new Tag("hr");
 		hr.addAttribute(new Attribute("style", "width: 100%; height: 2px;"));

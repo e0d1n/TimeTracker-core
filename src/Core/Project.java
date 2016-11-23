@@ -39,8 +39,8 @@ public class Project extends Activity {
 	 * @param project
 	 *            : Father project of the project
 	 */
-	public Project(final String name, final String description, 
-			final Project project) {
+	public Project(final String name, final String description,
+	        final Project project) {
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
 		logger.debug("Project created " + name);
@@ -64,7 +64,7 @@ public class Project extends Activity {
 	 *           time
 	 */
 	@Override
-    public final String toString() {
+	public final String toString() {
 		
 		if (this.periode.getDataInici() == null) {
 			
@@ -86,7 +86,7 @@ public class Project extends Activity {
 	 *            : Object of the class printer used to visit the activity
 	 */
 	@Override
-    public final void acceptPrinter(final Printer printer) {
+	public final void acceptPrinter(final Printer printer) {
 		
 		printer.print(this);
 		// Call each of it sub activities
@@ -95,9 +95,8 @@ public class Project extends Activity {
 		}
 	}
 	
-	public final void acceptTableVisitor(final TableVisitor tableVisitor, 
-			final Taula table,
-	        final Periode periode) {
+	public final void acceptTableVisitor(final TableVisitor tableVisitor,
+	        final Taula table, final Periode periode) {
 		
 		tableVisitor.visitProject(this, table, periode);
 		

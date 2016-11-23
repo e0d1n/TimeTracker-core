@@ -22,9 +22,9 @@ public class SerialSave {
 	 * 
 	 * @project: the project to save
 	 */
-	public final void Save(final Activity activity) 
-			throws FileNotFoundException,
-	        IOException {
+	public final void Save(final Activity activity)
+	        throws FileNotFoundException, IOException {
+		assert activity != null;
 		logger.debug("Saving serialized file to timetask.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
 		        "timetask.ser"));

@@ -12,7 +12,11 @@ public class ExtendedReport extends Report {
 	private static final int TRES = 3;
 	private static final int CUATRO = 4;
 	private static final int CINCO = 5;
-	
+	/**
+	 * Constructor that calls the super constructor and initialize  the 
+	 * specific elements of the short report
+	 *
+	 */	
 	public ExtendedReport(final Periode periode, final Project root) {
 		super("Extended Report", periode, root);
 		this.addElement(new Line());
@@ -23,7 +27,8 @@ public class ExtendedReport extends Report {
 		this.addElement(new Subtitle("Subprojectes"));
 		this.addElement(new
 		Paragraph("S'inclouen en la següent taula només els subprojectes" 
-				+ "que tinguin alguna tasca amb algun interval dins del període."));
+				+ "que tinguin alguna tasca amb algun"
+				+ "interval dins del període."));
 		Taula subProjectTable = createSubProjectTable(periode);
 		this.addElement(subProjectTable);
 		this.addElement(new Line());
@@ -53,6 +58,7 @@ public class ExtendedReport extends Report {
 	}
 	
 	public final Taula createProjectTable(final Periode periode) {
+		assert periode != null;
 		Taula projectTable = new Taula(UNO, CUATRO);
 		projectTable.setFirstRowHeader(true);
 		projectTable.setPosicio(UNO, UNO, "Project");
@@ -73,6 +79,7 @@ public class ExtendedReport extends Report {
 	}
 	
 	public final Taula createSubProjectTable(final Periode periode) {
+		assert periode != null;
 		Taula subprojectTable = new Taula(UNO, CUATRO);
 		subprojectTable.setFirstRowHeader(true);
 		subprojectTable.setPosicio(UNO, UNO, "Project");
@@ -85,13 +92,15 @@ public class ExtendedReport extends Report {
 		List<Activity> baseProjects = this.root.getActivities();
 		
 		for (Activity activity : baseProjects) {
-			activity.acceptTableVisitor(subProjectVisitor, subprojectTable, periode);
+			activity.acceptTableVisitor(subProjectVisitor, 
+					subprojectTable, periode);
 		}
 		
 		return subprojectTable;
 	}
 	
 	public final Taula createTaskTable(final Periode periode) {
+		assert periode != null;
 		Taula taskTable = new Taula(UNO, CINCO);
 		taskTable.setFirstRowHeader(true);
 		taskTable.setPosicio(UNO, UNO, "Nom Projecte");
@@ -108,6 +117,7 @@ public class ExtendedReport extends Report {
 	}
 	
 	public final Taula createIntervalTable(final Periode periode) {
+		assert periode != null;
 		Taula intervalTable = new Taula(UNO, CINCO);
 		intervalTable.setFirstRowHeader(true);
 		intervalTable.setPosicio(UNO, UNO, "Tasca");

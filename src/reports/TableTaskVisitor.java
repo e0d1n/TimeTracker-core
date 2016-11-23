@@ -23,6 +23,9 @@ public class TableTaskVisitor extends TableVisitor {
 	@Override
     public final void visitProject(final Project project, 
     		final Taula table, final Periode periode) {
+		assert project != null;
+		assert table != null;
+		assert periode != null;
 		
 		List<Activity> subprojects = project.getActivities();
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
@@ -36,6 +39,9 @@ public class TableTaskVisitor extends TableVisitor {
 	@Override
     public final void visitTask(final Task task, final Taula table, 
     		final Periode periode) {
+		assert task != null;
+		assert table != null;
+		assert periode != null;
 		System.out.println(task);
 		List<Object> taskArray = new ArrayList<Object>();
 		Periode periodeIntersection = task.getPeriode().intersect(periode);

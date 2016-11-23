@@ -12,6 +12,7 @@ public class Paragraph extends ReportElement {
 	private String text;
 	
 	public Paragraph(final String textValue) {
+		assert textValue != null;
 		this.text = textValue;
 	}
 	
@@ -21,6 +22,7 @@ public class Paragraph extends ReportElement {
 	
 	@Override
     public final void accept(final ReportVisitor visitor) {
+		assert visitor != null;
 		visitor.visitParagraph(this);
 	}
 	

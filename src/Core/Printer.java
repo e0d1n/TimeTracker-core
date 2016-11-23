@@ -21,6 +21,7 @@ public class Printer implements Observer {
 	 *            : Project root
 	 */
 	public Printer(final Activity pRoot) {
+		assert pRoot != null;
 		this.root = pRoot;
 	}
 	
@@ -40,6 +41,7 @@ public class Printer implements Observer {
 	 *            <Activity>
 	 */
 	public final void print(final Activity activity) {
+		assert activity != null;
 		logger.debug("Printing Activity " + activity.name);
 		System.out.println(activity);
 	}
@@ -49,14 +51,14 @@ public class Printer implements Observer {
 	 * of the project
 	 */
 	@Override
-    public final void update(final Observable o, final Object arg) {
+	public final void update(final Observable o, final Object arg) {
+		assert o != null;
+		assert arg != null;
 		
-		System.out
-		        .println("Nom        Temps inici      " 
-		+ "       Temps final        Durada (hh:mm:ss)");
-		System.out
-		        .println("----+-----------------------+--------" 
-		+ "---------------+------------------");
+		System.out.println("Nom        Temps inici      "
+		        + "       Temps final        Durada (hh:mm:ss)");
+		System.out.println("----+-----------------------+--------"
+		        + "---------------+------------------");
 		printAll();
 	}
 	

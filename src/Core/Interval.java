@@ -38,6 +38,7 @@ public class Interval implements Observer, Serializable {
 	}
 	
 	public final void setPeriode(final Periode pPeriode) {
+		assert pPeriode != null;
 		this.periode = pPeriode;
 	}
 	
@@ -51,7 +52,7 @@ public class Interval implements Observer, Serializable {
 	 *            : Father task of interval
 	 */
 	public Interval(final Task pTask) {
-		
+		assert pTask != null;
 		this.task = pTask;
 		this.periode = new Periode(null, null);
 	}
@@ -65,8 +66,9 @@ public class Interval implements Observer, Serializable {
 	 * Clock to update dates and duration
 	 */
 	@Override
-    public final void update(final Observable arg0, final Object clock) {
-		
+	public final void update(final Observable arg0, final Object clock) {
+		assert arg0 != null;
+		assert clock != null;
 		this.periode.setDataFi(((Clock) clock).getDate());
 		
 		if (this.periode.getDataInici() == null) {
@@ -85,15 +87,17 @@ public class Interval implements Observer, Serializable {
 	 *           time
 	 */
 	@Override
-    public final String toString() {
+	public final String toString() {
 		
 		return "Interval " + this.task.name + ", Duracion:"
 		        + this.periode.getDurationAsStringFormated();
 	}
 	
-	public final void acceptTableVisitor(final TableVisitor tableVisitor, 
-			final Taula table, final Periode pPeriode) {
-		
+	public final void acceptTableVisitor(final TableVisitor tableVisitor,
+	        final Taula table, final Periode pPeriode) {
+		assert tableVisitor != null;
+		assert table != null;
+		assert pPeriode != null;
 		tableVisitor.visitInterval(this, table, pPeriode);
 		
 	}

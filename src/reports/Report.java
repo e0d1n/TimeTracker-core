@@ -41,6 +41,8 @@ public abstract class Report {
 	 */
 	public Report(final String title, 
 			final Periode periode, final Project pRoot) {
+		assert periode != null;
+		assert root != null;
 		this.userPeriode = periode;
 		this.root = pRoot;
 		this.reportElements = new java.util.ArrayList<ReportElement>();
@@ -54,6 +56,7 @@ public abstract class Report {
 	}
 	
 	public final Taula createUserPeriodeTable(final Periode periode) {
+		assert periode != null;
 		Taula tableUserPeriode = new Taula(CUATRO, DOS);
 		tableUserPeriode.setFirstColumnHeader(true);
 		tableUserPeriode.setFirstRowHeader(true);
@@ -87,7 +90,7 @@ public abstract class Report {
      */
 	public final void printReport(final ReportVisitor visitor)
 	        throws IOException {
-		
+		assert visitor != null;
 		for (ReportElement element : reportElements) {
 			element.accept(visitor);
 		}

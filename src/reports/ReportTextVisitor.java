@@ -16,16 +16,19 @@ public class ReportTextVisitor extends ReportVisitor {
 	private static final int MAXLENGTH = 102;
 	
 	private String wrapString(final String input) {
+		assert input != null;
 		return WordUtils.wrap(input, MAXLENGTH, null, false);
 		
 	}
 	
 	public ReportTextVisitor(final String filename) throws IOException {
+		assert filename != null;
 		this.writer = new PrintWriter(filename);
 	}
 	
 	@Override
     public final void visitTitle(final Title title) {
+		assert title != null;
 		
 		this.writer.println(title.getText());
 		
@@ -33,7 +36,7 @@ public class ReportTextVisitor extends ReportVisitor {
 	
 	@Override
     public final void visitLine(final Line line) {
-		
+		assert line != null;
 		for (int i = 0; i < ReportTextVisitor.MAXLENGTH; i++) {
 			this.writer.print("-");
 		}
@@ -42,20 +45,21 @@ public class ReportTextVisitor extends ReportVisitor {
 	
 	@Override
     public final void visitFooter(final Footer footer) {
-		
+		assert footer != null;
 		this.writer.println(footer.getText());
 		
 	}
 	
 	@Override
     public final void visitSubtitle(final Subtitle subtitle) {
-		
+		assert subtitle != null;
 		this.writer.println(subtitle.getText());
 		
 	}
 	
 	@Override
     public final void visitParagraph(final Paragraph paragraph) {
+		assert paragraph != null;
 		String paragraphText = paragraph.getText();
 		this.writer.println(wrapString(paragraphText));
 		
@@ -64,7 +68,7 @@ public class ReportTextVisitor extends ReportVisitor {
 	
     @Override
     public final void visitTable(final Taula table) {
-		
+    	assert table != null;
 		ArrayList tableArray = table.getTaula();
 		for (Object fila : tableArray) {
 			for (Object columna : (ArrayList) fila) {

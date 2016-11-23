@@ -16,6 +16,8 @@ public class Periode implements Serializable {
 	 * Periode constructor
 	 */
 	public Periode(final Date pDataInici, final Date pDataFi) {
+		assert pDataFi != null;
+		assert pDataInici != null;
 		this.dataInici = pDataInici;
 		this.dataFi = pDataFi;
 		if (dataInici == null || dataFi == null) {
@@ -27,6 +29,7 @@ public class Periode implements Serializable {
 	}
 	
 	public final String getDateAsStringFormated(final Date dateToFormat) {
+		assert dateToFormat != null;
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateToFormat);
 		int year = cal.get(Calendar.YEAR);
@@ -58,6 +61,7 @@ public class Periode implements Serializable {
 	 * @param newDataInici
 	 */
 	public final void setDataInici(final Date newDataInici) {
+		assert newDataInici != null;
 		this.dataInici = newDataInici;
 	}
 	
@@ -80,6 +84,7 @@ public class Periode implements Serializable {
 	 * @param newDataFi
 	 */
 	public final void setDataFi(final Date newDataFi) {
+		assert newDataFi != null;
 		this.dataFi = newDataFi;
 	}
 	
@@ -121,7 +126,7 @@ public class Periode implements Serializable {
 	 * @return
 	 */
 	public final Periode intersect(final Periode periodeToIntersect) {
-		
+		assert periodeToIntersect != null;
 		// In case that both Periode don't touch or just touch end and start
 		if (this.dataInici.after(periodeToIntersect.getDataFi())
 		        || this.dataInici.equals(periodeToIntersect.getDataFi())
@@ -144,6 +149,8 @@ public class Periode implements Serializable {
 	}
 	
 	private Date max(final Date data1, final Date data2) {
+		assert data1 != null;
+		assert data2 != null;
 		if (data1.after(data2)) {
 			return data1;
 		} else {
@@ -153,6 +160,8 @@ public class Periode implements Serializable {
 	
 	private Date min(final Date data1, final Date data2) {
 		if (data1.before(data2)) {
+			assert data1 != null;
+			assert data2 != null;
 			return data1;
 		} else {
 			return data2;

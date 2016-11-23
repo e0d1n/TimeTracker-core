@@ -8,6 +8,7 @@ public class Subtitle extends ReportElement {
 	private String text;
 	
 	public Subtitle(final String textValue) {
+		assert textValue != null;
 		this.text = textValue;
 	}
 	
@@ -17,6 +18,7 @@ public class Subtitle extends ReportElement {
 	
 	@Override
     public final void accept(final ReportVisitor visitor) {
+		assert visitor != null;
 		visitor.visitSubtitle(this);
 	}
 	

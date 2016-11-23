@@ -20,6 +20,9 @@ public class TableIntervalVisitor extends TableVisitor {
 	@Override
     public final void visitInterval(final Interval interval,
     		final Taula table, final Periode periode) {
+		assert interval != null;
+		assert table != null;
+		assert periode != null;
 		System.out.println(interval);
 		
 		List<Object> intervalArray = new ArrayList<Object>();
@@ -41,7 +44,9 @@ public class TableIntervalVisitor extends TableVisitor {
 	@Override
     public final void visitProject(final Project project,
     		final Taula table, final Periode periode) {
-		
+		assert project != null;
+		assert table != null;
+		assert periode != null;
 		List<Activity> subprojects = project.getActivities();
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
 		if (periodeIntersection != null) {
@@ -54,6 +59,9 @@ public class TableIntervalVisitor extends TableVisitor {
 	@Override
     public final void visitTask(final Task task, 
     		final Taula table, final Periode periode) {
+		assert task != null;
+		assert table != null;
+		assert periode != null;
 		List<Interval> intervals = task.getIntervals();
 		counter = 1;
 		Periode periodeIntersection = task.getPeriode().intersect(periode);

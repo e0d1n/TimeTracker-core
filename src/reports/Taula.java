@@ -55,18 +55,13 @@ public class Taula extends ReportElement {
 	}
 	
 	/**
-	 * Method that ccrates a new table with pNfiles number of rows 
+	 * Method that crates a new table with pNfiles number of rows 
 	 * and pNcolumnas number of columns
 	 * 
 	
      * @param pNfiles
      * @param pNcolumnes
      **/
-    /**
-     * @param pNfiles
-     * @param pNcolumnes
-     */
-    @SuppressWarnings("unchecked")
     public Taula(final int pNfiles, final int pNcolumnes) {
 		setNfiles(pNfiles);
 		setNcolumnes(pNcolumnes);
@@ -85,7 +80,6 @@ public class Taula extends ReportElement {
 	/**
 	 * Adds a new blank row
 	 */
-	@SuppressWarnings("unchecked")
     public final void afegeixFila() {
 		int vNcolumnes = getNcolumnes();
 		ArrayList fila = new ArrayList();
@@ -101,15 +95,15 @@ public class Taula extends ReportElement {
 	 * Adds a new row whith the paramtre llistaStrings
 	 * @param llistaStrings
 	 */
-	@SuppressWarnings("unchecked")
     public final void afegeixFila(final ArrayList llistaStrings) {
+		assert llistaStrings != null;
 		getTaula().add(llistaStrings);
 		setNfiles(getNfiles() + 1);
 	}
 	
-	@SuppressWarnings("unchecked")
     public final void setPosicio(final int fila, 
-			final int columna, final String str) { // numerem de 1
+			final int columna, final String str) { 
+		assert str != null;										// numerem de 1
 		                                                        // ... n i no de
 		                                                        // 0 ... n-1
 		((ArrayList) getTaula().get(fila - 1)).set(columna - 1, str);
@@ -121,6 +115,7 @@ public class Taula extends ReportElement {
 	
 	@Override
     public final void accept(final ReportVisitor visitor) {
+		assert visitor != null;
 		visitor.visitTable(this);
 	}
 	

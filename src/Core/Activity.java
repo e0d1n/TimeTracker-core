@@ -51,6 +51,7 @@ public abstract class Activity implements Serializable, Printable {
 	}
 	
 	public final void setPeriode(final Periode pPeriode) {
+		assert pPeriode != null;
 		this.periode = pPeriode;
 	}
 	
@@ -61,8 +62,11 @@ public abstract class Activity implements Serializable, Printable {
 	 * the dates to null because we need it to control when a activity is not
 	 * started, to assign both Finally it assign the level of the logger
 	 */
-	public Activity(final String pName,
-			final String pDescription, final Project pProject) {
+	public Activity(final String pName, final String pDescription,
+	        final Project pProject) {
+		assert pName != null;
+		assert pDescription != null;
+		assert pProject != null;
 		this.name = pName;
 		this.description = pDescription;
 		this.project = pProject;
@@ -80,6 +84,7 @@ public abstract class Activity implements Serializable, Printable {
 	 */
 	protected final void updateActivity(final Object clock, 
 			final boolean first) {
+		assert clock != null;
 		// If no start date defined
 		if (this.periode.getDataInici() == null) {
 			this.periode.setDataInici(((Clock) clock).getDate());

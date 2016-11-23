@@ -23,6 +23,9 @@ public class TableProjectVisitor extends TableVisitor {
 	@Override
     public final void visitProject(final Project project, 
     		final Taula table, final Periode periode) {
+		assert project != null;
+		assert table != null;
+		assert periode != null;
 		System.out.println(project);
 		
 		List<Object> projectArray = new ArrayList<Object>();
