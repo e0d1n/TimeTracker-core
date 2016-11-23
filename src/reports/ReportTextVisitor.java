@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+/**
+ * Class that declares the visit methods for text reports
+ *
+ */
 public class ReportTextVisitor extends ReportVisitor {
 	
 	private PrintWriter writer;

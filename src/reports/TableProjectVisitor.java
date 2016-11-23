@@ -9,6 +9,10 @@ import core.Periode;
 import core.Project;
 import core.Task;
 
+/**
+ * Class that implements the visit methods for the projectTable
+ *
+ */
 public class TableProjectVisitor extends TableVisitor {
 	
 	@Override
@@ -32,10 +36,10 @@ public class TableProjectVisitor extends TableVisitor {
 			projectArray.add(periodeIntersection.getDurationAsStringFormated());
 			table.afegeixFila((ArrayList<Object>) projectArray);
 			
-			//List<Activity> subprojects = project.getActivities();
-			//for (Activity activity : subprojects) {
-			//	activity.acceptTableVisitor(this, table, periode);
-			//}
+			List<Activity> subprojects = project.getActivities();
+			for (Activity activity : subprojects) {
+				activity.acceptTableVisitor(this, table, periode);
+			}
 			
 		}
 		

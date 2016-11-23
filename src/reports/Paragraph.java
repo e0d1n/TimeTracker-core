@@ -1,5 +1,9 @@
 package reports;
 
+/**
+ * Class to define the paragraphs structure and methods
+ *
+ */
 public class Paragraph extends ReportElement {
 	
 	/**

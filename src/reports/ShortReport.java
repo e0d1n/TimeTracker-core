@@ -3,12 +3,17 @@ package reports;
 import core.Periode;
 import core.Project;
 
+
 public class ShortReport extends Report {
 	private static final int UNO = 1;
 	private static final int DOS = 2;
 	private static final int TRES = 3;
 	private static final int CUATRO = 4;
-	
+/**
+ * Constructor that calls the super constructor and initialize  the 
+ * specific elements of the short report
+ *
+ */	
 	public ShortReport(final Periode periode, final Project root) {
 		super("Short Report", periode, root);
 		this.addElement(new Line());

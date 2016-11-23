@@ -54,7 +54,19 @@ public class Taula extends ReportElement {
 		this.taula = pTaula;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Method that ccrates a new table with pNfiles number of rows 
+	 * and pNcolumnas number of columns
+	 * 
+	
+     * @param pNfiles
+     * @param pNcolumnes
+     **/
+    /**
+     * @param pNfiles
+     * @param pNcolumnes
+     */
+    @SuppressWarnings("unchecked")
     public Taula(final int pNfiles, final int pNcolumnes) {
 		setNfiles(pNfiles);
 		setNcolumnes(pNcolumnes);
@@ -70,6 +82,9 @@ public class Taula extends ReportElement {
 		setTaula(t);
 	}
 	
+	/**
+	 * Adds a new blank row
+	 */
 	@SuppressWarnings("unchecked")
     public final void afegeixFila() {
 		int vNcolumnes = getNcolumnes();
@@ -82,6 +97,10 @@ public class Taula extends ReportElement {
 		setNfiles(getNfiles() + 1);
 	}
 	
+	/**
+	 * Adds a new row whith the paramtre llistaStrings
+	 * @param llistaStrings
+	 */
 	@SuppressWarnings("unchecked")
     public final void afegeixFila(final ArrayList llistaStrings) {
 		getTaula().add(llistaStrings);

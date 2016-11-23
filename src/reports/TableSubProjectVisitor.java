@@ -9,7 +9,13 @@ import core.Periode;
 import core.Project;
 import core.Task;
 
+/**
+ * Class that implements the visit methods for the subprojectTable
+ *
+ */
 public class TableSubProjectVisitor extends TableVisitor {
+	
+	private static int treeLevel = 1;
 	
 	@Override
 	public void visitInterval(final Interval interval, 
@@ -34,6 +40,7 @@ public class TableSubProjectVisitor extends TableVisitor {
 			
 			List<Activity> subprojects = project.getActivities();
 			for (Activity activity : subprojects) {
+				treeLevel = 2;
 				activity.acceptTableVisitor(this, table, periode);
 			}
 			

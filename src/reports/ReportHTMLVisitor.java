@@ -3,7 +3,10 @@ package reports;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Collection;
-
+/**
+ * Class that declares the visit methods for html reports
+ *
+ */
 public class ReportHTMLVisitor extends ReportVisitor {
 	
 	private PaginaWeb webPage;

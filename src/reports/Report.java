@@ -7,6 +7,10 @@ import java.util.List;
 import core.Periode;
 import core.Project;
 
+/**
+ * @author erodrgal
+ *
+ */
 public abstract class Report {
 	private static final int UNO = 1;
 	private static final int DOS = 2;
@@ -23,11 +27,18 @@ public abstract class Report {
 	protected Periode userPeriode;
 	protected Project root;
 	
+	
 	protected final void addElement(final ReportElement element) {
 		reportElements.add(element);
 	}
 	
 	// List<Activity> activities, Date startDate, Date finishDate
+	/**
+	 * Abstract constructor that initialize the common part of the report
+	 * @param title
+	 * @param periode
+	 * @param pRoot
+	 */
 	public Report(final String title, 
 			final Periode periode, final Project pRoot) {
 		this.userPeriode = periode;

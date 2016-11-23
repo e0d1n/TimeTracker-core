@@ -1,5 +1,8 @@
 package reports;
-
+/**
+ * Abstract class that declares the visit methods of Report
+ *
+ */
 public abstract class ReportVisitor {
 	
 	/**

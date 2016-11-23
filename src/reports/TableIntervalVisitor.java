@@ -9,6 +9,10 @@ import core.Periode;
 import core.Project;
 import core.Task;
 
+/**
+ * Class that implements the visit methods for the intervalTable
+ *
+ */
 public class TableIntervalVisitor extends TableVisitor {
 	
 	private static int counter;
