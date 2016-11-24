@@ -36,6 +36,31 @@ public class Task extends Activity {
 		return this.intervals;
 	}
 	
+	private boolean invariant(){
+		
+		if (this.getProject() == null){
+			return false;
+		}
+		
+		if (this.getIntervals() == null){
+			return false;
+		}
+		
+		if (this.getName() == null){
+			return false;
+		}
+		
+		if (this.getPeriode() == null){
+			return false;
+		}
+		
+		if (this.isStartable == null){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * Constructor task: It complains the leaf element of the composite design
 	 * pattern We call the constructor of the superclass and initialize the list
@@ -55,6 +80,7 @@ public class Task extends Activity {
 		super(name, description, project);
 		this.intervals = new java.util.ArrayList<Interval>();
 		this.isStartable = true;
+		assert invariant();
 	}
 	
 	/**
@@ -80,6 +106,7 @@ public class Task extends Activity {
 			
 			logger.warn("The task is already running");
 		}
+		assert invariant();
 	}
 	
 	/**
@@ -92,9 +119,13 @@ public class Task extends Activity {
 	public final void stop(final Clock clock) {
 		assert clock != null;
 		// Delete the observer of the last interval
+		if (this.intervals.size() == 0){
+			throw new RuntimeException("You can't stop a task that has not been started");
+		}
 		clock.deleteObserver(this.intervals.get(this.intervals.size() - 1));
 		this.isStartable = true;
 		logger.debug("Task stopped " + this.name);
+		assert invariant();
 	}
 	
 	/**
@@ -125,6 +156,7 @@ public class Task extends Activity {
 	public final void acceptPrinter(final Printer printer) {
 		assert printer != null;
 		printer.print(this);
+		assert invariant();
 	}
 	
 	public final void acceptTableVisitor(final TableVisitor tableVisitor,
@@ -133,7 +165,7 @@ public class Task extends Activity {
 		assert table != null;
 		assert periode != null;
 		tableVisitor.visitTask(this, table, periode);
-		
+		assert invariant();
 	}
 	
 }
