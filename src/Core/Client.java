@@ -329,7 +329,7 @@ class Client {
 		// a2Test();
 		
 		// boolean extendedReport, boolean htmlReport
-		reportTestStatic(false,true);
+		reportTestStatic(true,true);
 		// reportTestDynamic(true,true);
 		
 	}

@@ -35,8 +35,14 @@ public class PaginaWeb {
     public PaginaWeb(final PrintWriter writer) {
     	assert writer != null;
 		Tag title = new Tag("title");
+		Tag meta = new Tag("meta");
+		Attribute charsetAtribute = new Attribute();
+		charsetAtribute.setAttribute("charset");
+		charsetAtribute.setValue("UTF-8");
+		meta.addAttribute(charsetAtribute);
 		title.add("Informe TimeTracker");
 		head.add(title);
+		head.add(meta);
 		paginaWeb.add(head);
 		paginaWeb.add(body);
 		this.write = writer;

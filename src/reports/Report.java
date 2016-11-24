@@ -49,7 +49,7 @@ public abstract class Report {
 		this.reportElements.add(new Line());
 		this.reportElements.add(new Title(title));
 		this.reportElements.add(new Line());
-		this.addElement(new Subtitle("Període"));
+		this.addElement(new Subtitle("Per√≠ode"));
 		Taula tableUserPeriode = createUserPeriodeTable(periode);
 		
 		this.reportElements.add(tableUserPeriode);
@@ -63,7 +63,7 @@ public abstract class Report {
 		tableUserPeriode.setPosicio(UNO, DOS, "Data");
 		tableUserPeriode.setPosicio(DOS, UNO, "Desde");
 		tableUserPeriode.setPosicio(TRES, UNO, "Fins a");
-		tableUserPeriode.setPosicio(CUATRO, UNO, "Data de generació");
+		tableUserPeriode.setPosicio(CUATRO, UNO, "Data de generaci√≥");
 		// Data
 		tableUserPeriode.setPosicio(DOS, DOS,
 		        periode.getDataIniciAsStringFormated());

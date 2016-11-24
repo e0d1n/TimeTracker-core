@@ -26,22 +26,22 @@ public class ExtendedReport extends Report {
 		this.addElement(new Line());
 		this.addElement(new Subtitle("Subprojectes"));
 		this.addElement(new
-		Paragraph("S'inclouen en la següent taula només els subprojectes" 
+		Paragraph("S'inclouen en la seg√ºent taula nom√®s els subprojectes" 
 				+ "que tinguin alguna tasca amb algun"
-				+ "interval dins del període."));
+				+ "interval dins del per√≠ode."));
 		Taula subProjectTable = createSubProjectTable(periode);
 		this.addElement(subProjectTable);
 		this.addElement(new Line());
 		this.addElement(new Subtitle("Tasques"));
 		this.addElement(new Paragraph(
-		        "S'inclouen en la següent taula la durada de" 
+		        "S'inclouen en la seg√ºent taula la durada de" 
 			  + "totes tasques i el projecte al qual pertanyen."));
 		Taula taskTable = createTaskTable(periode);
 		this.addElement(taskTable);
 		this.addElement(new Line());
 		this.addElement(new Subtitle("Intervals"));
 		this.addElement(new Paragraph(
-		        "S'inclouen en la següent taula el temps d'inici, final"
+		        "S'inclouen en la seg√ºent taula el temps d'inici, final"
 				+ "i durada de tots els intervals entre la data inicial"
 		        + " i final especificades, i la tasca i projecte al qual"
 				+ "pertanyen."));
