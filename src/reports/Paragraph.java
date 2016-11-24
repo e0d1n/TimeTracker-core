@@ -11,12 +11,21 @@ public class Paragraph extends ReportElement {
 	 */
 	private String text;
 	
+	private boolean invariant(){
+		if (this.text == null){
+			return false;
+		}
+		return true;
+	}
+	
 	public Paragraph(final String textValue) {
-		assert textValue != null;
+		assert textValue != null: "Paragraph text can't be null" ;
 		this.text = textValue;
+		assert invariant();
 	}
 	
 	public final String getText() {
+		assert invariant();
 		return this.text;
 	}
 	
@@ -24,6 +33,7 @@ public class Paragraph extends ReportElement {
     public final void accept(final ReportVisitor visitor) {
 		assert visitor != null;
 		visitor.visitParagraph(this);
+		assert invariant();
 	}
 	
 }
