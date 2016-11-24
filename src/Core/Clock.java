@@ -32,6 +32,7 @@ public class Clock extends Observable {
 	 * @uml.property name="updatePeriod"
 	 */
 	public final long getUpdatePeriod() {
+		assert updatePeriod > 0;
 		return updatePeriod;
 	}
 	
@@ -44,11 +45,30 @@ public class Clock extends Observable {
 		return date;
 	}
 	
+	private boolean invariant(){
+		
+		if (this.go == null){
+			return false;
+		}
+		
+		if (this.updatePeriod <= 0){
+			return false;
+		}
+		
+		if (this.ct == null){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private void tick() {
 		this.date = new Date();
+		assert this.date != null;
 		setChanged();
 		// Notify observers with the new date
 		notifyObservers(this);
+		assert invariant();
 	}
 	
 	/**
@@ -58,9 +78,11 @@ public class Clock extends Observable {
 	 * the clock
 	 */
 	public Clock(final int pUpdatePeriod) {
+		assert pUpdatePeriod > 0: "Update periode should be bigger than zero";
 		this.ct = new ClockTimer();
 		this.updatePeriod = pUpdatePeriod;
 		this.go = false;
+		assert invariant();
 	}
 	
 	private class ClockTimer extends TimerTask {
@@ -76,7 +98,9 @@ public class Clock extends Observable {
 					Thread.sleep(getUpdatePeriod());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+					
 				}
+				assert invariant();
 			}
 		}
 	}
@@ -96,6 +120,7 @@ public class Clock extends Observable {
 		th.start();
 		this.go = true;
 		logger.debug("Clock started");
+		assert invariant();
 	}
 	
 	/**
@@ -106,6 +131,7 @@ public class Clock extends Observable {
 	public final void stop() {
 		this.go = false;
 		logger.debug("Clock stoped");
+		assert invariant();
 	}
 	
 }
