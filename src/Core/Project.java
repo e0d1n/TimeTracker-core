@@ -27,6 +27,19 @@ public class Project extends Activity {
 		return this.activities;
 	}
 	
+	private boolean invariant(){
+		if (this.getName() == null){
+			return false;
+		}
+		if (this.getPeriode() == null){
+			return false;
+		}
+		if (this.getActivities() == null){
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Constructor project: It complains the composite element of the composite
 	 * design pattern We call the constructor of the superclass and initialize
@@ -44,6 +57,7 @@ public class Project extends Activity {
 		super(name, description, project);
 		this.activities = new java.util.ArrayList<Activity>();
 		logger.debug("Project created " + name);
+		assert invariant();
 	}
 	
 	/**
@@ -54,9 +68,13 @@ public class Project extends Activity {
 	 *            : the activity to add
 	 */
 	public final void addActivity(final Activity activity) {
-		
+		if (activity == null){
+			throw new IllegalArgumentException("Not a valid activity");
+		}
+		assert this.activities != null;
 		this.activities.add(activity);
 		logger.info("New activity added: " + activity.name);
+		assert invariant();
 	}
 	
 	/**
@@ -87,19 +105,23 @@ public class Project extends Activity {
 	 */
 	@Override
 	public final void acceptPrinter(final Printer printer) {
-		
+		assert printer != null;
 		printer.print(this);
+		assert this.activities != null;
 		// Call each of it sub activities
 		for (Activity act : this.activities) {
 			act.acceptPrinter(printer);
 		}
+		assert invariant();
 	}
 	
 	public final void acceptTableVisitor(final TableVisitor tableVisitor,
 	        final Taula table, final Periode periode) {
-		
+		assert tableVisitor != null;
+		assert table != null;
+		assert periode != null;
 		tableVisitor.visitProject(this, table, periode);
-		
+		assert invariant();
 	}
 	
 }
