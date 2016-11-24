@@ -28,6 +28,7 @@ public class SerialSave {
 		logger.debug("Saving serialized file to timetask.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
 		        "timetask.ser"));
+		assert oos != null;
 		oos.writeObject(activity);
 		logger.debug("Serialized file saved");
 	}
@@ -42,6 +43,8 @@ public class SerialSave {
 		        "timetask.ser"));
 		Activity activity = (Activity) ois.readObject();
 		logger.debug("Serialized file loaded");
+		assert ois != null;
+		assert activity != null;
 		return activity;
 	}
 	
