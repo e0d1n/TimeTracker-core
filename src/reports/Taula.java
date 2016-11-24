@@ -54,6 +54,23 @@ public class Taula extends ReportElement {
 		this.taula = pTaula;
 	}
 	
+	private boolean invariant(){
+		
+		if (this.getTaula() == null){
+			return false;
+		}
+		
+		if (this.nfiles <= 0){
+			return false;
+		}
+		
+		if (this.ncolumnes <= 0){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * Method that crates a new table with pNfiles number of rows 
 	 * and pNcolumnas number of columns
@@ -63,6 +80,8 @@ public class Taula extends ReportElement {
      * @param pNcolumnes
      **/
     public Taula(final int pNfiles, final int pNcolumnes) {
+    	assert pNfiles > 0:"El nombre de files ha de ser major a zero";
+    	assert pNcolumnes > 0: "El nombre de columnes ha de ser major a zero";
 		setNfiles(pNfiles);
 		setNcolumnes(pNcolumnes);
 		ArrayList t = new ArrayList();
@@ -74,6 +93,8 @@ public class Taula extends ReportElement {
 			}
 			t.add(fila);
 		}
+		assert t != null;
+		assert invariant();
 		setTaula(t);
 	}
 	
@@ -89,6 +110,7 @@ public class Taula extends ReportElement {
 		}
 		getTaula().add(fila);
 		setNfiles(getNfiles() + 1);
+		assert invariant();
 	}
 	
 	/**
@@ -99,6 +121,7 @@ public class Taula extends ReportElement {
 		assert llistaStrings != null;
 		getTaula().add(llistaStrings);
 		setNfiles(getNfiles() + 1);
+		assert invariant();
 	}
 	
     public final void setPosicio(final int fila, 
@@ -107,9 +130,11 @@ public class Taula extends ReportElement {
 		                                                        // ... n i no de
 		                                                        // 0 ... n-1
 		((ArrayList) getTaula().get(fila - 1)).set(columna - 1, str);
+		assert invariant();
 	}
 	
 	public final String getPosicio(final int fila, final int columna) {
+		assert invariant();
 		return (String) ((ArrayList) getTaula().get(fila - 1)).get(columna - 1);
 	}
 	
@@ -117,6 +142,7 @@ public class Taula extends ReportElement {
     public final void accept(final ReportVisitor visitor) {
 		assert visitor != null;
 		visitor.visitTable(this);
+		assert invariant();
 	}
 	
 }
