@@ -21,7 +21,7 @@ public class Title extends ReportElement {
 	}
 	
 	@Override
-    public final void accept(final ReportVisitor visitor) {
+    public final void accept(final Format visitor) {
 		assert visitor != null;
 		visitor.visitTitle(this);
 		assert invariant();

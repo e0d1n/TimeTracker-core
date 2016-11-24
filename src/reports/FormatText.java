@@ -10,7 +10,7 @@ import org.apache.commons.lang3.text.WordUtils;
  * Class that declares the visit methods for text reports
  *
  */
-public class ReportTextVisitor extends ReportVisitor {
+public class FormatText extends Format {
 	
 	private PrintWriter writer;
 	private static final int MAXLENGTH = 102;
@@ -29,7 +29,7 @@ public class ReportTextVisitor extends ReportVisitor {
 		return true;
 	}
 	
-	public ReportTextVisitor(final String filename) throws IOException {
+	public FormatText(final String filename) throws IOException {
 		assert filename != null;
 		this.writer = new PrintWriter(filename);
 		assert invariant();
@@ -45,7 +45,7 @@ public class ReportTextVisitor extends ReportVisitor {
 	@Override
     public final void visitLine(final Line line) {
 		assert line != null;
-		for (int i = 0; i < ReportTextVisitor.MAXLENGTH; i++) {
+		for (int i = 0; i < FormatText.MAXLENGTH; i++) {
 			this.writer.print("-");
 		}
 		this.writer.println();

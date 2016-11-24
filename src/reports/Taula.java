@@ -139,7 +139,7 @@ public class Taula extends ReportElement {
 	}
 	
 	@Override
-    public final void accept(final ReportVisitor visitor) {
+    public final void accept(final Format visitor) {
 		assert visitor != null;
 		visitor.visitTable(this);
 		assert invariant();

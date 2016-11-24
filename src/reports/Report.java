@@ -91,7 +91,7 @@ public abstract class Report {
 	
 	/**
      */
-	public final void printReport(final ReportVisitor visitor)
+	public final void printReport(final Format visitor)
 	        throws IOException {
 		assert visitor != null;
 		for (ReportElement element : reportElements) {

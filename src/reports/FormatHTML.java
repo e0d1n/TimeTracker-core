@@ -7,7 +7,7 @@ import java.util.Collection;
  * Class that declares the visit methods for html reports
  *
  */
-public class ReportHTMLVisitor extends ReportVisitor {
+public class FormatHTML extends Format {
 	
 	private PaginaWeb webPage;
 	private PrintWriter writer;
@@ -24,7 +24,7 @@ public class ReportHTMLVisitor extends ReportVisitor {
 		return true;
 	}
 	
-	public ReportHTMLVisitor(final String filename)
+	public FormatHTML(final String filename)
 			throws FileNotFoundException {
 		assert filename != null;
 		this.writer = new PrintWriter(filename);

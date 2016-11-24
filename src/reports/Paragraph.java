@@ -30,7 +30,7 @@ public class Paragraph extends ReportElement {
 	}
 	
 	@Override
-    public final void accept(final ReportVisitor visitor) {
+    public final void accept(final Format visitor) {
 		assert visitor != null;
 		visitor.visitParagraph(this);
 		assert invariant();

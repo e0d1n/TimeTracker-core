@@ -209,7 +209,7 @@ class Client {
 		}
 		
 		String fileFormat;
-		ReportVisitor visitor;
+		Format visitor;
 		if (htmlReport){
 			
 			fileFormat = String.format(("report--%s--%s--(%s).html"),
@@ -217,7 +217,7 @@ class Client {
 					getDateAsStringFormated(dataFiUser),
 					getDateAsStringFormated(new Date()));
 			
-			visitor = new ReportHTMLVisitor(fileFormat);
+			visitor = new FormatHTML(fileFormat);
 			
 		}else{
 			
@@ -225,7 +225,7 @@ class Client {
 			        getDateAsStringFormated(dataIniciUser),
 			        getDateAsStringFormated(dataFiUser),
 			        getDateAsStringFormated(new Date()));
-			visitor = new ReportTextVisitor(fileFormat);
+			visitor = new FormatText(fileFormat);
 		}
 		
 		
@@ -296,7 +296,7 @@ class Client {
 		}
 		
 		String fileFormat;
-		ReportVisitor visitor;
+		Format visitor;
 		if (htmlReport){
 			
 			fileFormat = String.format(("report--%s--%s--(%s).html"),
@@ -304,7 +304,7 @@ class Client {
 					getDateAsStringFormated(dataFiUser),
 					getDateAsStringFormated(new Date()));
 			
-			visitor = new ReportHTMLVisitor(fileFormat);
+			visitor = new FormatHTML(fileFormat);
 			
 		}else{
 			
@@ -312,7 +312,7 @@ class Client {
 			        getDateAsStringFormated(dataIniciUser),
 			        getDateAsStringFormated(dataFiUser),
 			        getDateAsStringFormated(new Date()));
-			visitor = new ReportTextVisitor(fileFormat);
+			visitor = new FormatText(fileFormat);
 		}
 		
 		
