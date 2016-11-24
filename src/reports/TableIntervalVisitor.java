@@ -15,7 +15,14 @@ import core.Task;
  */
 public class TableIntervalVisitor extends TableVisitor {
 	
-	private static int counter;
+	private static int counter = 1;
+	
+	private boolean invariant(){
+		if (this.counter < 0){
+			return false;
+		}
+		return true;
+	}
 	
 	@Override
     public final void visitInterval(final Interval interval,
@@ -26,7 +33,8 @@ public class TableIntervalVisitor extends TableVisitor {
 		System.out.println(interval);
 		
 		List<Object> intervalArray = new ArrayList<Object>();
-		
+		assert intervalArray != null;
+
 		Periode periodeIntersection = interval.getPeriode().intersect(periode);
 		
 		if (periodeIntersection != null) {
@@ -54,6 +62,7 @@ public class TableIntervalVisitor extends TableVisitor {
 				activity.acceptTableVisitor(this, table, periode);
 			}
 		}
+		assert invariant();
 	}
 	
 	@Override
@@ -71,7 +80,7 @@ public class TableIntervalVisitor extends TableVisitor {
 				counter++;
 			}
 		}
-		
+		assert invariant();
 	}
 	
 }
