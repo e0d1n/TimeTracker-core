@@ -14,9 +14,7 @@ import core.Task;
  *
  */
 public class TableSubProjectVisitor extends TableVisitor {
-	
-	private static int treeLevel = 1;
-	
+		
 	@Override
 	public void visitInterval(final Interval interval, 
 			final Taula table, final Periode periode) {
@@ -43,7 +41,6 @@ public class TableSubProjectVisitor extends TableVisitor {
 			
 			List<Activity> subprojects = project.getActivities();
 			for (Activity activity : subprojects) {
-				treeLevel = 2;
 				activity.acceptTableVisitor(this, table, periode);
 			}
 			

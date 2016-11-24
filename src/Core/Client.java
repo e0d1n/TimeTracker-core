@@ -10,9 +10,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import reports.ExtendedReport;
-import reports.ReportHTMLVisitor;
-import reports.ReportTextVisitor;
+import reports.*;
 
 class Client {
 	private static final int MIL = 1000;
@@ -154,7 +152,7 @@ class Client {
 		        hour, minute, second);
 	}
 	
-	public static void reportTestStatic() throws ParseException, IOException,
+	public static void reportTestStatic(boolean extendedReport, boolean htmlReport) throws ParseException, IOException,
 	        InterruptedException {
 		
 		Project R = new Project("RT", "proot", null);
@@ -201,29 +199,41 @@ class Client {
 		// User Choose
 		Date dataIniciUser = stringToDate("16/11/2016 11:00:00");
 		Date dataFiUser = stringToDate("17/11/2016 9:00:00");
-		
 		Periode userPeriode = new Periode(dataIniciUser, dataFiUser);
-		ExtendedReport report = new ExtendedReport(userPeriode, R);
-		// ShortReport report = new ShortReport(userPeriode,R);
 		
-		String fileFormat = String.format(("report--%s--%s--(%s).txt"),
-		        getDateAsStringFormated(dataIniciUser),
-		        getDateAsStringFormated(dataFiUser),
-		        getDateAsStringFormated(new Date()));
-		ReportTextVisitor visitor = new ReportTextVisitor(fileFormat);
+		Report report;
+		if (extendedReport){
+			report = new ExtendedReport(userPeriode, R);
+		}else{
+			report = new ShortReport(userPeriode,R);
+		}
 		
-		// String fileFormat =
-		// String.format(("report--%s--%s--(%s).html"),
-		//getDateAsStringFormated(dataIniciUser),getDateAsStringFormated
-		//(dataFiUser),getDateAsStringFormated(new
-		// Date()));
-		// ReportHTMLVisitor visitor = new ReportHTMLVisitor(fileFormat);
+		String fileFormat;
+		ReportVisitor visitor;
+		if (htmlReport){
+			
+			fileFormat = String.format(("report--%s--%s--(%s).html"),
+					getDateAsStringFormated(dataIniciUser),
+					getDateAsStringFormated(dataFiUser),
+					getDateAsStringFormated(new Date()));
+			
+			visitor = new ReportHTMLVisitor(fileFormat);
+			
+		}else{
+			
+			fileFormat = String.format(("report--%s--%s--(%s).txt"),
+			        getDateAsStringFormated(dataIniciUser),
+			        getDateAsStringFormated(dataFiUser),
+			        getDateAsStringFormated(new Date()));
+			visitor = new ReportTextVisitor(fileFormat);
+		}
+		
 		
 		report.printReport(visitor);
 		
 	}
 	
-	public static void reportTestDynamic() throws ParseException, IOException,
+	public static void reportTestDynamic(boolean extendedReport, boolean htmlReport) throws ParseException, IOException,
 	        InterruptedException {
 		
 		Clock clock = new Clock(MIL);
@@ -276,23 +286,35 @@ class Client {
 		// User Choose
 		Date dataIniciUser = stringToDate("15/11/2016 19:30:00");
 		Date dataFiUser = stringToDate("25/11/2016 19:40:00");
-		
 		Periode userPeriode = new Periode(dataIniciUser, dataFiUser);
-		ExtendedReport report = new ExtendedReport(userPeriode, R);
-		// ShortReport report = new ShortReport(userPeriode,R);
 		
-		// String fileFormat =
-		// String.format(("report--%s--%s--(%s).txt"),getDateAsStringFormated
-		//(dataIniciUser),
-		//getDateAsStringFormated(dataFiUser),getDateAsStringFormated(new
-		// Date()));
-		// ReportTextVisitor visitor = new ReportTextVisitor(fileFormat);
+		Report report;
+		if (extendedReport){
+			report = new ExtendedReport(userPeriode, R);
+		}else{
+			report = new ShortReport(userPeriode,R);
+		}
 		
-		String fileFormat = String.format(("report--%s--%s--(%s).html"),
-		        getDateAsStringFormated(dataIniciUser),
-		        getDateAsStringFormated(dataFiUser),
-		        getDateAsStringFormated(new Date()));
-		ReportHTMLVisitor visitor = new ReportHTMLVisitor(fileFormat);
+		String fileFormat;
+		ReportVisitor visitor;
+		if (htmlReport){
+			
+			fileFormat = String.format(("report--%s--%s--(%s).html"),
+					getDateAsStringFormated(dataIniciUser),
+					getDateAsStringFormated(dataFiUser),
+					getDateAsStringFormated(new Date()));
+			
+			visitor = new ReportHTMLVisitor(fileFormat);
+			
+		}else{
+			
+			fileFormat = String.format(("report--%s--%s--(%s).txt"),
+			        getDateAsStringFormated(dataIniciUser),
+			        getDateAsStringFormated(dataFiUser),
+			        getDateAsStringFormated(new Date()));
+			visitor = new ReportTextVisitor(fileFormat);
+		}
+		
 		
 		report.printReport(visitor);
 		
@@ -301,12 +323,14 @@ class Client {
 	public static void main(final String[] args) throws InterruptedException,
 	        FileNotFoundException, IOException, ClassNotFoundException,
 	        ParseException {
+
 		// a1Test();
 		// serializeTest();
 		// a2Test();
 		
-		reportTestStatic();
-		// reportTestDynamic();
+		// boolean extendedReport, boolean htmlReport
+		reportTestStatic(false,true);
+		// reportTestDynamic(true,true);
 		
 	}
 	
