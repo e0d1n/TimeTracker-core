@@ -53,6 +53,20 @@ public abstract class Activity implements Serializable, Printable {
 	public final void setPeriode(final Periode pPeriode) {
 		assert pPeriode != null;
 		this.periode = pPeriode;
+		assert this.periode != null;
+	}
+	
+	private boolean invariant(){
+		
+		if (getPeriode() == null){
+			return false;
+		}
+		
+		if (getName() == null){
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -71,6 +85,7 @@ public abstract class Activity implements Serializable, Printable {
 		this.description = pDescription;
 		this.project = pProject;
 		this.periode = new Periode(null, null);
+		assert invariant();
 	}
 	
 	/**
@@ -85,6 +100,7 @@ public abstract class Activity implements Serializable, Printable {
 	protected final void updateActivity(final Object clock, 
 			final boolean first) {
 		assert clock != null;
+		assert invariant();
 		// If no start date defined
 		if (this.periode.getDataInici() == null) {
 			this.periode.setDataInici(((Clock) clock).getDate());
@@ -98,6 +114,8 @@ public abstract class Activity implements Serializable, Printable {
 			this.project.updateActivity(clock, first);
 		}
 		logger.debug("Updated activity " + this.name);
+		assert this.periode.getDataInici() != null;
+		assert this.periode.getDataFi() != null;
 	}
 	
 	public abstract void acceptTableVisitor(TableVisitor tableVisitor,
