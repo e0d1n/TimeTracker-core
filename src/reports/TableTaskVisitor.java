@@ -27,10 +27,11 @@ public class TableTaskVisitor extends TableVisitor {
 		assert table != null;
 		assert periode != null;
 		
-		List<Activity> subprojects = project.getActivities();
+		List<Activity> rootProjects = project.getActivities();
+		assert rootProjects != null;
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
 		if (periodeIntersection != null) {
-			for (Activity activity : subprojects) {
+			for (Activity activity : rootProjects) {
 				activity.acceptTableVisitor(this, table, periode);
 			}
 		}
@@ -44,6 +45,7 @@ public class TableTaskVisitor extends TableVisitor {
 		assert periode != null;
 		System.out.println(task);
 		List<Object> taskArray = new ArrayList<Object>();
+		assert taskArray != null;
 		Periode periodeIntersection = task.getPeriode().intersect(periode);
 		if (periodeIntersection != null) {
 			taskArray.add(task.getProject().getName());
