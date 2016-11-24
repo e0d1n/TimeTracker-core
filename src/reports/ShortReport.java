@@ -1,5 +1,8 @@
 package reports;
 
+import java.util.List;
+
+import core.Activity;
 import core.Periode;
 import core.Project;
 
@@ -25,6 +28,7 @@ public class ShortReport extends Report {
 	}
 	
 	public final Taula createProjectTable(final Periode periode) {
+		assert periode != null;
 		Taula projectTable = new Taula(UNO, CUATRO);
 		projectTable.setFirstRowHeader(true);
 		projectTable.setPosicio(UNO, UNO, "Project");
@@ -33,7 +37,12 @@ public class ShortReport extends Report {
 		projectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableProjectVisitor projectVisitor = new TableProjectVisitor();
-		this.root.acceptTableVisitor(projectVisitor, projectTable, periode);
+		
+		List<Activity> baseProjects = this.root.getActivities();
+		
+		for (Activity activity : baseProjects) {
+			activity.acceptTableVisitor(projectVisitor, projectTable, periode);
+		}
 		
 		return projectTable;
 		
