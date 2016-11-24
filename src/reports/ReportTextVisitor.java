@@ -21,17 +21,25 @@ public class ReportTextVisitor extends ReportVisitor {
 		
 	}
 	
+	private boolean invariant(){
+		if (this.writer == null){
+			return false;
+		}
+
+		return true;
+	}
+	
 	public ReportTextVisitor(final String filename) throws IOException {
 		assert filename != null;
 		this.writer = new PrintWriter(filename);
+		assert invariant();
 	}
 	
 	@Override
     public final void visitTitle(final Title title) {
 		assert title != null;
-		
 		this.writer.println(title.getText());
-		
+		assert invariant();
 	}
 	
 	@Override
@@ -41,20 +49,21 @@ public class ReportTextVisitor extends ReportVisitor {
 			this.writer.print("-");
 		}
 		this.writer.println();
+		assert invariant();
 	}
 	
 	@Override
     public final void visitFooter(final Footer footer) {
 		assert footer != null;
 		this.writer.println(footer.getText());
-		
+		assert invariant();
 	}
 	
 	@Override
     public final void visitSubtitle(final Subtitle subtitle) {
 		assert subtitle != null;
 		this.writer.println(subtitle.getText());
-		
+		assert invariant();
 	}
 	
 	@Override
@@ -62,7 +71,7 @@ public class ReportTextVisitor extends ReportVisitor {
 		assert paragraph != null;
 		String paragraphText = paragraph.getText();
 		this.writer.println(wrapString(paragraphText));
-		
+		assert invariant();
 	}
 	
 	
@@ -80,10 +89,12 @@ public class ReportTextVisitor extends ReportVisitor {
 			}
 			this.writer.println();
 		}
+		assert invariant();
 	}
 	
 	@Override
     public final void writeAndCloseFile() {
 		writer.close();
+		assert invariant();
 	}
 }
