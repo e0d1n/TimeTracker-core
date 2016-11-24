@@ -27,7 +27,6 @@ public class Interval implements Observer, Serializable {
 	private Task task;
 	
 	public final Task getTask() {
-		
 		return this.task;
 	}
 	
@@ -40,6 +39,20 @@ public class Interval implements Observer, Serializable {
 	public final void setPeriode(final Periode pPeriode) {
 		assert pPeriode != null;
 		this.periode = pPeriode;
+		assert invariant();
+	}
+	
+	private boolean invariant(){
+		
+		if (getPeriode() == null){
+			return false;
+		}
+		
+		if (getTask() == null){
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -55,6 +68,7 @@ public class Interval implements Observer, Serializable {
 		assert pTask != null;
 		this.task = pTask;
 		this.periode = new Periode(null, null);
+		assert invariant();
 	}
 	
 	/**
@@ -69,8 +83,9 @@ public class Interval implements Observer, Serializable {
 	public final void update(final Observable arg0, final Object clock) {
 		assert arg0 != null;
 		assert clock != null;
+		assert this.periode != null;
+
 		this.periode.setDataFi(((Clock) clock).getDate());
-		
 		if (this.periode.getDataInici() == null) {
 			this.periode.setDataInici(((Clock) clock).getDate());
 			this.task.updateActivity(clock, true);
@@ -80,6 +95,9 @@ public class Interval implements Observer, Serializable {
 		}
 		
 		logger.debug("Interval updated from task " + this.task.name);
+		assert this.periode.getDataInici() != null;
+		assert this.periode.getDataFi() != null;
+		assert invariant();
 	}
 	
 	/**
@@ -94,12 +112,12 @@ public class Interval implements Observer, Serializable {
 	}
 	
 	public final void acceptTableVisitor(final TableVisitor tableVisitor,
-	        final Taula table, final Periode pPeriode) {
+	        final Taula table, final Periode periode) {
 		assert tableVisitor != null;
 		assert table != null;
-		assert pPeriode != null;
-		tableVisitor.visitInterval(this, table, pPeriode);
-		
+		assert periode != null;
+		tableVisitor.visitInterval(this, table, periode);
+		assert invariant();
 	}
 	
 }

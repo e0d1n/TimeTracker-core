@@ -100,7 +100,7 @@ public abstract class Activity implements Serializable, Printable {
 	protected final void updateActivity(final Object clock, 
 			final boolean first) {
 		assert clock != null;
-		assert invariant();
+		assert this.periode != null;
 		// If no start date defined
 		if (this.periode.getDataInici() == null) {
 			this.periode.setDataInici(((Clock) clock).getDate());
@@ -116,6 +116,7 @@ public abstract class Activity implements Serializable, Printable {
 		logger.debug("Updated activity " + this.name);
 		assert this.periode.getDataInici() != null;
 		assert this.periode.getDataFi() != null;
+		assert invariant();
 	}
 	
 	public abstract void acceptTableVisitor(TableVisitor tableVisitor,
