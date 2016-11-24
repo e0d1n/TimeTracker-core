@@ -29,6 +29,7 @@ public class TableSubProjectVisitor extends TableVisitor {
 		System.out.println(project);
 		
 		List<Object> projectArray = new ArrayList<Object>();
+		assert projectArray != null;
 		Periode periodeIntersection = project.getPeriode().intersect(periode);
 		if (periodeIntersection != null) {
 			
@@ -40,6 +41,7 @@ public class TableSubProjectVisitor extends TableVisitor {
 			table.afegeixFila((ArrayList<Object>) projectArray);
 			
 			List<Activity> subprojects = project.getActivities();
+			assert subprojects != null: "There are no subprojects to report";
 			for (Activity activity : subprojects) {
 				activity.acceptTableVisitor(this, table, periode);
 			}
