@@ -32,7 +32,19 @@ public abstract class Report {
 		reportElements.add(element);
 	}
 	
-	// List<Activity> activities, Date startDate, Date finishDate
+	private boolean invariant(){
+		if (this.root == null){
+			return false;
+		}
+		if (this.userPeriode == null){
+			return false;
+		}
+		if (this.reportElements == null){
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Abstract constructor that initialize the common part of the report
 	 * @param title
@@ -41,8 +53,8 @@ public abstract class Report {
 	 */
 	public Report(final String title, 
 			final Periode periode, final Project pRoot) {
-		assert periode != null;
-		assert root != null;
+		assert periode != null: "No periode specified";
+		assert root != null: "No root project specified";
 		this.userPeriode = periode;
 		this.root = pRoot;
 		this.reportElements = new java.util.ArrayList<ReportElement>();
@@ -51,13 +63,14 @@ public abstract class Report {
 		this.reportElements.add(new Line());
 		this.addElement(new Subtitle("Període"));
 		Taula tableUserPeriode = createUserPeriodeTable(periode);
-		
 		this.reportElements.add(tableUserPeriode);
+		assert invariant();
 	}
 	
 	public final Taula createUserPeriodeTable(final Periode periode) {
 		assert periode != null;
 		Taula tableUserPeriode = new Taula(CUATRO, DOS);
+		assert tableUserPeriode != null;
 		tableUserPeriode.setFirstColumnHeader(true);
 		tableUserPeriode.setFirstRowHeader(true);
 		tableUserPeriode.setPosicio(UNO, DOS, "Data");
@@ -71,20 +84,10 @@ public abstract class Report {
 		        periode.getDataFiAsStringFormated());
 		tableUserPeriode.setPosicio(CUATRO, DOS,
 		        periode.getDateAsStringFormated(new Date()));
-		
+		assert invariant();
 		return tableUserPeriode;
 		
 	}
-	
-	/**
-	 * @uml.property name="startDate"
-	 */
-	protected Date startDate;
-	
-	/**
-	 * @uml.property name="finishDate"
-	 */
-	protected Date finishDate;
 	
 	/**
      */
@@ -95,6 +98,7 @@ public abstract class Report {
 			element.accept(visitor);
 		}
 		visitor.writeAndCloseFile();
+		assert invariant();
 	}
 	
 }

@@ -12,6 +12,20 @@ public class ExtendedReport extends Report {
 	private static final int TRES = 3;
 	private static final int CUATRO = 4;
 	private static final int CINCO = 5;
+	
+	private boolean invariant(){
+		if (this.root == null){
+			return false;
+		}
+		if (this.userPeriode == null){
+			return false;
+		}
+		if (this.reportElements == null){
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Constructor that calls the super constructor and initialize  the 
 	 * specific elements of the short report
@@ -50,11 +64,7 @@ public class ExtendedReport extends Report {
 		this.addElement(new Line());
 		this.addElement(new Footer("Time Tracker v1.0"));
 		
-		/*
-		 * Taula subprojectTable = createSubProjectTable(periode);
-		 * this.addElement(subprojectTable);
-		 */
-		
+		assert invariant();
 	}
 	
 	public final Taula createProjectTable(final Periode periode) {
@@ -67,13 +77,15 @@ public class ExtendedReport extends Report {
 		projectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableProjectVisitor projectVisitor = new TableProjectVisitor();
+		assert projectVisitor != null;
 		
 		List<Activity> baseProjects = this.root.getActivities();
 		
 		for (Activity activity : baseProjects) {
 			activity.acceptTableVisitor(projectVisitor, projectTable, periode);
 		}
-		
+
+		assert invariant();
 		return projectTable;
 		
 	}
@@ -88,6 +100,7 @@ public class ExtendedReport extends Report {
 		subprojectTable.setPosicio(UNO, CUATRO, "Durada");
 		
 		TableSubProjectVisitor subProjectVisitor = new TableSubProjectVisitor();
+		assert subProjectVisitor != null;
 		
 		List<Activity> baseProjects = this.root.getActivities();
 		
@@ -96,6 +109,7 @@ public class ExtendedReport extends Report {
 					subprojectTable, periode);
 		}
 		
+		assert invariant();
 		return subprojectTable;
 	}
 	
@@ -110,15 +124,17 @@ public class ExtendedReport extends Report {
 		taskTable.setPosicio(UNO, CINCO, "Durada");
 		
 		TableTaskVisitor taskVisitor = new TableTaskVisitor();
+		assert taskVisitor != null;
 		this.root.acceptTableVisitor(taskVisitor, taskTable, periode);
 		
+		assert invariant();
 		return taskTable;
-		
 	}
 	
 	public final Taula createIntervalTable(final Periode periode) {
 		assert periode != null;
 		Taula intervalTable = new Taula(UNO, CINCO);
+		assert intervalTable != null;
 		intervalTable.setFirstRowHeader(true);
 		intervalTable.setPosicio(UNO, UNO, "Tasca");
 		intervalTable.setPosicio(UNO, DOS, "Interval");
@@ -126,11 +142,12 @@ public class ExtendedReport extends Report {
 		intervalTable.setPosicio(UNO, CUATRO, "Data final");
 		intervalTable.setPosicio(UNO, CINCO, "Durada");
 		
-		TableIntervalVisitor taskVisitor = new TableIntervalVisitor();
-		this.root.acceptTableVisitor(taskVisitor, intervalTable, periode);
+		TableIntervalVisitor intervalVisitor = new TableIntervalVisitor();
+		assert intervalVisitor != null;
+		this.root.acceptTableVisitor(intervalVisitor, intervalTable, periode);
 		
-		return intervalTable;
-		
+		assert invariant();
+		return intervalTable;	
 	}
 	
 }
