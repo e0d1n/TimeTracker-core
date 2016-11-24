@@ -7,12 +7,21 @@ public class Subtitle extends ReportElement {
 	 */
 	private String text;
 	
+	private boolean invariant(){
+		if (this.text == null){
+			return false;
+		}
+		return true;
+	}
+	
 	public Subtitle(final String textValue) {
-		assert textValue != null;
+		assert textValue != null: "Subtitle text can't be null";
 		this.text = textValue;
+		assert invariant();
 	}
 	
 	public final String getText() {
+		assert invariant();
 		return this.text;
 	}
 	
@@ -20,6 +29,7 @@ public class Subtitle extends ReportElement {
     public final void accept(final ReportVisitor visitor) {
 		assert visitor != null;
 		visitor.visitSubtitle(this);
+		assert invariant();
 	}
 	
 }
