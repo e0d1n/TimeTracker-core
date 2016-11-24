@@ -12,6 +12,13 @@ public class Periode implements Serializable {
 	private Date dataFi;
 	private Long duration;
 	
+	private boolean invariant(){
+		if (this.duration == null){
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Periode constructor
 	 */
@@ -25,7 +32,7 @@ public class Periode implements Serializable {
 		} else {
 			this.duration = (dataFi.getTime() - dataInici.getTime());
 		}
-		
+		assert invariant();
 	}
 	
 	public final String getDateAsStringFormated(final Date dateToFormat) {
@@ -38,6 +45,7 @@ public class Periode implements Serializable {
 		int hour = cal.get(Calendar.HOUR);
 		int minute = cal.get(Calendar.MINUTE);
 		int second = cal.get(Calendar.SECOND);
+		assert invariant();
 		return String.format(("%02d/%02d/%d, %d:%02d:%02dh"), day, month, year,
 		        hour, minute, second);
 	}
@@ -63,6 +71,8 @@ public class Periode implements Serializable {
 	public final void setDataInici(final Date newDataInici) {
 		assert newDataInici != null;
 		this.dataInici = newDataInici;
+		assert this.dataInici != null;
+		assert invariant();
 	}
 	
 	/**
@@ -86,6 +96,8 @@ public class Periode implements Serializable {
 	public final void setDataFi(final Date newDataFi) {
 		assert newDataFi != null;
 		this.dataFi = newDataFi;
+		assert this.dataInici != null;
+		assert invariant();
 	}
 	
 	/**
@@ -96,7 +108,8 @@ public class Periode implements Serializable {
 		int seconds = (int) ((this.duration / MIL) % SESENTA);
 		int minutes = (int) ((this.duration / (MIL * SESENTA)) % SESENTA);
 		int hours = (int) ((this.duration / (MIL * SESENTA * SESENTA)));
-		
+
+		assert invariant();
 		return String.format(("%d:%02d:%02d"), hours, minutes, seconds);
 	}
 	
@@ -106,7 +119,9 @@ public class Periode implements Serializable {
 	 * @param newDuration
 	 */
 	public final void setDuration(final Long newDuration) {
+		assert newDuration != null;
 		this.duration = newDuration;
+		assert invariant();
 	}
 	
 	/**
@@ -115,7 +130,9 @@ public class Periode implements Serializable {
 	 * @param newIncrement
 	 */
 	public final void incrementDuration(final Long newIncrement) {
+		assert newIncrement >= 0;
 		this.duration += newIncrement;
+		assert invariant();
 	}
 	
 	/**
@@ -133,17 +150,16 @@ public class Periode implements Serializable {
 		        || this.dataFi.before(periodeToIntersect.getDataInici())
 		        || this.dataFi.equals(periodeToIntersect.getDataInici())) {
 			
+			assert invariant();
 			return null;
 		}
 		
 		Date newFi = min(this.dataFi, periodeToIntersect.getDataFi());
 		Date newInici = max(this.dataInici, periodeToIntersect.getDataInici());
-		// Long newDuration = (newFi.getTime() - newInici.getTime())/1000;
+		assert newFi == newInici: "Data inici i fi del periode iguals" ;
 		Periode newPeriode = new Periode(newInici, newFi);
-		// newPeriode.setDataInici(newInici);
-		// newPeriode.setDataFi(newFi);
-		// newPeriode.setDuration(newDuration);
-		
+		assert newPeriode != null;
+		assert invariant();
 		return newPeriode;
 		
 	}
